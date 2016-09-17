@@ -13,6 +13,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import io.github.kobakei.anago.entity.OrmaDatabase;
 import io.github.kobakei.anago.net.GitHubService;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -64,5 +65,11 @@ public class AppModule {
                 .client(client)
                 .build();
         return retrofit.create(GitHubService.class);
+    }
+
+    @Singleton
+    @Provides
+    public OrmaDatabase provideOrmaDatabase(Context context) {
+        return OrmaDatabase.builder(context).build();
     }
 }
