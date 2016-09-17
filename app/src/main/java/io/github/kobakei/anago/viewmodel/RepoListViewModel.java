@@ -6,6 +6,7 @@ import android.databinding.ObservableBoolean;
 
 import javax.inject.Inject;
 
+import io.github.kobakei.anago.activity.RepoActivity;
 import io.github.kobakei.anago.entity.Repo;
 import io.github.kobakei.anago.usecase.GetUserReposUseCase;
 import rx.android.schedulers.AndroidSchedulers;
@@ -40,5 +41,9 @@ public class RepoListViewModel extends ActivityViewModel {
                     repos.addAll(repos1);
                     isConnecting.set(false);
                 });
+    }
+
+    public void onItemClick() {
+        RepoActivity.startActivity(getActivity());
     }
 }

@@ -1,6 +1,7 @@
 package io.github.kobakei.anago.di;
 
 import dagger.Subcomponent;
+import io.github.kobakei.anago.activity.RepoActivity;
 import io.github.kobakei.anago.activity.RepoListActivity;
 import io.github.kobakei.anago.activity.SignInActivity;
 
@@ -11,4 +12,5 @@ import io.github.kobakei.anago.activity.SignInActivity;
 public interface ActivityComponent {
     void inject(SignInActivity activity);
     void inject(RepoListActivity activity);
+    void inject(RepoActivity activity);
 }
