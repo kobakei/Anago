@@ -8,8 +8,10 @@ import io.github.kobakei.anago.net.body.AuthorizationBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import rx.Completable;
 import rx.Single;
 
 /**
@@ -27,4 +29,10 @@ public interface GitHubService {
 
     @GET("/user/repos")
     Single<List<Repo>> getUserRepos(@Header("Authorization") String authorization);
+
+    @Headers({"Content-Length: 0"})
+    @PUT("/user/starred/{user}/{repo}")
+    Single<Void> putStar(@Header("Authorization") String authorization,
+                         @Path("user") String user,
+                         @Path("repo") String repo);
 }
