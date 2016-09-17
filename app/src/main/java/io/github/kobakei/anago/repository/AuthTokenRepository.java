@@ -49,4 +49,8 @@ public class AuthTokenRepository {
                     Timber.v("Upserted ID = " + id);
                 });
     }
+
+    public Single<AuthToken> get() {
+        return this.authTokenDao.get();
+    }
 }

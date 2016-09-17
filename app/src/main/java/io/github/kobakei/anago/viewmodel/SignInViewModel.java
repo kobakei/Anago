@@ -11,6 +11,7 @@ import android.widget.Toast;
 import javax.inject.Inject;
 
 import io.github.kobakei.anago.activity.RepoListActivity;
+import io.github.kobakei.anago.usecase.CheckSessionUseCase;
 import io.github.kobakei.anago.usecase.SignInUseCase;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -23,7 +24,9 @@ import timber.log.Timber;
 
 public class SignInViewModel extends ActivityViewModel {
 
+    // 使用するユースケース
     private final SignInUseCase signInUseCase;
+    private final CheckSessionUseCase checkSessionUseCase;
 
     // この画面の状態を表す変数
     public ObservableField<String> name;
@@ -31,14 +34,25 @@ public class SignInViewModel extends ActivityViewModel {
     public ObservableBoolean buttonEnabled;
 
     @Inject
-    public SignInViewModel(Activity activity, SignInUseCase signInUseCase) {
+    public SignInViewModel(Activity activity, SignInUseCase signInUseCase,
+                           CheckSessionUseCase checkSessionUseCase) {
         super(activity);
 
         this.signInUseCase = signInUseCase;
+        this.checkSessionUseCase = checkSessionUseCase;
 
         name = new ObservableField<>();
         password = new ObservableField<>();
         buttonEnabled = new ObservableBoolean(false);
+
+        checkSessionUseCase.run()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(authToken -> {
+                    Timber.v("Check session: " + authToken.token);
+                    Toast.makeText(getActivity(), "Already signed in", Toast.LENGTH_SHORT).show();
+                    goToNext();
+                }, Timber::e);
     }
 
     public void onTextChanged(CharSequence s, int start, int before, int count) {
