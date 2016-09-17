@@ -1,7 +1,9 @@
-package io.github.kobakei.anago;
+package io.github.kobakei.anago.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import io.github.kobakei.anago.R;
 
 public class SignInActivity extends AppCompatActivity {
 
