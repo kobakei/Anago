@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="io.github.kobakei.anago.activity.SignInActivity">
 
@@ -25,12 +26,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
+            <android.support.design.widget.TextInputEditText
                 android:id="@+id/editTextName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@={viewModel.name}"
-                android:hint="@string/sign_in.name_hint"/>
+                android:hint="@string/sign_in.name_hint"
+                android:onTextChanged="@{viewModel.onTextChanged}"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -39,13 +41,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
+            <android.support.design.widget.TextInputEditText
                 android:id="@+id/editTextPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:text="@={viewModel.password}"
-                android:hint="@string/sign_in.password_hint"/>
+                android:hint="@string/sign_in.password_hint"
+                android:onTextChanged="@{viewModel.onTextChanged}"/>
 
         </android.support.design.widget.TextInputLayout>
 
