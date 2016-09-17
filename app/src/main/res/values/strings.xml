@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Anago</string>
+
+    <string name="sign_in.button">Sign in</string>
+    <string name="sign_in.name_hint">Username</string>
+    <string name="sign_in.password_hint">Password</string>
 </resources>
