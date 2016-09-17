@@ -1,6 +1,7 @@
 package io.github.kobakei.anago.viewmodel;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.text.TextUtils;
@@ -8,6 +9,7 @@ import android.view.View;
 
 import javax.inject.Inject;
 
+import io.github.kobakei.anago.activity.RepoListActivity;
 import timber.log.Timber;
 
 /**
@@ -38,5 +40,7 @@ public class SignInViewModel extends ActivityViewModel {
 
     public void onButtonClick(View view) {
         Timber.v("Button clicked. name=" + name.get());
+        Intent intent = new Intent(getActivity(), RepoListActivity.class);
+        getActivity().startActivity(intent);
     }
 }
