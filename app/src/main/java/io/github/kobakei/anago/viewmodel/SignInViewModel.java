@@ -42,5 +42,6 @@ public class SignInViewModel extends ActivityViewModel {
         Timber.v("Button clicked. name=" + name.get());
         Intent intent = new Intent(getActivity(), RepoListActivity.class);
         getActivity().startActivity(intent);
+        getActivity().finish();
     }
 }
