@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <!-- colors from https://www.materialui.co/colors -->
+    <color name="blue_grey_600">#546E7A</color>
+    <color name="blue_grey_800">#37474F</color>
+    <color name="orange_600">#FB8C00</color>
 </resources>
