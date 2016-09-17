@@ -4,7 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="io.github.kobakei.anago.activity.SignInActivity">
 
-    <data></data>
+    <data>
+        <variable
+            name="viewModel"
+            type="io.github.kobakei.anago.viewmodel.SignInViewModel"/>
+    </data>
 
     <LinearLayout
         android:id="@+id/sign_in_activity"
@@ -25,6 +29,7 @@
                 android:id="@+id/editTextName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@={viewModel.name}"
                 android:hint="@string/sign_in.name_hint"/>
 
         </android.support.design.widget.TextInputLayout>
@@ -39,6 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
+                android:text="@={viewModel.password}"
                 android:hint="@string/sign_in.password_hint"/>
 
         </android.support.design.widget.TextInputLayout>
@@ -47,7 +53,9 @@
             android:id="@+id/buttonSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/sign_in.button"/>
+            android:text="@string/sign_in.button"
+            android:enabled="@{viewModel.buttonEnabled}"
+            android:onClick="@{viewModel::onButtonClick}"/>
 
     </LinearLayout>
 
