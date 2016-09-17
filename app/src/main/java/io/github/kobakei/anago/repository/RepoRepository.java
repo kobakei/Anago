@@ -11,6 +11,7 @@ import io.github.kobakei.anago.net.GitHubService;
 import rx.Single;
 
 /**
+ * リポジトリのリポジトリ
  * Created by keisuke on 2016/09/18.
  */
 @Singleton

@@ -18,6 +18,7 @@ import rx.Single;
 import timber.log.Timber;
 
 /**
+ * 認証トークンのリポジトリ
  * Created by keisuke on 2016/09/18.
  */
 @Singleton

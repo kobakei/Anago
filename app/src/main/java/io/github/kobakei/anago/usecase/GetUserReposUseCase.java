@@ -9,6 +9,7 @@ import io.github.kobakei.anago.repository.RepoRepository;
 import rx.Single;
 
 /**
+ * 自分のリポジトリ一覧を取得するユースケース
  * Created by keisuke on 2016/09/18.
  */
 

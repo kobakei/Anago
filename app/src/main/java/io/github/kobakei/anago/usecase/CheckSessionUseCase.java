@@ -7,6 +7,7 @@ import io.github.kobakei.anago.repository.AuthTokenRepository;
 import rx.Single;
 
 /**
+ * ログインしているかチェックするユースケース
  * Created by keisuke on 2016/09/18.
  */
 

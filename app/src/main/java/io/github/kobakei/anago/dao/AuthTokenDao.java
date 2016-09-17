@@ -8,6 +8,7 @@ import io.github.kobakei.anago.entity.OrmaDatabase;
 import rx.Single;
 
 /**
+ * 認証トークンのDAO
  * Created by keisuke on 2016/09/18.
  */
 @Singleton
