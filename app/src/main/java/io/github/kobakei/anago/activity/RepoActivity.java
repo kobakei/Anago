@@ -30,8 +30,9 @@ public class RepoActivity extends BaseActivity {
         binding.setViewModel(viewModel);
     }
 
-    public static void startActivity(Activity activity) {
+    public static void startActivity(Activity activity, long id) {
         Intent intent = new Intent(activity, RepoActivity.class);
+        intent.putExtra("id", id);
         activity.startActivity(intent);
     }
 }

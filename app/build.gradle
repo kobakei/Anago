@@ -52,6 +52,8 @@ dependencies {
     apt 'com.github.gfx.android.orma:orma-processor:2.5.2'
     compile 'com.github.gfx.android.orma:orma:2.5.2'
 
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+
     compile 'com.jakewharton.timber:timber:4.3.0'
 
     compile 'com.facebook.stetho:stetho:1.4.1'

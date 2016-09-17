@@ -43,7 +43,7 @@ public class RepoListViewModel extends ActivityViewModel {
                 });
     }
 
-    public void onItemClick() {
-        RepoActivity.startActivity(getActivity());
+    public void onItemClick(int position) {
+        RepoActivity.startActivity(getActivity(), repos.get(position).id);
     }
 }

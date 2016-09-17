@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="io.github.kobakei.anago.activity.RepoActivity">
     <data>
@@ -21,7 +22,9 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="60dp"
-            android:layout_height="60dp" />
+            android:layout_height="60dp"
+            app:imageUrl="@{viewModel.repo.owner.avatar_url}"
+            app:errorDrawable="@{@android:drawable/ic_delete}"/>
 
         <TextView
             android:id="@+id/textViewName"
