@@ -2,6 +2,8 @@ package io.github.kobakei.anago;
 
 import android.app.Application;
 
+import com.facebook.stetho.Stetho;
+
 import io.github.kobakei.anago.di.AppComponent;
 import io.github.kobakei.anago.di.AppModule;
 import io.github.kobakei.anago.di.DaggerAppComponent;
@@ -24,6 +26,8 @@ public class AnagoApplication extends Application {
                 .build();
 
         Timber.plant(new Timber.DebugTree());
+
+        Stetho.initializeWithDefaults(this);
     }
 
     public AppComponent getInjector() {
