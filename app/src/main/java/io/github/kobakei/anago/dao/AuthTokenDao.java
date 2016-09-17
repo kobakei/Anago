@@ -25,4 +25,12 @@ public class AuthTokenDao {
                 .upserter()
                 .executeAsObservable(authToken);
     }
+
+    public Single<AuthToken> get() {
+        return ormaDatabase.relationOfAuthToken()
+                .selector()
+                .limit(1)
+                .executeAsObservable()
+                .toSingle();
+    }
 }
