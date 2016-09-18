@@ -11,18 +11,19 @@ MVVMとClean architectureで書いたAndoridのサンプルアプリです。
 
 ## ライブラリ
 
-- Android data binding
-- Dagger
-- RxJava
-- RxAndroid
-- RxLifecycle
-- Gson
-- OkHttp
-- Retrofit
-- Glide
-- Orma
-- Timber
-- Stetho
+- [Android data binding](https://developer.android.com/topic/libraries/data-binding/index.html)
+- [google/dagger](https://github.com/google/dagger)
+- [evant/gradle-retrolambda](https://github.com/evant/gradle-retrolambda)
+- [ReactiveX/RxJava](https://github.com/ReactiveX/RxJava)
+- [ReactiveX/RxAndroid](https://github.com/ReactiveX/RxAndroid)
+- [trello/RxLifecycle](https://github.com/trello/RxLifecycle)
+- [google/gson](https://github.com/google/gson)
+- [square/okhttp](https://github.com/square/okhttp)
+- [square/retrofit](https://github.com/square/retrofit)
+- [bumptech/glide](https://github.com/bumptech/glide)
+- [gfx/Android-Orma](https://github.com/gfx/Android-Orma)
+- [JakeWharton/timber](https://github.com/JakeWharton/timber)
+- [facebook/stetho](https://github.com/facebook/stetho)
 
 ## License
 
