@@ -4,6 +4,7 @@ import java.util.List;
 
 import io.github.kobakei.anago.entity.AuthToken;
 import io.github.kobakei.anago.entity.Repo;
+import io.github.kobakei.anago.entity.User;
 import io.github.kobakei.anago.net.body.AuthorizationBody;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -46,4 +47,7 @@ public interface GitHubService {
     Single<Void> deleteStar(@Header("Authorization") String authorization,
                             @Path("user") String user,
                             @Path("repo") String repo);
+
+    @GET("/users/{user}")
+    Single<User> getUser(@Path("user") String user);
 }
