@@ -4,7 +4,6 @@ import javax.inject.Inject;
 
 import io.github.kobakei.anago.dao.AuthTokenDao;
 import io.github.kobakei.anago.net.GitHubService;
-import io.github.kobakei.anago.util.NetUtil;
 import rx.Completable;
 
 /**
@@ -27,6 +26,14 @@ public class StarRepository {
                 .flatMapCompletable(authToken -> {
                     String header = "token " + authToken.token;
                     return gitHubService.putStar(header, user, repo).toCompletable();
+                });
+    }
+
+    public Completable delete(String user, String repo) {
+        return authTokenDao.get()
+                .flatMapCompletable(authToken -> {
+                    String header = "token " + authToken.token;
+                    return gitHubService.deleteStar(header, user, repo).toCompletable();
                 });
     }
 }
