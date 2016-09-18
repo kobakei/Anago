@@ -7,6 +7,7 @@ import io.github.kobakei.anago.net.GitHubService;
 import rx.Completable;
 
 /**
+ * スターのリポジトリ
  * Created by keisuke on 2016/09/18.
  */
 
@@ -19,6 +20,14 @@ public class StarRepository {
     public StarRepository(GitHubService gitHubService, AuthTokenDao authTokenDao) {
         this.gitHubService = gitHubService;
         this.authTokenDao = authTokenDao;
+    }
+
+    public Completable get(String user, String repo) {
+        return authTokenDao.get()
+                .flatMapCompletable(authToken -> {
+                    String header = "token " + authToken.token;
+                    return gitHubService.getStar(header, user, repo).toCompletable();
+                });
     }
 
     public Completable put(String user, String repo) {
