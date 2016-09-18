@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="io.github.kobakei.anago.activity.RepoListActivity">
+    tools:context="io.github.kobakei.anago.fragment.RepoListFragment">
 
     <data>
         <import type="android.view.View"/>
@@ -13,7 +13,7 @@
     </data>
 
     <FrameLayout
-        android:id="@+id/repo_list_activity"
+        android:id="@+id/repo_list_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

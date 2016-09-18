@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import javax.inject.Inject;
 
-import io.github.kobakei.anago.activity.RepoListActivity;
+import io.github.kobakei.anago.activity.HomeActivity;
 import io.github.kobakei.anago.usecase.CheckSessionUseCase;
 import io.github.kobakei.anago.usecase.SignInUseCase;
 import rx.android.schedulers.AndroidSchedulers;
@@ -73,7 +73,7 @@ public class SignInViewModel extends ActivityViewModel {
     }
 
     private void goToNext() {
-        Intent intent = new Intent(getActivity(), RepoListActivity.class);
+        Intent intent = new Intent(getActivity(), HomeActivity.class);
         getActivity().startActivity(intent);
         getActivity().finish();
     }

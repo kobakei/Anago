@@ -1,23 +1,22 @@
-package io.github.kobakei.anago.activity;
+package io.github.kobakei.anago.fragment;
+
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import io.github.kobakei.anago.R;
-import io.github.kobakei.anago.databinding.RepoListActivityBinding;
+import io.github.kobakei.anago.databinding.RepoListFragmentBinding;
 import io.github.kobakei.anago.databinding.RepoListItemBinding;
 import io.github.kobakei.anago.entity.Repo;
 import io.github.kobakei.anago.viewmodel.RepoListItemViewModel;
@@ -26,22 +25,34 @@ import io.github.kobakei.anago.viewmodel.RepoListViewModel;
 /**
  * リポジトリ一覧画面
  */
-public class RepoListActivity extends BaseActivity {
+public class RepoListFragment extends BaseFragment {
 
     @Inject
     RepoListViewModel viewModel;
 
+    public RepoListFragment() {
+        // Required empty public constructor
+    }
+
+    public static RepoListFragment newInstance() {
+        RepoListFragment fragment = new RepoListFragment();
+        return fragment;
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
         getInjector().inject(this);
 
-        RepoListActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.repo_list_activity);
+        RepoListFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.repo_list_fragment, container, false);
         binding.setViewModel(viewModel);
 
-        RepoAdapter adapter = new RepoAdapter(this, viewModel.repos);
+        // Set up listview
+        RepoAdapter adapter = new RepoAdapter(getContext(), viewModel.repos);
         binding.listView.setAdapter(adapter);
+
+        return binding.getRoot();
     }
 
     /**
