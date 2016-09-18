@@ -8,4 +8,8 @@ public class User {
     public long id;
     public String login;
     public String avatar_url;
+    public String email;
+    public String bio;
+    public int followers;
+    public int following;
 }

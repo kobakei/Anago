@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import javax.inject.Inject;
 
+import io.github.kobakei.anago.activity.UserActivity;
 import io.github.kobakei.anago.entity.Repo;
 import rx.Observable;
 
@@ -26,6 +27,6 @@ public class RepoListItemViewModel extends ListItemViewModel {
     }
 
     public void onImageClick(View view) {
-        Toast.makeText(getContext(), "Image click", Toast.LENGTH_SHORT).show();
+        UserActivity.startActivity(getContext(), repo.get().owner.login);
     }
 }

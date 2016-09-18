@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.HomeActivity" />
-        <activity android:name=".activity.RepoActivity"></activity>
+        <activity android:name=".activity.RepoActivity" />
+        <activity android:name=".activity.UserActivity"></activity>
     </application>
 
 </manifest>

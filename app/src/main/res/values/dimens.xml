@@ -6,6 +6,7 @@
     <dimen name="margin_medium">16dp</dimen>
     <dimen name="margin_small">8dp</dimen>
 
+    <dimen name="avatar_large">90dp</dimen>
     <dimen name="avatar_medium">60dp</dimen>
     <dimen name="avatar_small">30dp</dimen>
 </resources>
