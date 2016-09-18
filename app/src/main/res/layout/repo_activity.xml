@@ -45,11 +45,19 @@
             android:layout_marginTop="8dp"
             android:text="@{viewModel.repo.description, default=Fuga}"/>
 
+        <TextView
+            android:id="@+id/textViewPeopleStarring"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewDescription"
+            android:layout_marginTop="8dp"
+            android:text="@{@plurals/repo_people_starring(viewModel.repo.stargazers_count, viewModel.repo.stargazers_count)}"/>
+
         <Button
             android:id="@+id/buttonStar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textViewDescription"
+            android:layout_below="@id/textViewPeopleStarring"
             android:layout_marginTop="8dp"
             android:text="@{viewModel.starred ? @string/repo_unstar : @string/repo_star}"
             android:onClick="@{viewModel.starred ? viewModel::onUnstarClick : viewModel::onStarClick}"/>

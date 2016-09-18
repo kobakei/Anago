@@ -9,5 +9,6 @@ public class Repo {
     public String name;
     public String full_name;
     public String description;
+    public int stargazers_count;
     public User owner;
 }

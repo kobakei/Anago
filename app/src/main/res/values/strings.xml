@@ -1,10 +1,16 @@
 <resources>
     <string name="app_name">Anago</string>
 
-    <string name="sign_in.button">Sign in</string>
-    <string name="sign_in.name_hint">Username</string>
-    <string name="sign_in.password_hint">Password</string>
+    <!-- 命名規則: <画面名>_<key> -->
 
+    <string name="sign_in_button">Sign in</string>
+    <string name="sign_in_name_hint">Username</string>
+    <string name="sign_in_password_hint">Password</string>
+
+    <plurals name="repo_people_starring">
+        <item quantity="one">%1$d person is starring.</item>
+        <item quantity="other">%1$d people are starring.</item>
+    </plurals>
     <string name="repo_star">Star</string>
     <string name="repo_unstar">Unstar</string>
 </resources>

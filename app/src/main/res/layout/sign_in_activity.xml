@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@={viewModel.name}"
-                android:hint="@string/sign_in.name_hint"
+                android:hint="@string/sign_in_name_hint"
                 android:onTextChanged="@{viewModel.onTextChanged}"/>
 
         </android.support.design.widget.TextInputLayout>
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:text="@={viewModel.password}"
-                android:hint="@string/sign_in.password_hint"
+                android:hint="@string/sign_in_password_hint"
                 android:onTextChanged="@{viewModel.onTextChanged}"/>
 
         </android.support.design.widget.TextInputLayout>
@@ -56,7 +56,7 @@
             android:id="@+id/buttonSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/sign_in.button"
+            android:text="@string/sign_in_button"
             android:enabled="@{viewModel.buttonEnabled}"
             android:onClick="@{viewModel::onButtonClick}"/>
 
