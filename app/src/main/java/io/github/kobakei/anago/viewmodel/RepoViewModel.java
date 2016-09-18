@@ -2,14 +2,17 @@ package io.github.kobakei.anago.viewmodel;
 
 import android.app.Activity;
 import android.databinding.ObservableField;
+import android.support.v4.util.Pair;
 import android.view.View;
 import android.widget.Toast;
 
 import javax.inject.Inject;
 
 import io.github.kobakei.anago.entity.Repo;
+import io.github.kobakei.anago.usecase.CheckStarUseCase;
 import io.github.kobakei.anago.usecase.GetRepoUseCase;
 import io.github.kobakei.anago.usecase.StarUseCase;
+import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -21,26 +24,39 @@ import rx.schedulers.Schedulers;
 public class RepoViewModel extends ActivityViewModel {
 
     private final GetRepoUseCase getRepoUseCase;
+    private final CheckStarUseCase checkStarUseCase;
     private final StarUseCase starUseCase;
 
     public ObservableField<Repo> repo;
 
     @Inject
     public RepoViewModel(Activity activity, GetRepoUseCase getRepoUseCase,
-                         StarUseCase starUseCase) {
+                         CheckStarUseCase checkStarUseCase, StarUseCase starUseCase) {
         super(activity);
         this.getRepoUseCase = getRepoUseCase;
+        this.checkStarUseCase = checkStarUseCase;
         this.starUseCase = starUseCase;
 
         this.repo = new ObservableField<>();
 
         long id = getActivity().getIntent().getLongExtra("id", 0L);
         getRepoUseCase.run(id)
+                .flatMapObservable(repo1 -> Observable.combineLatest(
+                        Observable.just(repo1),
+                        checkStarUseCase.run(repo1.owner.login, repo1.name).toObservable(),
+                        Pair::create
+                ))
+                .toSingle()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(repo1 -> {
-                    repo.set(repo1);
-                });
+                .subscribe(pair -> {
+                    this.repo.set(pair.first);
+                    if (pair.second) {
+                        Toast.makeText(activity, "Starred", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(activity, "Unstarred", Toast.LENGTH_SHORT).show();
+                    }
+                }, Throwable::printStackTrace);
     }
 
     public void onStarClick(View view) {
