@@ -21,19 +21,19 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="@dimen/avatar_medium"
+            android:layout_height="@dimen/avatar_medium"
             app:imageUrl="@{viewModel.repo.owner.avatar_url}"
             app:errorDrawable="@{@android:drawable/ic_delete}"/>
 
         <TextView
             android:id="@+id/textViewName"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="@dimen/avatar_medium"
             android:layout_toRightOf="@id/imageView"
             android:layout_toEndOf="@id/imageView"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_small"
             android:gravity="center_vertical"
             android:text="@{viewModel.repo.name, default=Hoge}"/>
 
@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/imageView"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/margin_small"
             android:text="@{viewModel.repo.description, default=Fuga}"/>
 
         <TextView
@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/textViewDescription"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/margin_small"
             android:text="@{@plurals/repo_people_starring(viewModel.repo.stargazers_count, viewModel.repo.stargazers_count)}"/>
 
         <Button
@@ -58,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/textViewPeopleStarring"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/margin_small"
             android:text="@{viewModel.starred ? @string/repo_unstar : @string/repo_star}"
             android:onClick="@{viewModel.starred ? viewModel::onUnstarClick : viewModel::onStarClick}"/>
 
