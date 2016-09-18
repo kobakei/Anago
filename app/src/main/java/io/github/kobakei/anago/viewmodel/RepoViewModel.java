@@ -72,6 +72,7 @@ public class RepoViewModel extends ActivityViewModel {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> {
+                    this.starred.set(true);
                     Toast.makeText(getActivity(), "Starred!", Toast.LENGTH_SHORT).show();
                 }, throwable -> {
                     Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
@@ -83,6 +84,7 @@ public class RepoViewModel extends ActivityViewModel {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> {
+                    this.starred.set(false);
                     Toast.makeText(getActivity(), "Unstarred!", Toast.LENGTH_SHORT).show();
                 }, throwable -> {
                     Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
