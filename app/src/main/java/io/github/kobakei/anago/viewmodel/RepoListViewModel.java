@@ -11,6 +11,7 @@ import io.github.kobakei.anago.entity.Repo;
 import io.github.kobakei.anago.usecase.GetUserReposUseCase;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import timber.log.Timber;
 
 /**
  * リポジトリ一覧画面ビューモデル
@@ -23,6 +24,7 @@ public class RepoListViewModel extends ActivityViewModel {
 
     public ObservableArrayList<Repo> repos;
     public ObservableBoolean isConnecting;
+    public ObservableBoolean isRefreshing;
 
     @Inject
     public RepoListViewModel(Activity activity, GetUserReposUseCase getUserReposUseCase) {
@@ -32,18 +34,30 @@ public class RepoListViewModel extends ActivityViewModel {
 
         repos = new ObservableArrayList<>();
         isConnecting = new ObservableBoolean(true);
+        isRefreshing = new ObservableBoolean(false);
 
-        getUserReposUseCase.run()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(repos1 -> {
-                    repos.clear();
-                    repos.addAll(repos1);
-                    isConnecting.set(false);
-                });
+        refreshData();
+    }
+
+    public void onRefresh() {
+        Timber.v("onRefresh");
+        this.isRefreshing.set(true);
+        refreshData();
     }
 
     public void onItemClick(int position) {
         RepoActivity.startActivity(getActivity(), repos.get(position).id);
+    }
+
+    private void refreshData() {
+        getUserReposUseCase.run()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(repos1 -> {
+                    this.isRefreshing.set(false);
+                    repos.clear();
+                    repos.addAll(repos1);
+                    isConnecting.set(false);
+                });
     }
 }

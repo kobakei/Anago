@@ -1,7 +1,6 @@
 package io.github.kobakei.anago.activity;
 
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import javax.inject.Inject;

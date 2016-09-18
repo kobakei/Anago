@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="io.github.kobakei.anago.activity.RepoListActivity">
 
@@ -16,11 +17,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ListView
-            android:id="@+id/listView"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:onItemClick="@{(parent, view, position, id) -> {viewModel.onItemClick(position)}}"/>
+            app:refreshing="@{viewModel.isRefreshing}"
+            app:onRefreshListener="@{() -> viewModel.onRefresh()}">
+
+            <ListView
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onItemClick="@{(parent, view, position, id) -> {viewModel.onItemClick(position)}}"/>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
 
         <ProgressBar
             android:id="@+id/progressBar"
