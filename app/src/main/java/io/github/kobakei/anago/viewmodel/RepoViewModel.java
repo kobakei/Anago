@@ -31,6 +31,7 @@ public class RepoViewModel extends ActivityViewModel {
     private final UnstarUseCase unstarUseCase;
 
     public ObservableField<Repo> repo;
+    public ObservableBoolean isConnecting;
     public ObservableBoolean starred;
 
     @Inject
@@ -44,6 +45,7 @@ public class RepoViewModel extends ActivityViewModel {
         this.unstarUseCase = unstarUseCase;
 
         this.repo = new ObservableField<>();
+        this.isConnecting = new ObservableBoolean(true);
         this.starred = new ObservableBoolean(false);
 
         long id = getActivity().getIntent().getLongExtra("id", 0L);
@@ -57,6 +59,7 @@ public class RepoViewModel extends ActivityViewModel {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(pair -> {
+                    this.isConnecting.set(false);
                     this.repo.set(pair.first);
                     this.starred.set(pair.second);
                     if (pair.second) {

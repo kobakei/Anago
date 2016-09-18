@@ -4,4 +4,6 @@
     <color name="blue_grey_600">#546E7A</color>
     <color name="blue_grey_800">#37474F</color>
     <color name="orange_600">#FB8C00</color>
+
+    <color name="white">#FFFFFF</color>
 </resources>
