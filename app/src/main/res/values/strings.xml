@@ -4,4 +4,7 @@
     <string name="sign_in.button">Sign in</string>
     <string name="sign_in.name_hint">Username</string>
     <string name="sign_in.password_hint">Password</string>
+
+    <string name="repo_star">Star</string>
+    <string name="repo_unstar">Unstar</string>
 </resources>
