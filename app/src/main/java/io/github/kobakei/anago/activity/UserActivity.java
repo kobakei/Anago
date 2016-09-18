@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import javax.inject.Inject;
 
@@ -27,11 +28,23 @@ public class UserActivity extends BaseActivity {
 
         UserActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.user_activity);
         binding.setViewModel(viewModel);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public static void startActivity(Context context, String name) {
         Intent intent = new Intent(context, UserActivity.class);
         intent.putExtra("name", name);
         context.startActivity(intent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return false;
     }
 }

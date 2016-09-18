@@ -29,7 +29,8 @@
                 android:layout_width="@dimen/avatar_medium"
                 android:layout_height="@dimen/avatar_medium"
                 app:imageUrl="@{viewModel.repo.owner.avatar_url}"
-                app:errorDrawable="@{@android:drawable/ic_delete}"/>
+                app:errorDrawable="@{@android:drawable/ic_delete}"
+                android:onClick="@{viewModel.onImageClick}"/>
 
             <TextView
                 android:id="@+id/textViewName"

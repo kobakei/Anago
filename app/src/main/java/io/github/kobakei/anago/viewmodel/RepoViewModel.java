@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import javax.inject.Inject;
 
+import io.github.kobakei.anago.activity.UserActivity;
 import io.github.kobakei.anago.entity.Repo;
 import io.github.kobakei.anago.usecase.CheckStarUseCase;
 import io.github.kobakei.anago.usecase.GetRepoUseCase;
@@ -92,5 +93,9 @@ public class RepoViewModel extends ActivityViewModel {
                 }, throwable -> {
                     Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                 });
+    }
+
+    public void onImageClick(View view) {
+        UserActivity.startActivity(getActivity(), repo.get().owner.login);
     }
 }
