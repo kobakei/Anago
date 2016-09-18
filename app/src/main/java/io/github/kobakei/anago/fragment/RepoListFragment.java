@@ -95,7 +95,7 @@ public class RepoListFragment extends BaseFragment {
             RepoListItemBinding binding;
             if (convertView == null) {
                 binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.repo_list_item, parent, false);
-                binding.setViewModel(new RepoListItemViewModel());
+                binding.setViewModel(new RepoListItemViewModel(getContext()));
             } else {
                 binding = DataBindingUtil.getBinding(convertView);
             }

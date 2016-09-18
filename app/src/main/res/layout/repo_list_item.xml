@@ -21,7 +21,8 @@
             android:layout_width="@dimen/avatar_small"
             android:layout_height="@dimen/avatar_small"
             app:imageUrl="@{viewModel.repo.owner.avatar_url}"
-            app:errorDrawable="@{@android:drawable/ic_delete}"/>
+            app:errorDrawable="@{@android:drawable/ic_delete}"
+            android:onClick="@{viewModel.onImageClick}"/>
 
         <LinearLayout
             android:layout_width="match_parent"
