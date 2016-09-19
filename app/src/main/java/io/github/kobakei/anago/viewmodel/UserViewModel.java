@@ -2,6 +2,7 @@ package io.github.kobakei.anago.viewmodel;
 
 import android.app.Activity;
 import android.databinding.ObservableField;
+import android.support.v7.app.AppCompatActivity;
 
 import javax.inject.Inject;
 
@@ -33,6 +34,13 @@ public class UserViewModel extends ActivityViewModel {
         getUserUseCase.run(name)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(user1 -> user.set(user1), Throwable::printStackTrace);
+                .subscribe(user1 -> {
+                    user.set(user1);
+
+                    // TODO ActionBarのタイトルはどこでセットすればいい？
+                    AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
+                    appCompatActivity.getSupportActionBar().setTitle(user.get().login);
+
+                }, Throwable::printStackTrace);
     }
 }

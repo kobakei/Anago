@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.support.v4.util.Pair;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -63,11 +64,11 @@ public class RepoViewModel extends ActivityViewModel {
                     this.isConnecting.set(false);
                     this.repo.set(pair.first);
                     this.starred.set(pair.second);
-                    if (pair.second) {
-                        Toast.makeText(activity, "Starred", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(activity, "Unstarred", Toast.LENGTH_SHORT).show();
-                    }
+
+                    // TODO ActionBarのタイトルはどこでセットすればいい？
+                    AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
+                    appCompatActivity.getSupportActionBar().setTitle(this.repo.get().name);
+
                 }, Throwable::printStackTrace);
     }
 

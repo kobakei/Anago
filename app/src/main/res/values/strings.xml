@@ -2,11 +2,13 @@
     <string name="app_name">Anago</string>
 
     <!-- 命名規則: <画面名>_<key> -->
-
+    <string name="sign_in_title">Sign in</string>
     <string name="sign_in_button">Sign in</string>
     <string name="sign_in_name_hint">Username</string>
     <string name="sign_in_password_hint">Password</string>
 
+    <string name="home_title">Home</string>
+    
     <plurals name="repo_people_starring">
         <item quantity="one">%1$d person is starring.</item>
         <item quantity="other">%1$d people are starring.</item>
