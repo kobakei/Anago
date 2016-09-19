@@ -14,6 +14,7 @@ import io.github.kobakei.anago.entity.AuthToken;
 import io.github.kobakei.anago.net.GitHubService;
 import io.github.kobakei.anago.net.body.AuthorizationBody;
 import io.github.kobakei.anago.util.NetUtil;
+import rx.Completable;
 import rx.Single;
 import timber.log.Timber;
 
@@ -53,5 +54,12 @@ public class AuthTokenRepository {
 
     public Single<AuthToken> get() {
         return this.authTokenDao.get();
+    }
+
+    public Completable delete() {
+        return this.authTokenDao.get()
+                .flatMap(authToken -> this.gitHubService.deleteAuthorization(authToken.id))
+                .flatMap(aVoid -> this.authTokenDao.removeAll())
+                .toCompletable();
     }
 }

@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 
 import io.github.kobakei.anago.entity.AuthToken;
 import io.github.kobakei.anago.entity.OrmaDatabase;
+import rx.Completable;
 import rx.Single;
 
 /**
@@ -33,5 +34,11 @@ public class AuthTokenDao {
                 .limit(1)
                 .executeAsObservable()
                 .toSingle();
+    }
+
+    public Single<Integer> removeAll() {
+        return ormaDatabase.relationOfAuthToken()
+                .deleter()
+                .executeAsObservable();
     }
 }

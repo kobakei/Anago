@@ -29,6 +29,9 @@ public interface GitHubService {
                                        @Path("fingerprint") String fingerprint,
                                        @Body AuthorizationBody body);
 
+    @DELETE("/authorizations/{id}")
+    Single<Void> deleteAuthorization(@Path("id") long id);
+
     @GET("/user/repos")
     Single<List<Repo>> getUserRepos(@Header("Authorization") String authorization);
 
