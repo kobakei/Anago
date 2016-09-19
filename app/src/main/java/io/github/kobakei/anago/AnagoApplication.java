@@ -3,6 +3,7 @@ package io.github.kobakei.anago;
 import android.app.Application;
 
 import com.facebook.stetho.Stetho;
+import com.squareup.leakcanary.LeakCanary;
 
 import io.github.kobakei.anago.di.AppComponent;
 import io.github.kobakei.anago.di.AppModule;
@@ -20,6 +21,11 @@ public class AnagoApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return;
+        }
+        LeakCanary.install(this);
 
         injector = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
