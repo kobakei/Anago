@@ -30,6 +30,18 @@ public class RepoActivity extends BaseActivity {
         binding.setViewModel(viewModel);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        viewModel.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        viewModel.onPause();
+    }
+
     public static void startActivity(Activity activity, long id) {
         Intent intent = new Intent(activity, RepoActivity.class);
         intent.putExtra("id", id);

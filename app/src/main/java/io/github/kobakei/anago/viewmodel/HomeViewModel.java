@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import io.github.kobakei.anago.activity.SignInActivity;
 import io.github.kobakei.anago.usecase.SignOutUseCase;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -25,11 +26,12 @@ public class HomeViewModel extends ActivityViewModel {
     }
 
     public void onSignOutClick() {
-        signOutUseCase.run()
+        Subscription subscription = signOutUseCase.run()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> {
                     SignInActivity.startActivity(getActivity());
                 });
+        getCompositeSubscription().add(subscription);
     }
 }

@@ -56,5 +56,14 @@
             android:layout_marginTop="@dimen/margin_medium"
             android:text="@{viewModel.user.bio, default=bio}"/>
 
+        <Button
+            android:id="@+id/buttonTest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_below="@id/textViewBio"
+            android:text="Test"
+            android:onClick="@{viewModel.onTestClick}"/>
+
     </RelativeLayout>
 </layout>

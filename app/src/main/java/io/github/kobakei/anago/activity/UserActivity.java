@@ -32,6 +32,18 @@ public class UserActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        viewModel.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        viewModel.onPause();
+    }
+
     public static void startActivity(Context context, String name) {
         Intent intent = new Intent(context, UserActivity.class);
         intent.putExtra("name", name);

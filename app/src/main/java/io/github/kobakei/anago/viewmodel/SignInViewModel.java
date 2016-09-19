@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import io.github.kobakei.anago.activity.HomeActivity;
 import io.github.kobakei.anago.usecase.CheckSessionUseCase;
 import io.github.kobakei.anago.usecase.SignInUseCase;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
@@ -45,7 +46,7 @@ public class SignInViewModel extends ActivityViewModel {
         password = new ObservableField<>();
         buttonEnabled = new ObservableBoolean(false);
 
-        checkSessionUseCase.run()
+        Subscription subscription = checkSessionUseCase.run()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(authToken -> {
@@ -53,6 +54,7 @@ public class SignInViewModel extends ActivityViewModel {
                     Toast.makeText(getActivity(), "Already signed in", Toast.LENGTH_SHORT).show();
                     goToNext();
                 }, Timber::e);
+        getCompositeSubscription().add(subscription);
     }
 
     public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -63,13 +65,14 @@ public class SignInViewModel extends ActivityViewModel {
     public void onButtonClick(View view) {
         Timber.v("Button clicked. name=" + name.get());
 
-        signInUseCase.run(name.get(), password.get())
+        Subscription subscription = signInUseCase.run(name.get(), password.get())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(authToken -> {
                     Toast.makeText(getActivity(), "Token: " + authToken.token, Toast.LENGTH_SHORT).show();
                     goToNext();
                 }, throwable -> Timber.e(throwable));
+        getCompositeSubscription().add(subscription);
     }
 
     private void goToNext() {

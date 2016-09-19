@@ -17,6 +17,7 @@ import io.github.kobakei.anago.usecase.GetRepoUseCase;
 import io.github.kobakei.anago.usecase.StarUseCase;
 import io.github.kobakei.anago.usecase.UnstarUseCase;
 import rx.Observable;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -51,7 +52,7 @@ public class RepoViewModel extends ActivityViewModel {
         this.starred = new ObservableBoolean(false);
 
         long id = getActivity().getIntent().getLongExtra("id", 0L);
-        getRepoUseCase.run(id)
+        Subscription subscription = getRepoUseCase.run(id)
                 .flatMapObservable(repo1 -> Observable.combineLatest(
                         Observable.just(repo1),
                         checkStarUseCase.run(repo1.owner.login, repo1.name).toObservable(),
@@ -70,10 +71,11 @@ public class RepoViewModel extends ActivityViewModel {
                     appCompatActivity.getSupportActionBar().setTitle(this.repo.get().name);
 
                 }, Throwable::printStackTrace);
+        getCompositeSubscription().add(subscription);
     }
 
     public void onStarClick(View view) {
-        this.starUseCase.run(repo.get().owner.login, repo.get().name)
+        Subscription subscription = this.starUseCase.run(repo.get().owner.login, repo.get().name)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> {
@@ -82,10 +84,11 @@ public class RepoViewModel extends ActivityViewModel {
                 }, throwable -> {
                     Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                 });
+        getCompositeSubscription().add(subscription);
     }
 
     public void onUnstarClick(View view) {
-        this.unstarUseCase.run(repo.get().owner.login, repo.get().name)
+        Subscription subscription = this.unstarUseCase.run(repo.get().owner.login, repo.get().name)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> {
@@ -94,6 +97,7 @@ public class RepoViewModel extends ActivityViewModel {
                 }, throwable -> {
                     Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                 });
+        getCompositeSubscription().add(subscription);
     }
 
     public void onImageClick(View view) {

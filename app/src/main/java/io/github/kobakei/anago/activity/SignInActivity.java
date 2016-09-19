@@ -29,6 +29,18 @@ public class SignInActivity extends BaseActivity {
         binding.setViewModel(viewModel);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        viewModel.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        viewModel.onPause();
+    }
+
     public static void startActivity(Activity activity) {
         Intent intent = new Intent(activity, SignInActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

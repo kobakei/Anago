@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import io.github.kobakei.anago.activity.RepoActivity;
 import io.github.kobakei.anago.entity.Repo;
 import io.github.kobakei.anago.usecase.GetUserReposUseCase;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
@@ -50,7 +51,7 @@ public class RepoListViewModel extends ActivityViewModel {
     }
 
     private void refreshData() {
-        getUserReposUseCase.run()
+        Subscription subscription = getUserReposUseCase.run()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(repos1 -> {
@@ -59,5 +60,6 @@ public class RepoListViewModel extends ActivityViewModel {
                     repos.addAll(repos1);
                     isConnecting.set(false);
                 });
+        getCompositeSubscription().add(subscription);
     }
 }
