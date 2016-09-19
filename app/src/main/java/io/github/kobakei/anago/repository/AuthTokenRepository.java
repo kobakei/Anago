@@ -58,7 +58,12 @@ public class AuthTokenRepository {
 
     public Completable delete() {
         return this.authTokenDao.get()
-                .flatMap(authToken -> this.gitHubService.deleteAuthorization(authToken.id))
+                .flatMap(authToken -> {
+                    String clientId = context.getString(R.string.github_client_id);
+                    String clientSecret = context.getString(R.string.github_client_secret);
+                    String header = NetUtil.getBasicHeader(clientId, clientSecret);
+                    return this.gitHubService.revokeAuthorization(header, clientId, authToken.token);
+                })
                 .flatMap(aVoid -> this.authTokenDao.removeAll())
                 .toCompletable();
     }

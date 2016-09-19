@@ -14,7 +14,7 @@ import javax.inject.Inject;
 import io.github.kobakei.anago.R;
 import io.github.kobakei.anago.databinding.HomeActivityBinding;
 import io.github.kobakei.anago.fragment.RepoListFragment;
-import io.github.kobakei.anago.viewmodel.RepoListViewModel;
+import io.github.kobakei.anago.viewmodel.HomeViewModel;
 
 /**
  * リポジトリ一覧画面
@@ -22,7 +22,7 @@ import io.github.kobakei.anago.viewmodel.RepoListViewModel;
 public class HomeActivity extends BaseActivity {
 
     @Inject
-    RepoListViewModel viewModel;
+    HomeViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,7 @@ public class HomeActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_home:
+                viewModel.onSignOutClick();
                 return true;
         }
         return false;
