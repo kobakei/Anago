@@ -17,6 +17,8 @@ import io.github.kobakei.anago.viewmodel.UserViewModel;
  */
 public class UserActivity extends BaseActivity {
 
+    private static final String KEY_NAME = "name";
+
     @Inject
     UserViewModel viewModel;
 
@@ -30,6 +32,9 @@ public class UserActivity extends BaseActivity {
         binding.setViewModel(viewModel);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        String name = getIntent().getStringExtra(KEY_NAME);
+        viewModel.setParams(name);
     }
 
     @Override
@@ -46,7 +51,7 @@ public class UserActivity extends BaseActivity {
 
     public static void startActivity(Context context, String name) {
         Intent intent = new Intent(context, UserActivity.class);
-        intent.putExtra("name", name);
+        intent.putExtra(KEY_NAME, name);
         context.startActivity(intent);
     }
 

@@ -24,14 +24,14 @@ public class RepoRepository {
     private final GitHubService gitHubService;
     private final AuthTokenDao authTokenDao;
 
-    private LongSparseArray<Repo> cache;
+    private Map<String, Repo> cache;
 
     @Inject
     public RepoRepository(GitHubService gitHubService, AuthTokenDao authTokenDao) {
         this.gitHubService = gitHubService;
         this.authTokenDao = authTokenDao;
 
-        this.cache = new LongSparseArray<>();
+        this.cache = new HashMap<>();
     }
 
     public Single<List<Repo>> getUserRepos() {
@@ -42,12 +42,12 @@ public class RepoRepository {
                 })
                 .doOnSuccess(repos1 -> {
                     for (Repo repo : repos1) {
-                        cache.put(repo.id, repo);
+                        cache.put(repo.full_name, repo);
                     }
                 });
     }
 
-    public Single<Repo> getById(long id) {
-        return Single.just(cache.get(id));
+    public Single<Repo> getByFullname(String fullname) {
+        return Single.just(cache.get(fullname));
     }
 }

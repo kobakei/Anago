@@ -37,6 +37,9 @@ public class RepoViewModel extends ActivityViewModel {
     public ObservableBoolean isConnecting;
     public ObservableBoolean starred;
 
+    private String paramUser;
+    private String paramRepo;
+
     @Inject
     public RepoViewModel(Activity activity, GetRepoUseCase getRepoUseCase,
                          CheckStarUseCase checkStarUseCase, StarUseCase starUseCase,
@@ -50,9 +53,18 @@ public class RepoViewModel extends ActivityViewModel {
         this.repo = new ObservableField<>();
         this.isConnecting = new ObservableBoolean(true);
         this.starred = new ObservableBoolean(false);
+    }
 
-        long id = getActivity().getIntent().getLongExtra("id", 0L);
-        Subscription subscription = getRepoUseCase.run(id)
+    public void setParams(String user, String repo) {
+        this.paramUser = user;
+        this.paramRepo = repo;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        Subscription subscription = getRepoUseCase.run(paramUser, paramRepo)
                 .flatMapObservable(repo1 -> Observable.combineLatest(
                         Observable.just(repo1),
                         checkStarUseCase.run(repo1.owner.login, repo1.name).toObservable(),

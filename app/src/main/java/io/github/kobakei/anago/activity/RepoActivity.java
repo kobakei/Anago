@@ -3,7 +3,6 @@ package io.github.kobakei.anago.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import javax.inject.Inject;
@@ -17,6 +16,9 @@ import io.github.kobakei.anago.viewmodel.RepoViewModel;
  */
 public class RepoActivity extends BaseActivity {
 
+    private static final String KEY_USER = "user";
+    private static final String KEY_REPO = "repo";
+
     @Inject
     RepoViewModel viewModel;
 
@@ -28,6 +30,10 @@ public class RepoActivity extends BaseActivity {
 
         RepoActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.repo_activity);
         binding.setViewModel(viewModel);
+
+        String user = getIntent().getStringExtra(KEY_USER);
+        String repo = getIntent().getStringExtra(KEY_REPO);
+        viewModel.setParams(user, repo);
     }
 
     @Override
@@ -42,9 +48,16 @@ public class RepoActivity extends BaseActivity {
         viewModel.onPause();
     }
 
-    public static void startActivity(Activity activity, long id) {
+    /**
+     * このActivityに遷移する
+     * @param activity
+     * @param user
+     * @param repo
+     */
+    public static void startActivity(Activity activity, String user, String repo) {
         Intent intent = new Intent(activity, RepoActivity.class);
-        intent.putExtra("id", id);
+        intent.putExtra(KEY_USER, user);
+        intent.putExtra(KEY_REPO, repo);
         activity.startActivity(intent);
     }
 }

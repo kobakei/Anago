@@ -26,16 +26,25 @@ public class UserViewModel extends ActivityViewModel {
 
     public ObservableField<User> user;
 
+    private String paramName;
+
     @Inject
     public UserViewModel(Activity activity, GetUserUseCase getUserUseCase) {
         super(activity);
         this.getUserUseCase = getUserUseCase;
 
         this.user = new ObservableField<>();
+    }
 
-        String name = activity.getIntent().getStringExtra("name");
+    public void setParams(String name) {
+        this.paramName = name;
+    }
 
-        Subscription subscription = getUserUseCase.run(name)
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        Subscription subscription = getUserUseCase.run(paramName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(user1 -> {
