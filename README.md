@@ -11,7 +11,7 @@ MVVMとClean architectureで書いたAndoridのサンプルアプリです。
 
 ## アーキテクチャ
 
-![Diagram](https://raw.github.com/kobakei/Anago/master/art/diagram.png)
+![Diagram](https://raw.githubusercontent.com/kobakei/Anago/master/art/diagram.png?token=AA2-lMB_FnGB9owAev-ANT0YRq8a0uOYks5X6qaowA%3D%3D)
 
 ## ライブラリ
 
