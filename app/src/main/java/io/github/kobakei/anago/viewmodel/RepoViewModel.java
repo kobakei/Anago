@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import javax.inject.Inject;
 
+import io.github.kobakei.anago.activity.StargazerListActivity;
 import io.github.kobakei.anago.activity.UserActivity;
 import io.github.kobakei.anago.entity.Repo;
 import io.github.kobakei.anago.usecase.CheckStarUseCase;
@@ -114,5 +115,9 @@ public class RepoViewModel extends ActivityViewModel {
 
     public void onImageClick(View view) {
         UserActivity.startActivity(getActivity(), repo.get().owner.login);
+    }
+
+    public void onStargazerClick(View view) {
+        StargazerListActivity.startActivity(getActivity(), repo.get().owner.login, repo.get().name);
     }
 }

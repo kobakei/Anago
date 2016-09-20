@@ -8,7 +8,7 @@
     <string name="sign_in_password_hint">Password</string>
 
     <string name="home_title">Home</string>
-    
+
     <plurals name="repo_people_starring">
         <item quantity="one">%1$d person is starring.</item>
         <item quantity="other">%1$d people are starring.</item>

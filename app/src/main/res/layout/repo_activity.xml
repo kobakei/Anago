@@ -65,8 +65,17 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textViewPeopleStarring"
                 android:layout_marginTop="@dimen/margin_small"
-                android:text="@{viewModel.starred ? @string/repo_unstar : @string/repo_star}"
+                android:text="@{viewModel.starred ? @string/repo_unstar : @string/repo_star, default=Star}"
                 android:onClick="@{viewModel.starred ? viewModel::onUnstarClick : viewModel::onStarClick}"/>
+
+            <Button
+                android:id="@+id/buttonStargazer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/buttonStar"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="Stargazers"
+                android:onClick="@{viewModel::onStargazerClick}"/>
 
         </RelativeLayout>
 

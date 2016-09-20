@@ -11,7 +11,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.SignInActivity"
+        <activity
+            android:name=".activity.SignInActivity"
             android:label="@string/sign_in_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,10 +20,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.HomeActivity"
-            android:label="@string/home_title"/>
+        <activity
+            android:name=".activity.HomeActivity"
+            android:label="@string/home_title" />
         <activity android:name=".activity.RepoActivity" />
-        <activity android:name=".activity.UserActivity"></activity>
+        <activity android:name=".activity.UserActivity" />
+        <activity android:name=".activity.StargazerListActivity"></activity>
     </application>
 
 </manifest>

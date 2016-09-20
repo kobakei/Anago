@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="io.github.kobakei.anago.viewmodel.StargazerListItemViewModel"/>
+    </data>
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="@dimen/margin_medium">
+        
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="@dimen/avatar_small"
+            android:layout_height="@dimen/avatar_small"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            app:imageUrl="@{viewModel.user.avatar_url}"
+            app:errorDrawable="@{@android:drawable/ic_delete}"
+            android:onClick="@{viewModel.onImageClick}"/>
+
+        <TextView
+            android:id="@+id/textViewName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/imageView"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_medium"
+            android:text="@{viewModel.user.login, default=Hoge}"/>
+
+    </RelativeLayout>
+
+</layout>
