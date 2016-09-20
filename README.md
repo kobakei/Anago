@@ -9,6 +9,10 @@ MVVMとClean architectureで書いたAndoridのサンプルアプリです。
   - 自分のリポジトリを表示
   - スター登録・解除
 
+## アーキテクチャ
+
+![Diagram](https://raw.github.com/kobakei/Anago/master/art/diagram.png)
+
 ## ライブラリ
 
 - [Android data binding](https://developer.android.com/topic/libraries/data-binding/index.html)
