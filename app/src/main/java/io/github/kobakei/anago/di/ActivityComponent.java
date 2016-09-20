@@ -6,6 +6,7 @@ import io.github.kobakei.anago.activity.HomeActivity;
 import io.github.kobakei.anago.activity.SignInActivity;
 import io.github.kobakei.anago.activity.UserActivity;
 import io.github.kobakei.anago.fragment.RepoListFragment;
+import io.github.kobakei.anago.viewmodel.RepoListItemViewModel;
 
 /**
  * Created by keisuke on 2016/09/18.
@@ -18,4 +19,6 @@ public interface ActivityComponent {
     void inject(UserActivity activity);
 
     void inject(RepoListFragment fragment);
+
+    RepoListItemViewModel repoListItemViewModel();
 }

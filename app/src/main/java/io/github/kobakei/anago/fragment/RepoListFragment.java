@@ -58,7 +58,7 @@ public class RepoListFragment extends BaseFragment {
     /**
      * リストビューのアダプター
      */
-    static class RepoAdapter extends ArrayAdapter<Repo> {
+    class RepoAdapter extends ArrayAdapter<Repo> {
         public RepoAdapter(Context context, ObservableArrayList<Repo> objects) {
             super(context, 0, objects);
             objects.addOnListChangedCallback(new ObservableList.OnListChangedCallback<ObservableList<Repo>>() {
@@ -95,7 +95,7 @@ public class RepoListFragment extends BaseFragment {
             RepoListItemBinding binding;
             if (convertView == null) {
                 binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.repo_list_item, parent, false);
-                binding.setViewModel(new RepoListItemViewModel(getContext()));
+                binding.setViewModel(getInjector().repoListItemViewModel());
             } else {
                 binding = DataBindingUtil.getBinding(convertView);
             }
