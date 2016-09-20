@@ -9,7 +9,7 @@
             type="io.github.kobakei.anago.viewmodel.RepoListItemViewModel"/>
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,15 +20,27 @@
             android:id="@+id/imageView"
             android:layout_width="@dimen/avatar_small"
             android:layout_height="@dimen/avatar_small"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
             app:imageUrl="@{viewModel.repo.owner.avatar_url}"
             app:errorDrawable="@{@android:drawable/ic_delete}"
             android:onClick="@{viewModel.onImageClick}"/>
 
+        <ImageView
+            android:id="@+id/imageViewStar"
+            android:src="@android:drawable/ic_menu_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/imageView"
+            android:layout_toLeftOf="@id/imageViewStar"
             android:layout_marginLeft="@dimen/margin_medium"
-            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginRight="@dimen/margin_medium"
             android:orientation="vertical">
 
             <TextView
@@ -36,18 +48,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_small"
-                android:text="@{viewModel.repo.full_name}"/>
+                android:text="@{viewModel.repo.full_name, default=Hoge}"/>
 
             <TextView
                 android:id="@+id/textViewDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{viewModel.repo.description}"
+                android:text="@{viewModel.repo.description, default=Fuga}"
                 android:maxLines="1"
                 android:ellipsize="end"/>
 
         </LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </layout>
