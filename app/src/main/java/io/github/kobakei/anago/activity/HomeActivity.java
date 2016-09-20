@@ -1,5 +1,6 @@
 package io.github.kobakei.anago.activity;
 
+import android.app.Activity;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -34,7 +35,7 @@ public class HomeActivity extends BaseActivity {
         binding.setViewModel(viewModel);
 
         // Set up viewpager
-        HomeFragmentPagerAdapter adapter = new HomeFragmentPagerAdapter(getSupportFragmentManager());
+        HomeFragmentPagerAdapter adapter = new HomeFragmentPagerAdapter(this, getSupportFragmentManager());
         binding.viewPager.setAdapter(adapter);
         binding.tabLayout.setupWithViewPager(binding.viewPager);
     }
@@ -73,8 +74,11 @@ public class HomeActivity extends BaseActivity {
      */
     static class HomeFragmentPagerAdapter extends FragmentPagerAdapter {
 
-        public HomeFragmentPagerAdapter(FragmentManager fm) {
+        private Activity activity;
+
+        public HomeFragmentPagerAdapter(Activity activity, FragmentManager fm) {
             super(fm);
+            this.activity = activity;
         }
 
         @Override
@@ -84,7 +88,11 @@ public class HomeActivity extends BaseActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return "Title " + position;
+            if (position == 0) {
+                return activity.getString(R.string.home_tab_my);
+            } else {
+                return activity.getString(R.string.home_tab_public);
+            }
         }
 
         @Override
