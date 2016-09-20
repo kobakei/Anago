@@ -28,7 +28,7 @@
 
         <ImageView
             android:id="@+id/imageViewStar"
-            android:src="@drawable/ic_star_border_black_36dp"
+            android:src="@{viewModel.starred? @drawable/ic_star_black_36dp : @drawable/ic_star_border_black_36dp}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

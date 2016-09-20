@@ -51,7 +51,7 @@ public class RepoListItemViewModel extends ListItemViewModel {
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(() -> {
-                        starred.set(true);
+                        starred.set(false);
                         Toast.makeText(getContext(), "Unstarred!", Toast.LENGTH_SHORT).show();
                     });
         } else {
