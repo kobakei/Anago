@@ -1,5 +1,7 @@
 package io.github.kobakei.anago.repository;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -8,6 +10,7 @@ import io.github.kobakei.anago.net.GitHubService;
 import rx.Single;
 
 /**
+ * ユーザーのリポジトリ
  * Created by keisuke on 2016/09/19.
  */
 @Singleton
@@ -22,5 +25,9 @@ public class UserRepository {
 
     public Single<User> get(String name) {
         return gitHubService.getUser(name);
+    }
+
+    public Single<List<User>> getStargazers(String user, String repo) {
+        return gitHubService.getStargazers(user, repo);
     }
 }

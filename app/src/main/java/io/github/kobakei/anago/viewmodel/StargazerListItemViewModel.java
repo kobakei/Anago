@@ -6,9 +6,11 @@ import android.view.View;
 
 import javax.inject.Inject;
 
+import io.github.kobakei.anago.activity.UserActivity;
 import io.github.kobakei.anago.entity.User;
 
 /**
+ * スターした人アイテムのビューモデル
  * Created by keisuke on 2016/09/20.
  */
 
@@ -24,6 +26,6 @@ public class StargazerListItemViewModel extends ListItemViewModel {
     }
 
     public void onImageClick(View view) {
-
+        UserActivity.startActivity(getContext(), user.get().login);
     }
 }

@@ -41,9 +41,25 @@ public class StargazerListActivity extends BaseActivity {
         StargazerListActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.stargazer_list_activity);
         binding.setViewModel(viewModel);
 
+        String user = getIntent().getStringExtra(KEY_USER);
+        String repo = getIntent().getStringExtra(KEY_REPO);
+        viewModel.setParams(user, repo);
+
         // Set up recycler view
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(new StargazerAdapter(viewModel.users));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        viewModel.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        viewModel.onPause();
     }
 
     public static void startActivity(Activity activity, String user, String repo) {

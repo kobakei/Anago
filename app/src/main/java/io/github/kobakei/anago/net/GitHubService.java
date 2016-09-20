@@ -55,4 +55,8 @@ public interface GitHubService {
 
     @GET("/users/{user}")
     Single<User> getUser(@Path("user") String user);
+
+    @GET("/repos/{user}/{repo}/stargazers")
+    Single<List<User>> getStargazers(@Path("user") String user,
+                                     @Path("repo") String repo);
 }
