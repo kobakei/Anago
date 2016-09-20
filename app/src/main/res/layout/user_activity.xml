@@ -6,64 +6,86 @@
     tools:context="io.github.kobakei.anago.activity.UserActivity">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="io.github.kobakei.anago.viewmodel.UserViewModel"/>
     </data>
 
-    <RelativeLayout
+    <FrameLayout
         android:id="@+id/user_activity"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="@dimen/avatar_large"
-            android:layout_height="@dimen/avatar_large"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentTop="true"
-            app:imageUrl="@{viewModel.user.avatar_url}"
-            app:errorDrawable="@{@android:drawable/ic_delete}"/>
-
-        <TextView
-            android:id="@+id/textViewName"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:layout_below="@id/imageView"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:text="@{viewModel.user.login, default=Name}"/>
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin">
 
-        <TextView
-            android:id="@+id/textViewEmail"
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="@dimen/avatar_large"
+                android:layout_height="@dimen/avatar_large"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentTop="true"
+                app:imageUrl="@{viewModel.user.avatar_url}"
+                app:errorDrawable="@{@android:drawable/ic_delete}"/>
+
+            <TextView
+                android:id="@+id/textViewName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_below="@id/imageView"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:text="@{viewModel.user.login, default=Name}"/>
+
+            <TextView
+                android:id="@+id/textViewEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_below="@id/textViewName"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:text="@{viewModel.user.email, default=name_example_com}"/>
+
+            <TextView
+                android:id="@+id/textViewBio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_below="@id/textViewEmail"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:text="@{viewModel.user.bio, default=bio}"/>
+
+            <Button
+                android:id="@+id/buttonTest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_below="@id/textViewBio"
+                android:text="Test"
+                android:onClick="@{viewModel.onTestClick}"/>
+
+        </RelativeLayout>
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:layout_below="@id/textViewName"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:text="@{viewModel.user.email, default=name_example_com}"/>
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:visibility="@{viewModel.isConnecting? View.VISIBLE : View.GONE}"
+            tools:visibility="gone">
 
-        <TextView
-            android:id="@+id/textViewBio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:layout_below="@id/textViewEmail"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:text="@{viewModel.user.bio, default=bio}"/>
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
 
-        <Button
-            android:id="@+id/buttonTest"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:layout_below="@id/textViewBio"
-            android:text="Test"
-            android:onClick="@{viewModel.onTestClick}"/>
+        </FrameLayout>
 
-    </RelativeLayout>
+    </FrameLayout>
+
 </layout>

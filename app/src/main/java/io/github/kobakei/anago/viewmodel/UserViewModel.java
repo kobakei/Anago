@@ -1,6 +1,7 @@
 package io.github.kobakei.anago.viewmodel;
 
 import android.app.Activity;
+import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -25,6 +26,7 @@ public class UserViewModel extends ActivityViewModel {
     private final GetUserUseCase getUserUseCase;
 
     public ObservableField<User> user;
+    public ObservableBoolean isConnecting;
 
     private String paramName;
 
@@ -34,6 +36,7 @@ public class UserViewModel extends ActivityViewModel {
         this.getUserUseCase = getUserUseCase;
 
         this.user = new ObservableField<>();
+        this.isConnecting = new ObservableBoolean(true);
     }
 
     public void setParams(String name) {
@@ -53,6 +56,8 @@ public class UserViewModel extends ActivityViewModel {
                     // TODO ActionBarのタイトルはどこでセットすればいい？
                     AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
                     appCompatActivity.getSupportActionBar().setTitle(user.get().login);
+
+                    isConnecting.set(false);
 
                 }, Throwable::printStackTrace);
         getCompositeSubscription().add(subscription);

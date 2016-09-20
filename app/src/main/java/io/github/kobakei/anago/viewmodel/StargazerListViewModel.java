@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import io.github.kobakei.anago.entity.User;
 import io.github.kobakei.anago.usecase.GetStargazersUseCase;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -41,13 +42,14 @@ public class StargazerListViewModel extends ActivityViewModel {
     public void onResume() {
         super.onResume();
 
-        getStargazersUseCase.run(paramUser, paramRepo)
+        Subscription subscription = getStargazersUseCase.run(paramUser, paramRepo)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(users1 -> {
                     this.users.clear();
                     this.users.addAll(users1);
                 });
+        getCompositeSubscription().add(subscription);
     }
 
     @Override
