@@ -1,9 +1,8 @@
 package io.github.kobakei.anago.di;
 
-import android.app.Activity;
-
 import dagger.Module;
 import dagger.Provides;
+import io.github.kobakei.anago.activity.BaseActivity;
 
 /**
  * Created by keisuke on 2016/09/18.
@@ -11,14 +10,14 @@ import dagger.Provides;
 @Module
 public class ActivityModule {
 
-    private final Activity activity;
+    private final BaseActivity activity;
 
-    public ActivityModule(Activity activity) {
+    public ActivityModule(BaseActivity activity) {
         this.activity = activity;
     }
 
     @Provides
-    public Activity provideActivity() {
+    public BaseActivity provideActivity() {
         return activity;
     }
 

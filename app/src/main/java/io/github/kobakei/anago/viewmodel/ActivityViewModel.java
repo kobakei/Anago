@@ -1,29 +1,22 @@
 package io.github.kobakei.anago.viewmodel;
 
-import android.app.Activity;
-
-import rx.subscriptions.CompositeSubscription;
+import io.github.kobakei.anago.activity.BaseActivity;
 
 /**
+ * Activity用ビューモデルのベースクラス
  * Created by keisuke on 2016/09/18.
  */
 
 public abstract class ActivityViewModel {
 
-    private final Activity activity;
-    private final CompositeSubscription compositeSubscription;
+    private final BaseActivity activity;
 
-    public ActivityViewModel(Activity activity) {
+    public ActivityViewModel(BaseActivity activity) {
         this.activity = activity;
-        this.compositeSubscription = new CompositeSubscription();
     }
 
-    public Activity getActivity() {
+    public BaseActivity getActivity() {
         return activity;
-    }
-
-    public CompositeSubscription getCompositeSubscription() {
-        return compositeSubscription;
     }
 
     public void onResume() {
@@ -31,6 +24,5 @@ public abstract class ActivityViewModel {
     }
 
     public void onPause() {
-        compositeSubscription.unsubscribe();
     }
 }

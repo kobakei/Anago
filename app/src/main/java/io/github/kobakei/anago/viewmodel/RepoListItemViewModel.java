@@ -1,6 +1,5 @@
 package io.github.kobakei.anago.viewmodel;
 
-import android.content.Context;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.view.View;
@@ -10,9 +9,9 @@ import javax.inject.Inject;
 
 import io.github.kobakei.anago.activity.UserActivity;
 import io.github.kobakei.anago.entity.Repo;
+import io.github.kobakei.anago.fragment.BaseFragment;
 import io.github.kobakei.anago.usecase.StarUseCase;
 import io.github.kobakei.anago.usecase.UnstarUseCase;
-import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -21,7 +20,7 @@ import rx.schedulers.Schedulers;
  * Created by keisuke on 2016/09/18.
  */
 
-public class RepoListItemViewModel extends ListItemViewModel {
+public class RepoListItemViewModel extends FragmentViewModel{
 
     private final StarUseCase starUseCase;
     private final UnstarUseCase unstarUseCase;
@@ -30,10 +29,10 @@ public class RepoListItemViewModel extends ListItemViewModel {
     public ObservableBoolean starred;
 
     @Inject
-    public RepoListItemViewModel(Context context,
+    public RepoListItemViewModel(BaseFragment fragment,
                                  StarUseCase starUseCase,
                                  UnstarUseCase unstarUseCase) {
-        super(context);
+        super(fragment);
         this.starUseCase = starUseCase;
         this.unstarUseCase = unstarUseCase;
 
@@ -42,25 +41,27 @@ public class RepoListItemViewModel extends ListItemViewModel {
     }
 
     public void onImageClick(View view) {
-        UserActivity.startActivity(getContext(), repo.get().owner.login);
+        UserActivity.startActivity(getFragment().getContext(), repo.get().owner.login);
     }
 
     public void onStarClick(View view) {
         if (starred.get()) {
             unstarUseCase.run(repo.get().owner.login, repo.get().name)
+                    .compose(getFragment().bindToLifecycle().forCompletable())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(() -> {
                         starred.set(false);
-                        Toast.makeText(getContext(), "Unstarred!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getFragment().getContext(), "Unstarred!", Toast.LENGTH_SHORT).show();
                     });
         } else {
             starUseCase.run(repo.get().owner.login, repo.get().name)
+                    .compose(getFragment().bindToLifecycle().forCompletable())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(() -> {
                         starred.set(true);
-                        Toast.makeText(getContext(), "Starred!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getFragment().getContext(), "Starred!", Toast.LENGTH_SHORT).show();
                     });
         }
     }

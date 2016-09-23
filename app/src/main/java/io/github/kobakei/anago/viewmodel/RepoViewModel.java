@@ -1,6 +1,5 @@
 package io.github.kobakei.anago.viewmodel;
 
-import android.app.Activity;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.support.v4.util.Pair;
@@ -10,6 +9,7 @@ import android.widget.Toast;
 
 import javax.inject.Inject;
 
+import io.github.kobakei.anago.activity.BaseActivity;
 import io.github.kobakei.anago.activity.StargazerListActivity;
 import io.github.kobakei.anago.activity.UserActivity;
 import io.github.kobakei.anago.entity.Repo;
@@ -42,7 +42,7 @@ public class RepoViewModel extends ActivityViewModel {
     private String paramRepo;
 
     @Inject
-    public RepoViewModel(Activity activity, GetRepoUseCase getRepoUseCase,
+    public RepoViewModel(BaseActivity activity, GetRepoUseCase getRepoUseCase,
                          CheckStarUseCase checkStarUseCase, StarUseCase starUseCase,
                          UnstarUseCase unstarUseCase) {
         super(activity);
@@ -65,7 +65,8 @@ public class RepoViewModel extends ActivityViewModel {
     public void onResume() {
         super.onResume();
 
-        Subscription subscription = getRepoUseCase.run(paramUser, paramRepo)
+        getRepoUseCase.run(paramUser, paramRepo)
+                .compose(getActivity().bindToLifecycle().forSingle())
                 .flatMapObservable(repo1 -> Observable.combineLatest(
                         Observable.just(repo1),
                         checkStarUseCase.run(repo1.owner.login, repo1.name).toObservable(),
@@ -84,11 +85,11 @@ public class RepoViewModel extends ActivityViewModel {
                     appCompatActivity.getSupportActionBar().setTitle(this.repo.get().name);
 
                 }, Throwable::printStackTrace);
-        getCompositeSubscription().add(subscription);
     }
 
     public void onStarClick(View view) {
-        Subscription subscription = this.starUseCase.run(repo.get().owner.login, repo.get().name)
+        starUseCase.run(repo.get().owner.login, repo.get().name)
+                .compose(getActivity().bindToLifecycle().forCompletable())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> {
@@ -97,11 +98,11 @@ public class RepoViewModel extends ActivityViewModel {
                 }, throwable -> {
                     Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                 });
-        getCompositeSubscription().add(subscription);
     }
 
     public void onUnstarClick(View view) {
-        Subscription subscription = this.unstarUseCase.run(repo.get().owner.login, repo.get().name)
+        unstarUseCase.run(repo.get().owner.login, repo.get().name)
+                .compose(getActivity().bindToLifecycle().forCompletable())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> {
@@ -110,7 +111,6 @@ public class RepoViewModel extends ActivityViewModel {
                 }, throwable -> {
                     Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                 });
-        getCompositeSubscription().add(subscription);
     }
 
     public void onImageClick(View view) {

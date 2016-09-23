@@ -1,6 +1,5 @@
 package io.github.kobakei.anago.viewmodel;
 
-import android.app.Activity;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +8,7 @@ import android.widget.Toast;
 
 import javax.inject.Inject;
 
+import io.github.kobakei.anago.activity.BaseActivity;
 import io.github.kobakei.anago.entity.User;
 import io.github.kobakei.anago.usecase.GetUserUseCase;
 import rx.Observable;
@@ -31,7 +31,7 @@ public class UserViewModel extends ActivityViewModel {
     private String paramName;
 
     @Inject
-    public UserViewModel(Activity activity, GetUserUseCase getUserUseCase) {
+    public UserViewModel(BaseActivity activity, GetUserUseCase getUserUseCase) {
         super(activity);
         this.getUserUseCase = getUserUseCase;
 
@@ -47,7 +47,8 @@ public class UserViewModel extends ActivityViewModel {
     public void onResume() {
         super.onResume();
 
-        Subscription subscription = getUserUseCase.run(paramName)
+        getUserUseCase.run(paramName)
+                .compose(getActivity().bindToLifecycle().forSingle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(user1 -> {
@@ -60,11 +61,11 @@ public class UserViewModel extends ActivityViewModel {
                     isConnecting.set(false);
 
                 }, Throwable::printStackTrace);
-        getCompositeSubscription().add(subscription);
     }
 
     public void onTestClick(View view) {
-        Subscription subscription = Observable.just(10)
+        Observable.just(10)
+                .compose(getActivity().bindToLifecycle())
                 .flatMap(integer -> {
                     try {
                         Thread.sleep(10 * 1000L);
@@ -82,6 +83,5 @@ public class UserViewModel extends ActivityViewModel {
                 }, () -> {
                     Toast.makeText(getActivity(), "Complete", Toast.LENGTH_SHORT).show();
                 });
-        getCompositeSubscription().add(subscription);
     }
 }

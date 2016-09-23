@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import io.github.kobakei.anago.activity.RepoActivity;
 import io.github.kobakei.anago.entity.Repo;
+import io.github.kobakei.anago.fragment.BaseFragment;
 import io.github.kobakei.anago.usecase.GetUserReposUseCase;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -20,7 +21,7 @@ import timber.log.Timber;
  * Created by keisuke on 2016/09/18.
  */
 
-public class MyRepoListViewModel extends ActivityViewModel {
+public class MyRepoListViewModel extends FragmentViewModel {
 
     private final GetUserReposUseCase getUserReposUseCase;
 
@@ -29,8 +30,8 @@ public class MyRepoListViewModel extends ActivityViewModel {
     public ObservableBoolean isRefreshing;
 
     @Inject
-    public MyRepoListViewModel(Activity activity, GetUserReposUseCase getUserReposUseCase) {
-        super(activity);
+    public MyRepoListViewModel(BaseFragment fragment, GetUserReposUseCase getUserReposUseCase) {
+        super(fragment);
 
         this.getUserReposUseCase = getUserReposUseCase;
 
@@ -49,11 +50,12 @@ public class MyRepoListViewModel extends ActivityViewModel {
 
     public void onItemClick(int position) {
         Repo repo = repos.get(position).first;
-        RepoActivity.startActivity(getActivity(), repo.owner.login, repo.name);
+        RepoActivity.startActivity(getFragment().getActivity(), repo.owner.login, repo.name);
     }
 
     private void refreshData() {
-        Subscription subscription = getUserReposUseCase.run()
+        getUserReposUseCase.run()
+                .compose(getFragment().bindToLifecycle().forSingle())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(repos1 -> {
@@ -62,6 +64,5 @@ public class MyRepoListViewModel extends ActivityViewModel {
                     repos.addAll(repos1);
                     isConnecting.set(false);
                 });
-        getCompositeSubscription().add(subscription);
     }
 }

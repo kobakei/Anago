@@ -1,10 +1,10 @@
 package io.github.kobakei.anago.viewmodel;
 
-import android.app.Activity;
 import android.databinding.ObservableArrayList;
 
 import javax.inject.Inject;
 
+import io.github.kobakei.anago.activity.BaseActivity;
 import io.github.kobakei.anago.entity.User;
 import io.github.kobakei.anago.usecase.GetStargazersUseCase;
 import rx.Subscription;
@@ -26,7 +26,7 @@ public class StargazerListViewModel extends ActivityViewModel {
     private String paramRepo;
 
     @Inject
-    public StargazerListViewModel(Activity activity, GetStargazersUseCase getStargazersUseCase) {
+    public StargazerListViewModel(BaseActivity activity, GetStargazersUseCase getStargazersUseCase) {
         super(activity);
         this.getStargazersUseCase = getStargazersUseCase;
 
@@ -42,14 +42,14 @@ public class StargazerListViewModel extends ActivityViewModel {
     public void onResume() {
         super.onResume();
 
-        Subscription subscription = getStargazersUseCase.run(paramUser, paramRepo)
+        getStargazersUseCase.run(paramUser, paramRepo)
+                .compose(getActivity().bindToLifecycle().forSingle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(users1 -> {
                     this.users.clear();
                     this.users.addAll(users1);
                 });
-        getCompositeSubscription().add(subscription);
     }
 
     @Override
