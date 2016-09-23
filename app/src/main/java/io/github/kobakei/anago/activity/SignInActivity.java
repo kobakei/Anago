@@ -27,6 +27,9 @@ public class SignInActivity extends BaseActivity {
 
         SignInActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.sign_in_activity);
         binding.setViewModel(viewModel);
+
+        // ランチャー名に影響しないように、ここでタイトルをセット
+        getSupportActionBar().setTitle(R.string.sign_in_title);
     }
 
     @Override
