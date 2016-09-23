@@ -23,6 +23,7 @@ MVVMとClean architectureで書いたAndoridのサンプルアプリです。
 - [ReactiveX/RxJava](https://github.com/ReactiveX/RxJava)
 - [ReactiveX/RxAndroid](https://github.com/ReactiveX/RxAndroid)
 - [trello/RxLifecycle](https://github.com/trello/RxLifecycle)
+- [greenrobot/EventBus](https://github.com/greenrobot/EventBus)
 - [google/gson](https://github.com/google/gson)
 - [square/okhttp](https://github.com/square/okhttp)
 - [square/retrofit](https://github.com/square/retrofit)
