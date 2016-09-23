@@ -66,13 +66,13 @@ public class RepoViewModel extends ActivityViewModel {
         super.onResume();
 
         getRepoUseCase.run(paramUser, paramRepo)
-                .compose(getActivity().bindToLifecycle().forSingle())
                 .flatMapObservable(repo1 -> Observable.combineLatest(
                         Observable.just(repo1),
                         checkStarUseCase.run(repo1.owner.login, repo1.name).toObservable(),
                         Pair::create
                 ))
                 .toSingle()
+                .compose(getActivity().bindToLifecycle().forSingle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(pair -> {

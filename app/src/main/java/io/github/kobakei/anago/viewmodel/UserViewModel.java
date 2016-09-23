@@ -12,7 +12,6 @@ import io.github.kobakei.anago.activity.BaseActivity;
 import io.github.kobakei.anago.entity.User;
 import io.github.kobakei.anago.usecase.GetUserUseCase;
 import rx.Observable;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -65,7 +64,6 @@ public class UserViewModel extends ActivityViewModel {
 
     public void onTestClick(View view) {
         Observable.just(10)
-                .compose(getActivity().bindToLifecycle())
                 .flatMap(integer -> {
                     try {
                         Thread.sleep(10 * 1000L);
@@ -74,6 +72,7 @@ public class UserViewModel extends ActivityViewModel {
                     }
                     return Observable.just(integer);
                 })
+                .compose(getActivity().bindToLifecycle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(integer -> {
