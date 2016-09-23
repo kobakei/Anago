@@ -34,15 +34,15 @@ public class RepoRepository {
         this.cache = new HashMap<>();
     }
 
-    public Single<List<Repo>> getPublicRepos() {
-        return gitHubService.getPublicRepos();
+    public Single<List<Repo>> getPublicRepos(int page, int perPage) {
+        return gitHubService.getPublicRepos(page, perPage);
     }
 
-    public Single<List<Repo>> getUserRepos() {
+    public Single<List<Repo>> getUserRepos(int page, int perPage) {
         return authTokenDao.get()
                 .flatMap(authToken -> {
                     String header = "token " + authToken.token;
-                    return gitHubService.getUserRepos(header);
+                    return gitHubService.getUserRepos(header, page, perPage);
                 })
                 .doOnSuccess(repos1 -> {
                     for (Repo repo : repos1) {

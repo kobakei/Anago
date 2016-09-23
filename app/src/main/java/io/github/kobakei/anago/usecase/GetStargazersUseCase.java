@@ -23,6 +23,6 @@ public class GetStargazersUseCase {
     }
 
     public Single<List<User>> run(String user, String repo) {
-        return userRepository.getStargazers(user, repo);
+        return userRepository.getStargazers(user, repo, 1, 10);
     }
 }

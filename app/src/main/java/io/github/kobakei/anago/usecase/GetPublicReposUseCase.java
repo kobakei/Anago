@@ -29,7 +29,7 @@ public class GetPublicReposUseCase {
     }
 
     public Single<List<Pair<Repo, Boolean>>> run() {
-        return repoRepository.getPublicRepos()
+        return repoRepository.getPublicRepos(1, 10)
                 .flatMapObservable(Observable::from)
                 .flatMap(repo -> Observable.combineLatest(
                         Observable.just(repo),

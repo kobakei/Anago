@@ -13,6 +13,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import rx.Completable;
 import rx.Single;
 
@@ -35,10 +36,13 @@ public interface GitHubService {
                                      @Path("token") String token);
 
     @GET("/repositories")
-    Single<List<Repo>> getPublicRepos();
+    Single<List<Repo>> getPublicRepos(@Query("page") int page,
+                                      @Query("per_page") int perPage);
 
     @GET("/user/repos")
-    Single<List<Repo>> getUserRepos(@Header("Authorization") String authorization);
+    Single<List<Repo>> getUserRepos(@Header("Authorization") String authorization,
+                                    @Query("page") int page,
+                                    @Query("per_page") int perPage);
 
     @GET("/user/starred/{user}/{repo}")
     Single<Void> getStar(@Header("Authorization") String authorization,
@@ -61,5 +65,7 @@ public interface GitHubService {
 
     @GET("/repos/{user}/{repo}/stargazers")
     Single<List<User>> getStargazers(@Path("user") String user,
-                                     @Path("repo") String repo);
+                                     @Path("repo") String repo,
+                                     @Query("page") int page,
+                                     @Query("per_page") int perPage);
 }

@@ -27,7 +27,7 @@ public class UserRepository {
         return gitHubService.getUser(name);
     }
 
-    public Single<List<User>> getStargazers(String user, String repo) {
-        return gitHubService.getStargazers(user, repo);
+    public Single<List<User>> getStargazers(String user, String repo, int page, int perPage) {
+        return gitHubService.getStargazers(user, repo, page, perPage);
     }
 }
