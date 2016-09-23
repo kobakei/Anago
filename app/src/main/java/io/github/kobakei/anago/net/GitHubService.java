@@ -34,6 +34,9 @@ public interface GitHubService {
                                      @Path("client_id") String clientId,
                                      @Path("token") String token);
 
+    @GET("/repositories")
+    Single<List<Repo>> getPublicRepos();
+
     @GET("/user/repos")
     Single<List<Repo>> getUserRepos(@Header("Authorization") String authorization);
 

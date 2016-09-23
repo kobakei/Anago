@@ -34,6 +34,10 @@ public class RepoRepository {
         this.cache = new HashMap<>();
     }
 
+    public Single<List<Repo>> getPublicRepos() {
+        return gitHubService.getPublicRepos();
+    }
+
     public Single<List<Repo>> getUserRepos() {
         return authTokenDao.get()
                 .flatMap(authToken -> {

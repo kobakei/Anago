@@ -14,7 +14,8 @@ import javax.inject.Inject;
 
 import io.github.kobakei.anago.R;
 import io.github.kobakei.anago.databinding.HomeActivityBinding;
-import io.github.kobakei.anago.fragment.RepoListFragment;
+import io.github.kobakei.anago.fragment.MyRepoListFragment;
+import io.github.kobakei.anago.fragment.PublicRepoListFragment;
 import io.github.kobakei.anago.viewmodel.HomeViewModel;
 
 /**
@@ -83,7 +84,11 @@ public class HomeActivity extends BaseActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return RepoListFragment.newInstance();
+            if (position == 0) {
+                return MyRepoListFragment.newInstance();
+            } else {
+                return PublicRepoListFragment.newInstance();
+            }
         }
 
         @Override

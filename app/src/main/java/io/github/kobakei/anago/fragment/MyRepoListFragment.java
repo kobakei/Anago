@@ -7,7 +7,6 @@ import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,26 +16,25 @@ import android.widget.ArrayAdapter;
 import javax.inject.Inject;
 
 import io.github.kobakei.anago.R;
-import io.github.kobakei.anago.databinding.RepoListFragmentBinding;
+import io.github.kobakei.anago.databinding.MyRepoListFragmentBinding;
 import io.github.kobakei.anago.databinding.RepoListItemBinding;
 import io.github.kobakei.anago.entity.Repo;
-import io.github.kobakei.anago.viewmodel.RepoListItemViewModel;
-import io.github.kobakei.anago.viewmodel.RepoListViewModel;
+import io.github.kobakei.anago.viewmodel.MyRepoListViewModel;
 
 /**
  * リポジトリ一覧画面
  */
-public class RepoListFragment extends BaseFragment {
+public class MyRepoListFragment extends BaseFragment {
 
     @Inject
-    RepoListViewModel viewModel;
+    MyRepoListViewModel viewModel;
 
-    public RepoListFragment() {
+    public MyRepoListFragment() {
         // Required empty public constructor
     }
 
-    public static RepoListFragment newInstance() {
-        RepoListFragment fragment = new RepoListFragment();
+    public static MyRepoListFragment newInstance() {
+        MyRepoListFragment fragment = new MyRepoListFragment();
         return fragment;
     }
 
@@ -46,7 +44,7 @@ public class RepoListFragment extends BaseFragment {
 
         getInjector().inject(this);
 
-        RepoListFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.repo_list_fragment, container, false);
+        MyRepoListFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.my_repo_list_fragment, container, false);
         binding.setViewModel(viewModel);
 
         // Set up listview

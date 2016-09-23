@@ -3,13 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="io.github.kobakei.anago.fragment.RepoListFragment">
+    tools:context="io.github.kobakei.anago.fragment.MyRepoListFragment">
 
     <data>
         <import type="android.view.View"/>
         <variable
             name="viewModel"
-            type="io.github.kobakei.anago.viewmodel.RepoListViewModel"/>
+            type="io.github.kobakei.anago.viewmodel.PublicRepoListViewModel"/>
     </data>
 
     <FrameLayout
