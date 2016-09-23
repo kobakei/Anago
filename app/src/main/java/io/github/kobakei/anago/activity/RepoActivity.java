@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import javax.inject.Inject;
 
@@ -34,6 +35,8 @@ public class RepoActivity extends BaseActivity {
         String user = getIntent().getStringExtra(KEY_USER);
         String repo = getIntent().getStringExtra(KEY_REPO);
         viewModel.setParams(user, repo);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -46,6 +49,16 @@ public class RepoActivity extends BaseActivity {
     protected void onPause() {
         super.onPause();
         viewModel.onPause();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return false;
     }
 
     /**
