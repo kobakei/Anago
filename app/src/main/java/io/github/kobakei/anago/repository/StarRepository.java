@@ -1,10 +1,14 @@
 package io.github.kobakei.anago.repository;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import io.github.kobakei.anago.dao.AuthTokenDao;
 import io.github.kobakei.anago.net.GitHubService;
 import rx.Completable;
+import rx.Single;
 
 /**
  * スターのリポジトリ
@@ -16,18 +20,30 @@ public class StarRepository {
     private final GitHubService gitHubService;
     private final AuthTokenDao authTokenDao;
 
+    private final Map<String, Boolean> cache;
+
     @Inject
     public StarRepository(GitHubService gitHubService, AuthTokenDao authTokenDao) {
         this.gitHubService = gitHubService;
         this.authTokenDao = authTokenDao;
+
+        this.cache = new HashMap<>();
     }
 
-    public Completable get(String user, String repo) {
+    public Single<Boolean> get(String user, String repo) {
+        String key = user + "/" + repo;
+        if (cache.containsKey(key)) {
+            return Single.just(cache.get(key));
+        }
         return authTokenDao.get()
-                .flatMapCompletable(authToken -> {
+                .flatMap(authToken -> {
                     String header = "token " + authToken.token;
-                    return gitHubService.getStar(header, user, repo).toCompletable();
-                });
+                    return gitHubService.getStar(header, user, repo)
+                            .toCompletable()
+                            .toSingleDefault(true)
+                            .onErrorReturn(throwable -> false);
+                })
+                .doOnSuccess(aBoolean -> cache.put(key, aBoolean));
     }
 
     public Completable put(String user, String repo) {
@@ -35,7 +51,8 @@ public class StarRepository {
                 .flatMapCompletable(authToken -> {
                     String header = "token " + authToken.token;
                     return gitHubService.putStar(header, user, repo).toCompletable();
-                });
+                })
+                .doOnCompleted(() -> cache.put(user + "/" + repo, true));
     }
 
     public Completable delete(String user, String repo) {
@@ -43,6 +60,7 @@ public class StarRepository {
                 .flatMapCompletable(authToken -> {
                     String header = "token " + authToken.token;
                     return gitHubService.deleteStar(header, user, repo).toCompletable();
-                });
+                })
+                .doOnCompleted(() -> cache.put(user + "/" + repo, false));
     }
 }

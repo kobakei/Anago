@@ -33,8 +33,7 @@ public class GetStarredReposUseCase {
                 .flatMapObservable(Observable::from)
                 .flatMap(repo -> Observable.combineLatest(
                         Observable.just(repo),
-                        starRepository.get(repo.owner.login, repo.name)
-                                .toSingleDefault(true).onErrorReturn(throwable -> false).toObservable(),
+                        starRepository.get(repo.owner.login, repo.name).toObservable(),
                         Pair::create
                 ))
                 .toList()

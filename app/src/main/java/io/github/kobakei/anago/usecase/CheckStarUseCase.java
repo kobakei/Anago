@@ -20,8 +20,6 @@ public class CheckStarUseCase {
     }
 
     public Single<Boolean> run(String user, String repo) {
-        return starRepository.get(user, repo)
-                .toSingleDefault(true)
-                .onErrorReturn(throwable -> false);
+        return starRepository.get(user, repo);
     }
 }
