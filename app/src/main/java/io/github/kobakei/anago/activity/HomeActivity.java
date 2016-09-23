@@ -15,7 +15,7 @@ import javax.inject.Inject;
 import io.github.kobakei.anago.R;
 import io.github.kobakei.anago.databinding.HomeActivityBinding;
 import io.github.kobakei.anago.fragment.MyRepoListFragment;
-import io.github.kobakei.anago.fragment.PublicRepoListFragment;
+import io.github.kobakei.anago.fragment.StarredRepoListFragment;
 import io.github.kobakei.anago.viewmodel.HomeViewModel;
 
 /**
@@ -87,7 +87,7 @@ public class HomeActivity extends BaseActivity {
             if (position == 0) {
                 return MyRepoListFragment.newInstance();
             } else {
-                return PublicRepoListFragment.newInstance();
+                return StarredRepoListFragment.newInstance();
             }
         }
 
@@ -96,7 +96,7 @@ public class HomeActivity extends BaseActivity {
             if (position == 0) {
                 return activity.getString(R.string.home_tab_my);
             } else {
-                return activity.getString(R.string.home_tab_public);
+                return activity.getString(R.string.home_tab_starred);
             }
         }
 

@@ -49,6 +49,11 @@ public interface GitHubService {
                          @Path("user") String user,
                          @Path("repo") String repo);
 
+    @GET("/user/starred")
+    Single<List<Repo>> getStarredRepos(@Header("Authorization") String authorization,
+                                       @Query("page") int page,
+                                       @Query("per_page") int perPage);
+
     @Headers({"Content-Length: 0"})
     @PUT("/user/starred/{user}/{repo}")
     Single<Void> putStar(@Header("Authorization") String authorization,

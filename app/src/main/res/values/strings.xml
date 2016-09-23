@@ -9,7 +9,7 @@
 
     <string name="home_title">Home</string>
     <string name="home_tab_my">My</string>
-    <string name="home_tab_public">Public</string>
+    <string name="home_tab_starred">Starred</string>
 
     <plurals name="repo_people_starring">
         <item quantity="one">%1$d person is starring.</item>

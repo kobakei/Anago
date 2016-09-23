@@ -7,7 +7,7 @@ import io.github.kobakei.anago.activity.SignInActivity;
 import io.github.kobakei.anago.activity.StargazerListActivity;
 import io.github.kobakei.anago.activity.UserActivity;
 import io.github.kobakei.anago.fragment.MyRepoListFragment;
-import io.github.kobakei.anago.fragment.PublicRepoListFragment;
+import io.github.kobakei.anago.fragment.StarredRepoListFragment;
 import io.github.kobakei.anago.viewmodel.RepoListItemViewModel;
 import io.github.kobakei.anago.viewmodel.StargazerListItemViewModel;
 
@@ -23,7 +23,7 @@ public interface ActivityComponent {
     void inject(StargazerListActivity activity);
 
     void inject(MyRepoListFragment fragment);
-    void inject(PublicRepoListFragment fragment);
+    void inject(StarredRepoListFragment fragment);
 
     RepoListItemViewModel repoListItemViewModel();
     StargazerListItemViewModel stargazerListItemViewModel();

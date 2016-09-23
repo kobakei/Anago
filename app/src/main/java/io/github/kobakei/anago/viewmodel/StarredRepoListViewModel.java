@@ -9,7 +9,7 @@ import javax.inject.Inject;
 
 import io.github.kobakei.anago.activity.RepoActivity;
 import io.github.kobakei.anago.entity.Repo;
-import io.github.kobakei.anago.usecase.GetPublicReposUseCase;
+import io.github.kobakei.anago.usecase.GetStarredReposUseCase;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -20,19 +20,19 @@ import timber.log.Timber;
  * Created by keisuke on 2016/09/18.
  */
 
-public class PublicRepoListViewModel extends ActivityViewModel {
+public class StarredRepoListViewModel extends ActivityViewModel {
 
-    private final GetPublicReposUseCase getPublicReposUseCase;
+    private final GetStarredReposUseCase getStarredReposUseCase;
 
     public ObservableArrayList<Pair<Repo, Boolean>> repos;
     public ObservableBoolean isConnecting;
     public ObservableBoolean isRefreshing;
 
     @Inject
-    public PublicRepoListViewModel(Activity activity, GetPublicReposUseCase getPublicReposUseCase) {
+    public StarredRepoListViewModel(Activity activity, GetStarredReposUseCase getStarredReposUseCase) {
         super(activity);
 
-        this.getPublicReposUseCase = getPublicReposUseCase;
+        this.getStarredReposUseCase = getStarredReposUseCase;
 
         repos = new ObservableArrayList<>();
         isConnecting = new ObservableBoolean(true);
@@ -53,7 +53,7 @@ public class PublicRepoListViewModel extends ActivityViewModel {
     }
 
     private void refreshData() {
-        Subscription subscription = getPublicReposUseCase.run()
+        Subscription subscription = getStarredReposUseCase.run()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(repos1 -> {

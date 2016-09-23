@@ -51,6 +51,19 @@ public class RepoRepository {
                 });
     }
 
+    public Single<List<Repo>> getStarredRepos(int page, int perPage) {
+        return authTokenDao.get()
+                .flatMap(authToken -> {
+                    String header = "token " + authToken.token;
+                    return gitHubService.getStarredRepos(header, page, perPage);
+                })
+                .doOnSuccess(repos1 -> {
+                    for (Repo repo : repos1) {
+                        cache.put(repo.full_name, repo);
+                    }
+                });
+    }
+
     public Single<Repo> getByFullname(String fullname) {
         return Single.just(cache.get(fullname));
     }

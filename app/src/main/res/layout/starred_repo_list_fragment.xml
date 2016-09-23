@@ -9,7 +9,7 @@
         <import type="android.view.View"/>
         <variable
             name="viewModel"
-            type="io.github.kobakei.anago.viewmodel.PublicRepoListViewModel"/>
+            type="io.github.kobakei.anago.viewmodel.StarredRepoListViewModel"/>
     </data>
 
     <FrameLayout

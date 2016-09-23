@@ -16,25 +16,25 @@ import android.widget.ArrayAdapter;
 import javax.inject.Inject;
 
 import io.github.kobakei.anago.R;
-import io.github.kobakei.anago.databinding.PublicRepoListFragmentBinding;
 import io.github.kobakei.anago.databinding.RepoListItemBinding;
+import io.github.kobakei.anago.databinding.StarredRepoListFragmentBinding;
 import io.github.kobakei.anago.entity.Repo;
-import io.github.kobakei.anago.viewmodel.PublicRepoListViewModel;
+import io.github.kobakei.anago.viewmodel.StarredRepoListViewModel;
 
 /**
  * リポジトリ一覧画面
  */
-public class PublicRepoListFragment extends BaseFragment {
+public class StarredRepoListFragment extends BaseFragment {
 
     @Inject
-    PublicRepoListViewModel viewModel;
+    StarredRepoListViewModel viewModel;
 
-    public PublicRepoListFragment() {
+    public StarredRepoListFragment() {
         // Required empty public constructor
     }
 
-    public static PublicRepoListFragment newInstance() {
-        PublicRepoListFragment fragment = new PublicRepoListFragment();
+    public static StarredRepoListFragment newInstance() {
+        StarredRepoListFragment fragment = new StarredRepoListFragment();
         return fragment;
     }
 
@@ -44,7 +44,7 @@ public class PublicRepoListFragment extends BaseFragment {
 
         getInjector().inject(this);
 
-        PublicRepoListFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.public_repo_list_fragment, container, false);
+        StarredRepoListFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.starred_repo_list_fragment, container, false);
         binding.setViewModel(viewModel);
 
         // Set up listview
