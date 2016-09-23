@@ -6,6 +6,8 @@ import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+
 import javax.inject.Inject;
 
 import io.github.kobakei.anago.activity.UserActivity;
@@ -52,7 +54,7 @@ public class RepoListItemViewModel extends FragmentViewModel{
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(() -> {
-                        starred.set(false);
+                        EventBus.getDefault().post(new StarEvent());
                         Snackbar.make(getFragment().getView(), "Unstarred!", Snackbar.LENGTH_SHORT).show();
                     });
         } else {
@@ -61,9 +63,11 @@ public class RepoListItemViewModel extends FragmentViewModel{
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(() -> {
-                        starred.set(true);
+                        EventBus.getDefault().post(new StarEvent());
                         Snackbar.make(getFragment().getView(), "Starred!", Snackbar.LENGTH_SHORT).show();
                     });
         }
     }
+
+    public static class StarEvent {}
 }

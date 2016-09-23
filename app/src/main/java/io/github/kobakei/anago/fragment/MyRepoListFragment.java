@@ -54,6 +54,18 @@ public class MyRepoListFragment extends BaseFragment {
         return binding.getRoot();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        viewModel.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        viewModel.onPause();
+    }
+
     /**
      * リストビューのアダプター
      */

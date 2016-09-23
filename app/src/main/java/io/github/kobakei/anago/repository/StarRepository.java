@@ -4,17 +4,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import io.github.kobakei.anago.dao.AuthTokenDao;
 import io.github.kobakei.anago.net.GitHubService;
 import rx.Completable;
 import rx.Single;
+import timber.log.Timber;
 
 /**
  * スターのリポジトリ
  * Created by keisuke on 2016/09/18.
  */
-
+@Singleton
 public class StarRepository {
 
     private final GitHubService gitHubService;
@@ -52,7 +54,10 @@ public class StarRepository {
                     String header = "token " + authToken.token;
                     return gitHubService.putStar(header, user, repo).toCompletable();
                 })
-                .doOnCompleted(() -> cache.put(user + "/" + repo, true));
+                .doOnCompleted(() -> {
+                    Timber.v("put complete");
+                    cache.put(user + "/" + repo, true);
+                });
     }
 
     public Completable delete(String user, String repo) {
@@ -61,6 +66,9 @@ public class StarRepository {
                     String header = "token " + authToken.token;
                     return gitHubService.deleteStar(header, user, repo).toCompletable();
                 })
-                .doOnCompleted(() -> cache.put(user + "/" + repo, false));
+                .doOnCompleted(() -> {
+                    Timber.v("delete complete");
+                    cache.put(user + "/" + repo, false);
+                });
     }
 }
