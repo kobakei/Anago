@@ -17,4 +17,6 @@
     </plurals>
     <string name="repo_star">Star</string>
     <string name="repo_unstar">Unstar</string>
+
+    <string name="stargazer_title">Stargazers</string>
 </resources>

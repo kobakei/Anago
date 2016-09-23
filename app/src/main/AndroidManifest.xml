@@ -24,7 +24,8 @@
             android:label="@string/home_title" />
         <activity android:name=".activity.RepoActivity" />
         <activity android:name=".activity.UserActivity" />
-        <activity android:name=".activity.StargazerListActivity"></activity>
+        <activity android:name=".activity.StargazerListActivity"
+            android:label="@string/stargazer_title"/>
     </application>
 
 </manifest>
