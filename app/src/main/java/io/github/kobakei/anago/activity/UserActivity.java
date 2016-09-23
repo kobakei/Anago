@@ -27,6 +27,7 @@ public class UserActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         getInjector().inject(this);
+        bindViewModel(viewModel);
 
         UserActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.user_activity);
         binding.setViewModel(viewModel);
@@ -35,18 +36,6 @@ public class UserActivity extends BaseActivity {
 
         String name = getIntent().getStringExtra(KEY_NAME);
         viewModel.setParams(name);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        viewModel.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        viewModel.onPause();
     }
 
     public static void startActivity(Context context, String name) {

@@ -38,6 +38,7 @@ public class StargazerListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         getInjector().inject(this);
+        bindViewModel(viewModel);
 
         StargazerListActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.stargazer_list_activity);
         binding.setViewModel(viewModel);
@@ -51,18 +52,6 @@ public class StargazerListActivity extends BaseActivity {
         binding.recyclerView.setAdapter(new StargazerAdapter(viewModel.users));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        viewModel.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        viewModel.onPause();
     }
 
     @Override

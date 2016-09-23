@@ -31,6 +31,7 @@ public class HomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         getInjector().inject(this);
+        bindViewModel(viewModel);
 
         HomeActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.home_activity);
         binding.setViewModel(viewModel);
@@ -39,18 +40,6 @@ public class HomeActivity extends BaseActivity {
         HomeFragmentPagerAdapter adapter = new HomeFragmentPagerAdapter(this, getSupportFragmentManager());
         binding.viewPager.setAdapter(adapter);
         binding.tabLayout.setupWithViewPager(binding.viewPager);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        viewModel.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        viewModel.onPause();
     }
 
     @Override

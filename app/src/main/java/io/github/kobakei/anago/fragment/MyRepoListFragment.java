@@ -43,6 +43,7 @@ public class MyRepoListFragment extends BaseFragment {
                              Bundle savedInstanceState) {
 
         getInjector().inject(this);
+        bindViewModel(viewModel);
 
         MyRepoListFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.my_repo_list_fragment, container, false);
         binding.setViewModel(viewModel);
@@ -52,18 +53,6 @@ public class MyRepoListFragment extends BaseFragment {
         binding.listView.setAdapter(adapter);
 
         return binding.getRoot();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        viewModel.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        viewModel.onPause();
     }
 
     /**

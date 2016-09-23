@@ -28,6 +28,7 @@ public class RepoActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         getInjector().inject(this);
+        bindViewModel(viewModel);
 
         RepoActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.repo_activity);
         binding.setViewModel(viewModel);
@@ -37,18 +38,6 @@ public class RepoActivity extends BaseActivity {
         viewModel.setParams(user, repo);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        viewModel.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        viewModel.onPause();
     }
 
     @Override
