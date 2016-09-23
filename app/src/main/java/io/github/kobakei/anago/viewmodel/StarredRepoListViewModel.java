@@ -39,14 +39,14 @@ public class StarredRepoListViewModel extends FragmentViewModel {
         repos = new ObservableArrayList<>();
         isConnecting = new ObservableBoolean(true);
         isRefreshing = new ObservableBoolean(false);
-
-        refreshData();
     }
 
     @Override
     public void onResume() {
         super.onResume();
         EventBus.getDefault().register(this);
+
+        refreshData();
     }
 
     @Override
