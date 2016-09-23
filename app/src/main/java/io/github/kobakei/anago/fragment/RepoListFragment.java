@@ -8,6 +8,7 @@ import android.databinding.ObservableList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,8 +59,8 @@ public class RepoListFragment extends BaseFragment {
     /**
      * リストビューのアダプター
      */
-    class RepoAdapter extends ArrayAdapter<Repo> {
-        public RepoAdapter(Context context, ObservableArrayList<Repo> objects) {
+    class RepoAdapter extends ArrayAdapter<Pair<Repo, Boolean>> {
+        public RepoAdapter(Context context, ObservableArrayList<Pair<Repo, Boolean>> objects) {
             super(context, 0, objects);
             objects.addOnListChangedCallback(new ObservableList.OnListChangedCallback<ObservableList<Repo>>() {
                 @Override
@@ -100,8 +101,10 @@ public class RepoListFragment extends BaseFragment {
                 binding = DataBindingUtil.getBinding(convertView);
             }
 
-            Repo repo = getItem(position);
+            Repo repo = getItem(position).first;
+            boolean starred = getItem(position).second;
             binding.getViewModel().repo.set(repo);
+            binding.getViewModel().starred.set(starred);
 
             return binding.getRoot();
         }

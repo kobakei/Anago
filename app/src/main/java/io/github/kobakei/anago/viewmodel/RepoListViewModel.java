@@ -3,6 +3,7 @@ package io.github.kobakei.anago.viewmodel;
 import android.app.Activity;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableBoolean;
+import android.util.Pair;
 
 import javax.inject.Inject;
 
@@ -23,7 +24,7 @@ public class RepoListViewModel extends ActivityViewModel {
 
     private final GetUserReposUseCase getUserReposUseCase;
 
-    public ObservableArrayList<Repo> repos;
+    public ObservableArrayList<Pair<Repo, Boolean>> repos;
     public ObservableBoolean isConnecting;
     public ObservableBoolean isRefreshing;
 
@@ -47,7 +48,8 @@ public class RepoListViewModel extends ActivityViewModel {
     }
 
     public void onItemClick(int position) {
-        RepoActivity.startActivity(getActivity(), repos.get(position).owner.login, repos.get(position).name);
+        Repo repo = repos.get(position).first;
+        RepoActivity.startActivity(getActivity(), repo.owner.login, repo.name);
     }
 
     private void refreshData() {

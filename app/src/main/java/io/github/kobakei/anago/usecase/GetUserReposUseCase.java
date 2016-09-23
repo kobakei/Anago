@@ -1,11 +1,14 @@
 package io.github.kobakei.anago.usecase;
 
+import android.util.Pair;
+
 import java.util.List;
 
 import javax.inject.Inject;
 
 import io.github.kobakei.anago.entity.Repo;
 import io.github.kobakei.anago.repository.RepoRepository;
+import rx.Observable;
 import rx.Single;
 
 /**
@@ -22,7 +25,11 @@ public class GetUserReposUseCase {
         this.repoRepository = repoRepository;
     }
 
-    public Single<List<Repo>> run() {
-        return repoRepository.getUserRepos();
+    public Single<List<Pair<Repo, Boolean>>> run() {
+        return repoRepository.getUserRepos()
+                .flatMapObservable(Observable::from)
+                .map(repo -> new Pair<>(repo, true)) // TODO APIでスターを取得
+                .toList()
+                .toSingle();
     }
 }
