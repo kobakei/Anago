@@ -2,6 +2,7 @@ package io.github.kobakei.anago.viewmodel;
 
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
+import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.Toast;
 
@@ -52,7 +53,7 @@ public class RepoListItemViewModel extends FragmentViewModel{
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(() -> {
                         starred.set(false);
-                        Toast.makeText(getFragment().getContext(), "Unstarred!", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(getFragment().getView(), "Unstarred!", Snackbar.LENGTH_SHORT).show();
                     });
         } else {
             starUseCase.run(repo.get().owner.login, repo.get().name)
@@ -61,7 +62,7 @@ public class RepoListItemViewModel extends FragmentViewModel{
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(() -> {
                         starred.set(true);
-                        Toast.makeText(getFragment().getContext(), "Starred!", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(getFragment().getView(), "Starred!", Snackbar.LENGTH_SHORT).show();
                     });
         }
     }
