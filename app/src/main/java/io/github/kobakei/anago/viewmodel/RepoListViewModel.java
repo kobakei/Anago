@@ -54,7 +54,7 @@ public class RepoListViewModel extends ActivityViewModel {
 
     private void refreshData() {
         Subscription subscription = getUserReposUseCase.run()
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(repos1 -> {
                     this.isRefreshing.set(false);

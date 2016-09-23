@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import io.github.kobakei.anago.entity.Repo;
 import io.github.kobakei.anago.repository.RepoRepository;
+import io.github.kobakei.anago.repository.StarRepository;
 import rx.Observable;
 import rx.Single;
 
@@ -19,16 +20,23 @@ import rx.Single;
 public class GetUserReposUseCase {
 
     private final RepoRepository repoRepository;
+    private final StarRepository starRepository;
 
     @Inject
-    public GetUserReposUseCase(RepoRepository repoRepository) {
+    public GetUserReposUseCase(RepoRepository repoRepository, StarRepository starRepository) {
         this.repoRepository = repoRepository;
+        this.starRepository = starRepository;
     }
 
     public Single<List<Pair<Repo, Boolean>>> run() {
         return repoRepository.getUserRepos()
                 .flatMapObservable(Observable::from)
-                .map(repo -> new Pair<>(repo, true)) // TODO APIでスターを取得
+                .flatMap(repo -> Observable.combineLatest(
+                        Observable.just(repo),
+                        starRepository.get(repo.owner.login, repo.name)
+                                .toSingleDefault(true).onErrorReturn(throwable -> false).toObservable(),
+                        Pair::create
+                ))
                 .toList()
                 .toSingle();
     }
