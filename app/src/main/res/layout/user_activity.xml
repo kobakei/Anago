@@ -76,8 +76,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_medium"
                 android:layout_below="@id/textViewDebugTitle"
-                android:text="Test"
+                android:text="Test RxLifecycle"
                 android:onClick="@{viewModel.onTestClick}"/>
+
+            <Button
+                android:id="@+id/buttonTest2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_below="@id/buttonTest"
+                android:text="Test counting service"
+                android:onClick="@{viewModel.onTest2Click}"/>
 
         </RelativeLayout>
 

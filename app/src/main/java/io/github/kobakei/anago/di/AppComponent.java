@@ -24,4 +24,11 @@ public interface AppComponent {
      * @return
      */
     FragmentComponent fragmentComponent(FragmentModule fragmentModule);
+
+    /**
+     * このインジェクタをベースに、Service用のインジェクタを生成する
+     * @param serviceModule
+     * @return
+     */
+    ServiceComponent serviceComponent(ServiceModule serviceModule);
 }

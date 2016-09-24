@@ -10,6 +10,7 @@ import javax.inject.Inject;
 
 import io.github.kobakei.anago.activity.BaseActivity;
 import io.github.kobakei.anago.entity.User;
+import io.github.kobakei.anago.service.CountIntentService;
 import io.github.kobakei.anago.usecase.GetUserUseCase;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -80,5 +81,9 @@ public class UserViewModel extends ActivityViewModel {
                 }, () -> {
                     Toast.makeText(getActivity(), "Complete", Toast.LENGTH_SHORT).show();
                 });
+    }
+
+    public void onTest2Click(View view) {
+        CountIntentService.startService(getActivity());
     }
 }

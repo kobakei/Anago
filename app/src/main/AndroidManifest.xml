@@ -26,6 +26,8 @@
         <activity android:name=".activity.UserActivity" />
         <activity android:name=".activity.StargazerListActivity"
             android:label="@string/stargazer_title"/>
+
+        <service android:name=".service.CountIntentService"/>
     </application>
 
 </manifest>
