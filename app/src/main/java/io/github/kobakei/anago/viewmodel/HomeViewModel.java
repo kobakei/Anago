@@ -28,8 +28,6 @@ public class HomeViewModel extends ActivityViewModel {
                 .compose(getActivity().bindToLifecycle().forCompletable())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(() -> {
-                    SignInActivity.startActivity(getActivity());
-                });
+                .subscribe(() -> SignInActivity.startActivity(getActivity()), Throwable::printStackTrace);
     }
 }
