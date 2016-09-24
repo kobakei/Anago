@@ -7,12 +7,22 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.IOError;
+import java.io.IOException;
+
 import javax.inject.Inject;
 
 import io.github.kobakei.anago.activity.BaseActivity;
 import io.github.kobakei.anago.activity.HomeActivity;
+import io.github.kobakei.anago.entity.Error;
 import io.github.kobakei.anago.usecase.CheckSessionUseCase;
 import io.github.kobakei.anago.usecase.SignInUseCase;
+import io.github.kobakei.anago.util.NetUtil;
+import okhttp3.ResponseBody;
+import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -72,7 +82,15 @@ public class SignInViewModel extends ActivityViewModel {
                 .subscribe(authToken -> {
                     Toast.makeText(getActivity(), "Token: " + authToken.token, Toast.LENGTH_SHORT).show();
                     goToNext();
-                }, throwable -> Timber.e(throwable));
+                }, throwable -> {
+                    Timber.e(throwable);
+                    Error error = NetUtil.convertError(throwable);
+                    if (error != null) {
+                        Toast.makeText(getActivity(), error.message, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getActivity(), "Disconnected", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void goToNext() {
