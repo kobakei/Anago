@@ -20,6 +20,10 @@ public abstract class Repository<K, V> {
         return cache;
     }
 
+    /**
+     * リポジトリのキャッシュをクリアする
+     * TODO ユースケースがこのメソッドを叩くのは設計的に微妙かも
+     */
     public void clearCache() {
         cache.clear();
     }
