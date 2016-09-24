@@ -53,9 +53,7 @@ public class UserViewModel extends ActivityViewModel {
                 .subscribe(user1 -> {
                     user.set(user1);
 
-                    // TODO ActionBarのタイトルはどこでセットすればいい？
-                    AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
-                    appCompatActivity.getSupportActionBar().setTitle(user.get().login);
+                    getActivity().getSupportActionBar().setTitle(user.get().login);
 
                     isConnecting.set(false);
 

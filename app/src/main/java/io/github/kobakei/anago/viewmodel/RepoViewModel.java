@@ -80,9 +80,7 @@ public class RepoViewModel extends ActivityViewModel {
                     this.repo.set(pair.first);
                     this.starred.set(pair.second);
 
-                    // TODO ActionBarのタイトルはどこでセットすればいい？
-                    AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
-                    appCompatActivity.getSupportActionBar().setTitle(this.repo.get().name);
+                    getActivity().getSupportActionBar().setTitle(this.repo.get().name);
 
                 }, Throwable::printStackTrace);
     }
