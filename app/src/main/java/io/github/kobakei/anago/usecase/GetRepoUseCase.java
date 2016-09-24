@@ -21,6 +21,6 @@ public class GetRepoUseCase {
     }
 
     public Single<Repo> run(String user, String repo) {
-        return repoRepository.getByFullname(user + "/" + repo);
+        return repoRepository.getByFullname(user, repo);
     }
 }

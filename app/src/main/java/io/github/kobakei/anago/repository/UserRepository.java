@@ -14,12 +14,13 @@ import rx.Single;
  * Created by keisuke on 2016/09/19.
  */
 @Singleton
-public class UserRepository {
+public class UserRepository extends Repository<String, User> {
 
     private final GitHubService gitHubService;
 
     @Inject
     public UserRepository(GitHubService gitHubService) {
+        super();
         this.gitHubService = gitHubService;
     }
 

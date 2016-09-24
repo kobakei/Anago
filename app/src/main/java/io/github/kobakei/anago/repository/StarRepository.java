@@ -1,8 +1,5 @@
 package io.github.kobakei.anago.repository;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -17,25 +14,22 @@ import timber.log.Timber;
  * Created by keisuke on 2016/09/18.
  */
 @Singleton
-public class StarRepository {
+public class StarRepository extends Repository<String, Boolean> {
 
     private final GitHubService gitHubService;
     private final AuthTokenDao authTokenDao;
 
-    private final Map<String, Boolean> cache;
-
     @Inject
     public StarRepository(GitHubService gitHubService, AuthTokenDao authTokenDao) {
+        super();
         this.gitHubService = gitHubService;
         this.authTokenDao = authTokenDao;
-
-        this.cache = new HashMap<>();
     }
 
     public Single<Boolean> get(String user, String repo) {
         String key = user + "/" + repo;
-        if (cache.containsKey(key)) {
-            return Single.just(cache.get(key));
+        if (getCache().containsKey(key)) {
+            return Single.just(getCache().get(key));
         }
         return authTokenDao.get()
                 .flatMap(authToken -> {
@@ -45,7 +39,7 @@ public class StarRepository {
                             .toSingleDefault(true)
                             .onErrorReturn(throwable -> false);
                 })
-                .doOnSuccess(aBoolean -> cache.put(key, aBoolean));
+                .doOnSuccess(aBoolean -> getCache().put(key, aBoolean));
     }
 
     public Completable put(String user, String repo) {
@@ -56,7 +50,7 @@ public class StarRepository {
                 })
                 .doOnCompleted(() -> {
                     Timber.v("put complete");
-                    cache.put(user + "/" + repo, true);
+                    getCache().put(user + "/" + repo, true);
                 });
     }
 
@@ -68,7 +62,7 @@ public class StarRepository {
                 })
                 .doOnCompleted(() -> {
                     Timber.v("delete complete");
-                    cache.put(user + "/" + repo, false);
+                    getCache().put(user + "/" + repo, false);
                 });
     }
 }

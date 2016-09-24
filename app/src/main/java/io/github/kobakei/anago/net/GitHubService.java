@@ -43,6 +43,9 @@ public interface GitHubService {
     Single<List<Repo>> getUserRepos(@Header("Authorization") String authorization,
                                     @Query("page") int page,
                                     @Query("per_page") int perPage);
+    @GET("/repos/{user}/{repo}")
+    Single<Repo> getRepo(@Path("user") String user,
+                         @Path("repo") String repo);
 
     @GET("/user/starred/{user}/{repo}")
     Single<Void> getStar(@Header("Authorization") String authorization,

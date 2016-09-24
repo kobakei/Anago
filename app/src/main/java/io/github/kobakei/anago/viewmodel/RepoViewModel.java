@@ -65,6 +65,46 @@ public class RepoViewModel extends ActivityViewModel {
     public void onResume() {
         super.onResume();
 
+        refreshRepo();
+    }
+
+    public void onStarClick(View view) {
+        starUseCase.run(repo.get().owner.login, repo.get().name)
+                .compose(getActivity().bindToLifecycle().forCompletable())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(() -> {
+                    this.starred.set(true);
+                    refreshRepo();
+                    Toast.makeText(getActivity(), "Starred!", Toast.LENGTH_SHORT).show();
+                }, throwable -> {
+                    Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    public void onUnstarClick(View view) {
+        unstarUseCase.run(repo.get().owner.login, repo.get().name)
+                .compose(getActivity().bindToLifecycle().forCompletable())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(() -> {
+                    this.starred.set(false);
+                    refreshRepo();
+                    Toast.makeText(getActivity(), "Unstarred!", Toast.LENGTH_SHORT).show();
+                }, throwable -> {
+                    Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    public void onImageClick(View view) {
+        UserActivity.startActivity(getActivity(), repo.get().owner.login);
+    }
+
+    public void onStargazerClick(View view) {
+        StargazerListActivity.startActivity(getActivity(), repo.get().owner.login, repo.get().name);
+    }
+
+    private void refreshRepo() {
         getRepoUseCase.run(paramUser, paramRepo)
                 .flatMapObservable(repo1 -> Observable.combineLatest(
                         Observable.just(repo1),
@@ -83,39 +123,5 @@ public class RepoViewModel extends ActivityViewModel {
                     getActivity().getSupportActionBar().setTitle(this.repo.get().name);
 
                 }, Throwable::printStackTrace);
-    }
-
-    public void onStarClick(View view) {
-        starUseCase.run(repo.get().owner.login, repo.get().name)
-                .compose(getActivity().bindToLifecycle().forCompletable())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(() -> {
-                    this.starred.set(true);
-                    Toast.makeText(getActivity(), "Starred!", Toast.LENGTH_SHORT).show();
-                }, throwable -> {
-                    Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
-                });
-    }
-
-    public void onUnstarClick(View view) {
-        unstarUseCase.run(repo.get().owner.login, repo.get().name)
-                .compose(getActivity().bindToLifecycle().forCompletable())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(() -> {
-                    this.starred.set(false);
-                    Toast.makeText(getActivity(), "Unstarred!", Toast.LENGTH_SHORT).show();
-                }, throwable -> {
-                    Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
-                });
-    }
-
-    public void onImageClick(View view) {
-        UserActivity.startActivity(getActivity(), repo.get().owner.login);
-    }
-
-    public void onStargazerClick(View view) {
-        StargazerListActivity.startActivity(getActivity(), repo.get().owner.login, repo.get().name);
     }
 }

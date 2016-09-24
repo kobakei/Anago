@@ -1,10 +1,6 @@
 package io.github.kobakei.anago.repository;
 
-import android.support.v4.util.LongSparseArray;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -19,19 +15,16 @@ import rx.Single;
  * Created by keisuke on 2016/09/18.
  */
 @Singleton
-public class RepoRepository {
+public class RepoRepository extends Repository<String, Repo> {
 
     private final GitHubService gitHubService;
     private final AuthTokenDao authTokenDao;
 
-    private Map<String, Repo> cache;
-
     @Inject
     public RepoRepository(GitHubService gitHubService, AuthTokenDao authTokenDao) {
+        super();
         this.gitHubService = gitHubService;
         this.authTokenDao = authTokenDao;
-
-        this.cache = new HashMap<>();
     }
 
     public Single<List<Repo>> getPublicRepos(int page, int perPage) {
@@ -46,7 +39,7 @@ public class RepoRepository {
                 })
                 .doOnSuccess(repos1 -> {
                     for (Repo repo : repos1) {
-                        cache.put(repo.full_name, repo);
+                        getCache().put(repo.full_name, repo);
                     }
                 });
     }
@@ -59,12 +52,16 @@ public class RepoRepository {
                 })
                 .doOnSuccess(repos1 -> {
                     for (Repo repo : repos1) {
-                        cache.put(repo.full_name, repo);
+                        getCache().put(repo.full_name, repo);
                     }
                 });
     }
 
-    public Single<Repo> getByFullname(String fullname) {
-        return Single.just(cache.get(fullname));
+    public Single<Repo> getByFullname(String user, String repo) {
+        String fullname = user + "/" + repo;
+        if (getCache().containsKey(fullname)) {
+            return Single.just(getCache().get(fullname));
+        }
+        return gitHubService.getRepo(user, repo);
     }
 }

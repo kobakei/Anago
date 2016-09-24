@@ -23,7 +23,7 @@ import timber.log.Timber;
  * Created by keisuke on 2016/09/18.
  */
 @Singleton
-public class AuthTokenRepository {
+public class AuthTokenRepository extends Repository<String, AuthToken> {
 
     private Context context;
     private final GitHubService gitHubService;
@@ -32,6 +32,7 @@ public class AuthTokenRepository {
     @Inject
     public AuthTokenRepository(Context context, GitHubService gitHubService,
                                AuthTokenDao authTokenDao) {
+        super();
         this.context = context;
         this.gitHubService = gitHubService;
         this.authTokenDao = authTokenDao;
