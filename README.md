@@ -7,6 +7,7 @@ MVVMとClean architectureで書いたAndoridのサンプルアプリです。
 - 以下の機能に限定したGitHubクライアントです
   - GitHubログイン
   - 自分のリポジトリを表示
+  - スターしたリポジトリを表示
   - スター登録・解除
   - スターした人一覧を表示
   - ユーザーのプロフィール表示
@@ -31,6 +32,8 @@ MVVMとClean architectureで書いたAndoridのサンプルアプリです。
 - [gfx/Android-Orma](https://github.com/gfx/Android-Orma)
 - [JakeWharton/timber](https://github.com/JakeWharton/timber)
 - [facebook/stetho](https://github.com/facebook/stetho)
+- [square/leakcanary](https://github.com/square/leakcanary)
+- [robolectric/robolectric](https://github.com/robolectric/robolectric)
 
 ## License
 
