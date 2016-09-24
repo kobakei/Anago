@@ -81,6 +81,6 @@ public class StarredRepoListViewModel extends FragmentViewModel {
                     repos.clear();
                     repos.addAll(repos1);
                     isConnecting.set(false);
-                });
+                }, Throwable::printStackTrace);
     }
 }

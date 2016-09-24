@@ -49,7 +49,7 @@ public class StargazerListViewModel extends ActivityViewModel {
                 .subscribe(users1 -> {
                     this.users.clear();
                     this.users.addAll(users1);
-                });
+                }, Throwable::printStackTrace);
     }
 
     @Override
