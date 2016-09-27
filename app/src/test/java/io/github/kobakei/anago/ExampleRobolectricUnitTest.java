@@ -15,7 +15,8 @@ import static org.junit.Assert.assertEquals;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.JELLY_BEAN)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.JELLY_BEAN,
+        application = TestAnagoApplication.class)
 public class ExampleRobolectricUnitTest {
     @Test
     public void addition_isCorrect() throws Exception {

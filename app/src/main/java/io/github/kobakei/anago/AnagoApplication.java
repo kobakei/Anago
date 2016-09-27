@@ -24,9 +24,11 @@ public class AnagoApplication extends Application {
         super.onCreate();
 
         if (!isUnitTest()) {
+            // TODO isInAnalyzerProcessがno-opに入ってないので、一時的にコメントアウト。LeakCanaryのアップデート後に戻す。
+            /*
             if (LeakCanary.isInAnalyzerProcess(this)) {
                 return;
-            }
+            }*/
             LeakCanary.install(this);
 
             Stetho.initializeWithDefaults(this);
