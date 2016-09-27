@@ -1,5 +1,7 @@
 # Anago
 
+[![CircleCI](https://circleci.com/gh/kobakei/Anago.svg?style=svg)](https://circleci.com/gh/kobakei/Anago)
+
 MVVMとClean architectureで書いたAndroidのサンプルアプリです。
 
 ## 説明
