@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:text="@={viewModel.name}"
                 android:hint="@string/sign_in_name_hint"
-                android:onTextChanged="@{viewModel.onTextChanged}"/>
+                android:onTextChanged="@{viewModel::onTextChanged}"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -48,7 +48,7 @@
                 android:inputType="textPassword"
                 android:text="@={viewModel.password}"
                 android:hint="@string/sign_in_password_hint"
-                android:onTextChanged="@{viewModel.onTextChanged}"/>
+                android:onTextChanged="@{viewModel::onTextChanged}"/>
 
         </android.support.design.widget.TextInputLayout>
 

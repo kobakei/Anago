@@ -24,7 +24,7 @@
             android:layout_centerVertical="true"
             app:imageUrl="@{viewModel.user.avatar_url}"
             app:errorDrawable="@{@android:drawable/ic_delete}"
-            android:onClick="@{viewModel.onImageClick}"/>
+            android:onClick="@{viewModel::onImageClick}"/>
 
         <TextView
             android:id="@+id/textViewName"

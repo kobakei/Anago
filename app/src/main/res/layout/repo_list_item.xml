@@ -24,7 +24,7 @@
             android:layout_centerVertical="true"
             app:imageUrl="@{viewModel.repo.owner.avatar_url}"
             app:errorDrawable="@{@android:drawable/ic_delete}"
-            android:onClick="@{viewModel.onImageClick}"/>
+            android:onClick="@{viewModel::onImageClick}"/>
 
         <ImageView
             android:id="@+id/imageViewStar"
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:onClick="@{viewModel.onStarClick}"/>
+            android:onClick="@{viewModel::onStarClick}"/>
 
         <LinearLayout
             android:layout_width="match_parent"
