@@ -1,6 +1,6 @@
 # Anago
 
-MVVMとClean architectureで書いたAndoridのサンプルアプリです。
+MVVMとClean architectureで書いたAndroidのサンプルアプリです。
 
 ## 説明
 
@@ -15,6 +15,8 @@ MVVMとClean architectureで書いたAndoridのサンプルアプリです。
 ## アーキテクチャ
 
 ![Diagram](https://github.com/kobakei/Anago/blob/master/art/diagram.png?raw=true)
+
+上からユーザーに近い順に並んでいます。UseCase以下の各層は、呼び出し元にRxJavaのObservableを返します。
 
 ## ライブラリ
 
