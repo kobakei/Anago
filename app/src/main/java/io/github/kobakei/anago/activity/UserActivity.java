@@ -6,6 +6,9 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import javax.inject.Inject;
 
 import io.github.kobakei.anago.R;
@@ -38,6 +41,18 @@ public class UserActivity extends BaseActivity {
         viewModel.setParams(name);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        EventBus.getDefault().unregister(this);
+    }
+
     public static void startActivity(Context context, String name) {
         Intent intent = new Intent(context, UserActivity.class);
         intent.putExtra(KEY_NAME, name);
@@ -52,5 +67,10 @@ public class UserActivity extends BaseActivity {
                 return true;
         }
         return false;
+    }
+
+    @Subscribe
+    public void onUserRefreshed(UserViewModel.RefreshUserEvent event) {
+        getSupportActionBar().setTitle(event.user.login);
     }
 }

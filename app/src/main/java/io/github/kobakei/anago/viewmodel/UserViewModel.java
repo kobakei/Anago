@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+
 import javax.inject.Inject;
 
 import io.github.kobakei.anago.activity.BaseActivity;
@@ -54,7 +56,7 @@ public class UserViewModel extends ActivityViewModel {
                 .subscribe(user1 -> {
                     user.set(user1);
 
-                    getActivity().getSupportActionBar().setTitle(user.get().login);
+                    EventBus.getDefault().post(new RefreshUserEvent(user.get()));
 
                     isConnecting.set(false);
 
@@ -85,5 +87,12 @@ public class UserViewModel extends ActivityViewModel {
 
     public void onTest2Click(View view) {
         CountIntentService.startService(getActivity());
+    }
+
+    public static class RefreshUserEvent {
+        public final User user;
+        public RefreshUserEvent(User user) {
+            this.user = user;
+        }
     }
 }

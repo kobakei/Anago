@@ -3,9 +3,10 @@ package io.github.kobakei.anago.viewmodel;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.support.v4.util.Pair;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
+
+import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Inject;
 
@@ -18,7 +19,6 @@ import io.github.kobakei.anago.usecase.GetRepoUseCase;
 import io.github.kobakei.anago.usecase.StarUseCase;
 import io.github.kobakei.anago.usecase.UnstarUseCase;
 import rx.Observable;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -120,8 +120,15 @@ public class RepoViewModel extends ActivityViewModel {
                     this.repo.set(pair.first);
                     this.starred.set(pair.second);
 
-                    getActivity().getSupportActionBar().setTitle(this.repo.get().name);
+                    EventBus.getDefault().post(new RefreshRepoEvent(pair.first));
 
                 }, Throwable::printStackTrace);
+    }
+
+    public static class RefreshRepoEvent {
+        public final Repo repo;
+        public RefreshRepoEvent(Repo repo) {
+            this.repo = repo;
+        }
     }
 }

@@ -6,6 +6,9 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import javax.inject.Inject;
 
 import io.github.kobakei.anago.R;
@@ -41,6 +44,18 @@ public class RepoActivity extends BaseActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -48,6 +63,11 @@ public class RepoActivity extends BaseActivity {
                 return true;
         }
         return false;
+    }
+
+    @Subscribe
+    public void onRepoRefreshed(RepoViewModel.RefreshRepoEvent event) {
+        getSupportActionBar().setTitle(event.repo.name);
     }
 
     /**
