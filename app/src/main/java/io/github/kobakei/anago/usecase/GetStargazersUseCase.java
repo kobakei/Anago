@@ -22,7 +22,7 @@ public class GetStargazersUseCase {
         this.userRepository = userRepository;
     }
 
-    public Single<List<User>> run(String user, String repo) {
-        return userRepository.getStargazers(user, repo, 1, 10);
+    public Single<List<User>> run(String user, String repo, int page, int perPage) {
+        return userRepository.getStargazers(user, repo, page, perPage);
     }
 }

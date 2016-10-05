@@ -1,6 +1,7 @@
 package io.github.kobakei.anago.viewmodel;
 
 import android.databinding.ObservableArrayList;
+import android.support.v7.widget.RecyclerView;
 
 import javax.inject.Inject;
 
@@ -10,6 +11,7 @@ import io.github.kobakei.anago.usecase.GetStargazersUseCase;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import timber.log.Timber;
 
 /**
  * スターした人一覧画面のビューモデル
@@ -24,6 +26,10 @@ public class StargazerListViewModel extends ActivityViewModel {
 
     private String paramUser;
     private String paramRepo;
+
+    private int page = 0;
+    private boolean hasMore = true;
+    private boolean loadingMore = false;
 
     @Inject
     public StargazerListViewModel(BaseActivity activity, GetStargazersUseCase getStargazersUseCase) {
@@ -42,7 +48,7 @@ public class StargazerListViewModel extends ActivityViewModel {
     public void onResume() {
         super.onResume();
 
-        getStargazersUseCase.run(paramUser, paramRepo)
+        getStargazersUseCase.run(paramUser, paramRepo, 1, 20)
                 .compose(getActivity().bindToLifecycle().forSingle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -55,5 +61,9 @@ public class StargazerListViewModel extends ActivityViewModel {
     @Override
     public void onPause() {
         super.onPause();
+    }
+
+    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+        Timber.v("onScrolled");
     }
 }

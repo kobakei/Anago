@@ -21,6 +21,7 @@ import io.github.kobakei.anago.databinding.StargazerListActivityBinding;
 import io.github.kobakei.anago.databinding.StargazerListItemBinding;
 import io.github.kobakei.anago.entity.User;
 import io.github.kobakei.anago.viewmodel.StargazerListViewModel;
+import timber.log.Timber;
 
 /**
  * スターした人一覧画面
