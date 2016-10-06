@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.view.MenuItem;
 
 import org.greenrobot.eventbus.EventBus;
@@ -13,6 +15,8 @@ import javax.inject.Inject;
 
 import io.github.kobakei.anago.R;
 import io.github.kobakei.anago.databinding.RepoActivityBinding;
+import io.github.kobakei.anago.fragment.RepoInfoFragment;
+import io.github.kobakei.anago.viewmodel.RepoInfoViewModel;
 import io.github.kobakei.anago.viewmodel.RepoViewModel;
 
 /**
@@ -36,9 +40,36 @@ public class RepoActivity extends BaseActivity {
         RepoActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.repo_activity);
         binding.setViewModel(viewModel);
 
+        // 変数
         String user = getIntent().getStringExtra(KEY_USER);
         String repo = getIntent().getStringExtra(KEY_REPO);
-        viewModel.setParams(user, repo);
+
+        // タブ＋ページャー
+        binding.tabLayout.setupWithViewPager(binding.viewPager);
+        binding.viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                if (position == 0) {
+                    return RepoInfoFragment.newInstance(user, repo);
+                } else {
+                    return RepoInfoFragment.newInstance(user, repo);
+                }
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                if (position == 0) {
+                    return "About";
+                } else {
+                    return "Code";
+                }
+            }
+
+            @Override
+            public int getCount() {
+                return 2;
+            }
+        });
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -66,7 +97,7 @@ public class RepoActivity extends BaseActivity {
     }
 
     @Subscribe
-    public void onRepoRefreshed(RepoViewModel.RefreshRepoEvent event) {
+    public void onRepoRefreshed(RepoInfoViewModel.RefreshRepoEvent event) {
         getSupportActionBar().setTitle(event.repo.name);
     }
 

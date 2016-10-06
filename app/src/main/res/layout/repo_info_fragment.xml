@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="io.github.kobakei.anago.fragment.RepoFragment">
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="io.github.kobakei.anago.viewmodel.RepoInfoViewModel"/>
+    </data>
+
+    <FrameLayout
+        android:id="@+id/repo_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="@dimen/avatar_medium"
+                android:layout_height="@dimen/avatar_medium"
+                app:imageUrl="@{viewModel.repo.owner.avatar_url}"
+                app:errorDrawable="@{@android:drawable/ic_delete}"
+                android:onClick="@{viewModel::onImageClick}"/>
+
+            <TextView
+                android:id="@+id/textViewName"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/avatar_medium"
+                android:layout_toRightOf="@id/imageView"
+                android:layout_toEndOf="@id/imageView"
+                android:layout_marginLeft="@dimen/margin_small"
+                android:layout_marginStart="@dimen/margin_small"
+                android:gravity="center_vertical"
+                android:text="@{viewModel.repo.name, default=Hoge}"/>
+
+            <TextView
+                android:id="@+id/textViewDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imageView"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="@{viewModel.repo.description, default=Fuga}"/>
+
+            <TextView
+                android:id="@+id/textViewPeopleStarring"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewDescription"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="@{@plurals/repo_people_starring(viewModel.repo.stargazers_count, viewModel.repo.stargazers_count)}"/>
+
+            <Button
+                android:id="@+id/buttonStar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewPeopleStarring"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="@{viewModel.starred ? @string/repo_unstar : @string/repo_star, default=Star}"
+                android:onClick="@{viewModel.starred ? viewModel::onUnstarClick : viewModel::onStarClick}"/>
+
+            <Button
+                android:id="@+id/buttonStargazer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/buttonStar"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="Stargazers"
+                android:onClick="@{viewModel::onStargazerClick}"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:visibility="@{viewModel.isConnecting ? View.VISIBLE : View.GONE}"
+            tools:visibility="gone">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+</layout>

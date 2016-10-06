@@ -1,6 +1,7 @@
 package io.github.kobakei.anago.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableArrayList;
@@ -65,11 +66,11 @@ public class StargazerListActivity extends BaseActivity {
         return false;
     }
 
-    public static void startActivity(Activity activity, String user, String repo) {
-        Intent intent = new Intent(activity, StargazerListActivity.class);
+    public static void startActivity(Context context, String user, String repo) {
+        Intent intent = new Intent(context, StargazerListActivity.class);
         intent.putExtra(KEY_USER, user);
         intent.putExtra(KEY_REPO, repo);
-        activity.startActivity(intent);
+        context.startActivity(intent);
     }
 
     /**
