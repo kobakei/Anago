@@ -4,7 +4,7 @@ import io.github.kobakei.anago.activity.BaseActivity;
 import io.github.kobakei.anago.fragment.BaseFragment;
 
 /**
- * Activity用ビューモデルのベースクラス
+ * ビューモデルのベースクラス
  * Created by keisuke on 2016/09/18.
  */
 
@@ -31,10 +31,19 @@ public abstract class ViewModel {
         return activity;
     }
 
+    /**
+     * Activity / FragmentのonResumeで呼ばれます
+     * EventBusのregisterなどはここで呼んでください
+     */
     public void onResume() {
-
+        // do nothing
     }
 
+    /**
+     * Activity / FragmentのonPauseで呼ばれます
+     * EventBusのunregisterなどはここで呼んでください
+     */
     public void onPause() {
+        // do nothing
     }
 }
