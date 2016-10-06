@@ -14,7 +14,7 @@ import io.github.kobakei.anago.entity.User;
  * Created by keisuke on 2016/09/20.
  */
 
-public class StargazerListItemViewModel extends ActivityViewModel {
+public class StargazerListItemViewModel extends ViewModel {
 
     public ObservableField<User> user;
 

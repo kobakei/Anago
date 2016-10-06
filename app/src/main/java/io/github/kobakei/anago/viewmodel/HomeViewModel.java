@@ -13,7 +13,7 @@ import rx.schedulers.Schedulers;
  * Created by keisuke on 2016/09/19.
  */
 
-public class HomeViewModel extends ActivityViewModel {
+public class HomeViewModel extends ViewModel {
 
     private final SignOutUseCase signOutUseCase;
 

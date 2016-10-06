@@ -2,7 +2,6 @@ package io.github.kobakei.anago.viewmodel;
 
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -23,7 +22,7 @@ import rx.schedulers.Schedulers;
  * Created by keisuke on 2016/09/19.
  */
 
-public class UserViewModel extends ActivityViewModel {
+public class UserViewModel extends ViewModel {
 
     private final GetUserUseCase getUserUseCase;
 

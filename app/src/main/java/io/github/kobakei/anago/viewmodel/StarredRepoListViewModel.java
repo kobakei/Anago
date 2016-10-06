@@ -22,7 +22,7 @@ import timber.log.Timber;
  * Created by keisuke on 2016/09/18.
  */
 
-public class StarredRepoListViewModel extends FragmentViewModel {
+public class StarredRepoListViewModel extends ViewModel {
 
     private final GetStarredReposUseCase getStarredReposUseCase;
 

@@ -5,7 +5,7 @@ import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import io.github.kobakei.anago.AnagoApplication;
 import io.github.kobakei.anago.di.ActivityComponent;
 import io.github.kobakei.anago.di.ActivityModule;
-import io.github.kobakei.anago.viewmodel.ActivityViewModel;
+import io.github.kobakei.anago.viewmodel.ViewModel;
 
 /**
  * Activityのベースクラス
@@ -14,7 +14,7 @@ import io.github.kobakei.anago.viewmodel.ActivityViewModel;
 
 public class BaseActivity extends RxAppCompatActivity {
 
-    private ActivityViewModel viewModel;
+    private ViewModel viewModel;
 
     protected ActivityComponent getInjector() {
         AnagoApplication application = (AnagoApplication) getApplication();
@@ -26,7 +26,7 @@ public class BaseActivity extends RxAppCompatActivity {
      * アクティビティのライフサイクルイベント発生時に、ビューモデルの対応するメソッドが呼ばれるようになります
      * @param viewModel
      */
-    protected void bindViewModel(ActivityViewModel viewModel) {
+    protected void bindViewModel(ViewModel viewModel) {
         this.viewModel = viewModel;
     }
 

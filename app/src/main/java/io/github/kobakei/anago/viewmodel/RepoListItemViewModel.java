@@ -23,7 +23,7 @@ import rx.schedulers.Schedulers;
  * Created by keisuke on 2016/09/18.
  */
 
-public class RepoListItemViewModel extends FragmentViewModel{
+public class RepoListItemViewModel extends ViewModel{
 
     private final StarUseCase starUseCase;
     private final UnstarUseCase unstarUseCase;

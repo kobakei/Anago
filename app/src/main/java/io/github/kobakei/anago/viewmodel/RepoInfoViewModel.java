@@ -28,7 +28,7 @@ import rx.schedulers.Schedulers;
  * Created by keisuke on 2016/09/18.
  */
 
-public class RepoInfoViewModel extends FragmentViewModel {
+public class RepoInfoViewModel extends ViewModel {
 
     private final GetRepoUseCase getRepoUseCase;
     private final CheckStarUseCase checkStarUseCase;

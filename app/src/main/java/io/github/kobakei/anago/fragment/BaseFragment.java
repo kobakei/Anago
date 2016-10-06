@@ -5,7 +5,7 @@ import com.trello.rxlifecycle.components.support.RxFragment;
 import io.github.kobakei.anago.AnagoApplication;
 import io.github.kobakei.anago.di.FragmentComponent;
 import io.github.kobakei.anago.di.FragmentModule;
-import io.github.kobakei.anago.viewmodel.FragmentViewModel;
+import io.github.kobakei.anago.viewmodel.ViewModel;
 
 /**
  * Fragmentのベースクラス
@@ -14,7 +14,7 @@ import io.github.kobakei.anago.viewmodel.FragmentViewModel;
 
 public abstract class BaseFragment extends RxFragment{
 
-    private FragmentViewModel viewModel;
+    private ViewModel viewModel;
 
     protected FragmentComponent getInjector() {
         AnagoApplication application = (AnagoApplication) getContext().getApplicationContext();
@@ -26,7 +26,7 @@ public abstract class BaseFragment extends RxFragment{
      * フラグメントのライフサイクルイベント発生時に、ビューモデルの対応するメソッドが呼ばれるようになります
      * @param viewModel
      */
-    protected void bindViewModel(FragmentViewModel viewModel) {
+    protected void bindViewModel(ViewModel viewModel) {
         this.viewModel = viewModel;
     }
 

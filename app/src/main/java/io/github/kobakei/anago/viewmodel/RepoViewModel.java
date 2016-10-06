@@ -9,7 +9,7 @@ import io.github.kobakei.anago.activity.BaseActivity;
  * Created by keisuke on 2016/10/07.
  */
 
-public class RepoViewModel extends ActivityViewModel {
+public class RepoViewModel extends ViewModel {
 
     @Inject
     public RepoViewModel(BaseActivity activity) {
