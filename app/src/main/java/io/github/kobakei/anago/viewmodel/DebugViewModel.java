@@ -3,14 +3,13 @@ package io.github.kobakei.anago.viewmodel;
 import android.view.View;
 import android.widget.Toast;
 
-import com.trello.rxlifecycle.android.RxLifecycleAndroid;
-
 import javax.inject.Inject;
 
 import io.github.kobakei.anago.service.CountIntentService;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import timber.log.Timber;
 
 /**
  * デバッグビューのビューモデル
@@ -35,12 +34,13 @@ public class DebugViewModel extends ViewModel {
                     }
                     return Observable.just(integer);
                 })
-                .compose(bindToLifecycle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .compose(bindToLifecycle())
                 .subscribe(integer -> {
                     Toast.makeText(getContext(), "Int: " + integer, Toast.LENGTH_SHORT).show();
                 }, throwable -> {
+                    Timber.e(throwable);
                     Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
                 }, () -> {
                     Toast.makeText(getContext(), "Complete", Toast.LENGTH_SHORT).show();
