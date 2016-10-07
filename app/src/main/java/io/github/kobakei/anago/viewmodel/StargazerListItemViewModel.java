@@ -26,6 +26,6 @@ public class StargazerListItemViewModel extends ViewModel {
     }
 
     public void onImageClick(View view) {
-        UserActivity.startActivity(getActivity(), user.get().login);
+        UserActivity.startActivity(getContext(), user.get().login);
     }
 }

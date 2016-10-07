@@ -25,9 +25,9 @@ public class HomeViewModel extends ViewModel {
 
     public void onSignOutClick() {
         signOutUseCase.run()
-                .compose(getActivity().bindToLifecycle().forCompletable())
+                .compose(bindToLifecycle().forCompletable())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(() -> SignInActivity.startActivity(getActivity()), Throwable::printStackTrace);
+                .subscribe(() -> SignInActivity.startActivity(getContext()), Throwable::printStackTrace);
     }
 }

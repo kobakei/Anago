@@ -71,38 +71,38 @@ public class RepoInfoViewModel extends ViewModel {
 
     public void onStarClick(View view) {
         starUseCase.run(repo.get().owner.login, repo.get().name)
-                .compose(getFragment().bindToLifecycle().forCompletable())
+                .compose(bindToLifecycle().forCompletable())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> {
                     this.starred.set(true);
                     refreshRepo();
-                    Toast.makeText(getFragment().getContext(), "Starred!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Starred!", Toast.LENGTH_SHORT).show();
                 }, throwable -> {
-                    Toast.makeText(getFragment().getContext(), "Error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
                 });
     }
 
     public void onUnstarClick(View view) {
         unstarUseCase.run(repo.get().owner.login, repo.get().name)
-                .compose(getFragment().bindToLifecycle().forCompletable())
+                .compose(bindToLifecycle().forCompletable())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(() -> {
                     this.starred.set(false);
                     refreshRepo();
-                    Toast.makeText(getFragment().getContext(), "Unstarred!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Unstarred!", Toast.LENGTH_SHORT).show();
                 }, throwable -> {
-                    Toast.makeText(getFragment().getContext(), "Error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
                 });
     }
 
     public void onImageClick(View view) {
-        UserActivity.startActivity(getFragment().getContext(), repo.get().owner.login);
+        UserActivity.startActivity(getContext(), repo.get().owner.login);
     }
 
     public void onStargazerClick(View view) {
-        StargazerListActivity.startActivity(getFragment().getContext(), repo.get().owner.login, repo.get().name);
+        StargazerListActivity.startActivity(getContext(), repo.get().owner.login, repo.get().name);
     }
 
     private void refreshRepo() {
@@ -113,7 +113,7 @@ public class RepoInfoViewModel extends ViewModel {
                         Pair::create
                 ))
                 .toSingle()
-                .compose(getFragment().bindToLifecycle().forSingle())
+                .compose(bindToLifecycle().forSingle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(pair -> {

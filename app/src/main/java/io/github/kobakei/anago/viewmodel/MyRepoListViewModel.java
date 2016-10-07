@@ -63,7 +63,7 @@ public class MyRepoListViewModel extends ViewModel {
 
     public void onItemClick(int position) {
         Repo repo = repos.get(position).first;
-        RepoActivity.startActivity(getFragment().getActivity(), repo.owner.login, repo.name);
+        RepoActivity.startActivity(getContext(), repo.owner.login, repo.name);
     }
 
     @Subscribe
@@ -73,7 +73,7 @@ public class MyRepoListViewModel extends ViewModel {
 
     private void refreshData() {
         getUserReposUseCase.run()
-                .compose(getFragment().bindToLifecycle().forSingle())
+                .compose(bindToLifecycle().forSingle())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(repos1 -> {

@@ -48,12 +48,12 @@ public class SignInViewModel extends ViewModel {
         buttonEnabled = new ObservableBoolean(false);
 
         checkSessionUseCase.run()
-                .compose(getActivity().bindToLifecycle().forSingle())
+                .compose(bindToLifecycle().forSingle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(authToken -> {
                     Timber.v("Check session: " + authToken.token);
-                    Toast.makeText(getActivity(), "Already signed in", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Already signed in", Toast.LENGTH_SHORT).show();
                     goToNext();
                 }, Timber::e);
     }
@@ -71,22 +71,22 @@ public class SignInViewModel extends ViewModel {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(authToken -> {
-                    Toast.makeText(getActivity(), "Token: " + authToken.token, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Token: " + authToken.token, Toast.LENGTH_SHORT).show();
                     goToNext();
                 }, throwable -> {
                     Timber.e(throwable);
                     Error error = NetUtil.convertError(throwable);
                     if (error != null) {
-                        Toast.makeText(getActivity(), error.message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), error.message, Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getActivity(), "Disconnected", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Disconnected", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
     private void goToNext() {
-        Intent intent = new Intent(getActivity(), HomeActivity.class);
-        getActivity().startActivity(intent);
+        Intent intent = new Intent(getContext(), HomeActivity.class);
+        getContext().startActivity(intent);
         getActivity().finish();
     }
 }

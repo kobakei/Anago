@@ -31,4 +31,11 @@ public interface AppComponent {
      * @return
      */
     ServiceComponent serviceComponent(ServiceModule serviceModule);
+
+    /**
+     * このインジェクタをベースに、View用のインジェクタを生成する
+     * @param viewModule
+     * @return
+     */
+    ViewComponent viewComponent(ViewModule viewModule);
 }

@@ -73,7 +73,7 @@ public class StargazerListViewModel extends ViewModel {
 
     private void load() {
         getStargazersUseCase.run(paramUser, paramRepo, page + 1, 20)
-                .compose(getActivity().bindToLifecycle().forSingle())
+                .compose(bindToLifecycle().forSingle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(users1 -> {

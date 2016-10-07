@@ -1,6 +1,7 @@
 package io.github.kobakei.anago.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -33,9 +34,9 @@ public class SignInActivity extends BaseActivity {
         getSupportActionBar().setTitle(R.string.sign_in_title);
     }
 
-    public static void startActivity(Activity activity) {
-        Intent intent = new Intent(activity, SignInActivity.class);
+    public static void startActivity(Context context) {
+        Intent intent = new Intent(context, SignInActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        activity.startActivity(intent);
+        context.startActivity(intent);
     }
 }

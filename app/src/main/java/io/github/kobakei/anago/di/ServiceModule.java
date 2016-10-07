@@ -18,6 +18,7 @@ public class ServiceModule {
         this.service = service;
     }
 
+    @Provides
     public Service provideService() {
         return service;
     }

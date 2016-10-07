@@ -44,27 +44,27 @@ public class RepoListItemViewModel extends ViewModel{
     }
 
     public void onImageClick(View view) {
-        UserActivity.startActivity(getFragment().getContext(), repo.get().owner.login);
+        UserActivity.startActivity(getContext(), repo.get().owner.login);
     }
 
     public void onStarClick(View view) {
         if (starred.get()) {
             unstarUseCase.run(repo.get().owner.login, repo.get().name)
-                    .compose(getFragment().bindToLifecycle().forCompletable())
+                    .compose(bindToLifecycle().forCompletable())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(() -> {
                         EventBus.getDefault().post(new StarEvent());
-                        Snackbar.make(getFragment().getView(), "Unstarred!", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(view, "Unstarred!", Snackbar.LENGTH_SHORT).show();
                     });
         } else {
             starUseCase.run(repo.get().owner.login, repo.get().name)
-                    .compose(getFragment().bindToLifecycle().forCompletable())
+                    .compose(bindToLifecycle().forCompletable())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(() -> {
                         EventBus.getDefault().post(new StarEvent());
-                        Snackbar.make(getFragment().getView(), "Starred!", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(view, "Starred!", Snackbar.LENGTH_SHORT).show();
                     });
         }
     }

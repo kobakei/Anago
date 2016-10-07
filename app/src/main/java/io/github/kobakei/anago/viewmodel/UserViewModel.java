@@ -49,7 +49,7 @@ public class UserViewModel extends ViewModel {
         super.onResume();
 
         getUserUseCase.run(paramName)
-                .compose(getActivity().bindToLifecycle().forSingle())
+                .compose(bindToLifecycle().forSingle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(user1 -> {
@@ -60,32 +60,6 @@ public class UserViewModel extends ViewModel {
                     isConnecting.set(false);
 
                 }, Throwable::printStackTrace);
-    }
-
-    public void onTestClick(View view) {
-        Observable.just(10)
-                .flatMap(integer -> {
-                    try {
-                        Thread.sleep(10 * 1000L);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    return Observable.just(integer);
-                })
-                .compose(getActivity().bindToLifecycle())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(integer -> {
-                    Toast.makeText(getActivity(), "Int: " + integer, Toast.LENGTH_SHORT).show();
-                }, throwable -> {
-                    Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
-                }, () -> {
-                    Toast.makeText(getActivity(), "Complete", Toast.LENGTH_SHORT).show();
-                });
-    }
-
-    public void onTest2Click(View view) {
-        CountIntentService.startService(getActivity());
     }
 
     public static class RefreshUserEvent {

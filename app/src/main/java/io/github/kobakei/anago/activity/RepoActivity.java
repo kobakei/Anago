@@ -1,6 +1,7 @@
 package io.github.kobakei.anago.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -103,14 +104,14 @@ public class RepoActivity extends BaseActivity {
 
     /**
      * このActivityに遷移する
-     * @param activity
+     * @param context
      * @param user
      * @param repo
      */
-    public static void startActivity(Activity activity, String user, String repo) {
-        Intent intent = new Intent(activity, RepoActivity.class);
+    public static void startActivity(Context context, String user, String repo) {
+        Intent intent = new Intent(context, RepoActivity.class);
         intent.putExtra(KEY_USER, user);
         intent.putExtra(KEY_REPO, repo);
-        activity.startActivity(intent);
+        context.startActivity(intent);
     }
 }
