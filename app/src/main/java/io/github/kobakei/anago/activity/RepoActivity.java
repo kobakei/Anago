@@ -16,6 +16,7 @@ import javax.inject.Inject;
 
 import io.github.kobakei.anago.R;
 import io.github.kobakei.anago.databinding.RepoActivityBinding;
+import io.github.kobakei.anago.fragment.IssueListFragment;
 import io.github.kobakei.anago.fragment.RepoInfoFragment;
 import io.github.kobakei.anago.viewmodel.RepoInfoViewModel;
 import io.github.kobakei.anago.viewmodel.RepoViewModel;
@@ -50,25 +51,39 @@ public class RepoActivity extends BaseActivity {
         binding.viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
-                if (position == 0) {
-                    return RepoInfoFragment.newInstance(user, repo);
-                } else {
-                    return RepoInfoFragment.newInstance(user, repo);
+                switch (position) {
+                    case 0:
+                        return RepoInfoFragment.newInstance(user, repo);
+                    case 1:
+                        return RepoInfoFragment.newInstance(user, repo);
+                    case 2:
+                        return IssueListFragment.newInstance(user, repo);
+                    case 3:
+                        return RepoInfoFragment.newInstance(user, repo);
+                    default:
+                        return null;
                 }
             }
 
             @Override
             public CharSequence getPageTitle(int position) {
-                if (position == 0) {
-                    return "About";
-                } else {
-                    return "Code";
+                switch (position) {
+                    case 0:
+                        return "About";
+                    case 1:
+                        return "Code";
+                    case 2:
+                        return "Issue";
+                    case 3:
+                        return "Pull Request";
+                    default:
+                        return null;
                 }
             }
 
             @Override
             public int getCount() {
-                return 2;
+                return 4;
             }
         });
 

@@ -19,4 +19,7 @@
     <string name="repo_unstar">Unstar</string>
 
     <string name="stargazer_title">Stargazers</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

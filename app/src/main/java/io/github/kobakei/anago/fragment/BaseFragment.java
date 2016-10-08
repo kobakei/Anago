@@ -65,7 +65,7 @@ public abstract class BaseFragment extends RxFragment{
 
     private void checkViewModel() {
         if (viewModel == null) {
-            throw new IllegalStateException("Before resuming activity, bindViewModel must be called.");
+            throw new IllegalStateException("Before resuming fragment, bindViewModel must be called.");
         }
     }
 }
