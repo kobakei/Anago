@@ -7,7 +7,8 @@ import javax.inject.Inject;
 
 import io.github.kobakei.anago.service.CountIntentService;
 import io.github.kobakei.anago.usecase.CountUseCase;
-import rx.Observable;
+import io.github.kobakei.anago.viewmodel.base.ActivityViewModel;
+import io.github.kobakei.anago.viewmodel.base.CustomViewViewModel;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
@@ -18,7 +19,7 @@ import timber.log.Timber;
  * Created by keisuke on 2016/10/08.
  */
 
-public class MyCustomViewModel extends ViewModel {
+public class MyCustomViewModel extends CustomViewViewModel {
 
     private final CountUseCase countUseCase;
 
@@ -45,5 +46,10 @@ public class MyCustomViewModel extends ViewModel {
 
     public void onTest2Click(View view) {
         CountIntentService.startService(getContext());
+    }
+
+    @Override
+    public void onDetached() {
+
     }
 }

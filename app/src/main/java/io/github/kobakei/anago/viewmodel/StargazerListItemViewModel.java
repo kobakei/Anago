@@ -8,13 +8,14 @@ import javax.inject.Inject;
 import io.github.kobakei.anago.activity.BaseActivity;
 import io.github.kobakei.anago.activity.UserActivity;
 import io.github.kobakei.anago.entity.User;
+import io.github.kobakei.anago.viewmodel.base.ActivityViewModel;
 
 /**
  * スターした人アイテムのビューモデル
  * Created by keisuke on 2016/09/20.
  */
 
-public class StargazerListItemViewModel extends ViewModel {
+public class StargazerListItemViewModel extends ActivityViewModel {
 
     public ObservableField<User> user;
 
@@ -23,6 +24,26 @@ public class StargazerListItemViewModel extends ViewModel {
         super(activity);
 
         this.user = new ObservableField<>();
+    }
+
+    @Override
+    public void onStart() {
+
+    }
+
+    @Override
+    public void onResume() {
+
+    }
+
+    @Override
+    public void onPause() {
+
+    }
+
+    @Override
+    public void onStop() {
+
     }
 
     public void onImageClick(View view) {

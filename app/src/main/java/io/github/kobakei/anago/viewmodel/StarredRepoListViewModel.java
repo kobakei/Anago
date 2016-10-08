@@ -13,6 +13,7 @@ import io.github.kobakei.anago.activity.RepoActivity;
 import io.github.kobakei.anago.entity.Repo;
 import io.github.kobakei.anago.fragment.BaseFragment;
 import io.github.kobakei.anago.usecase.GetStarredReposUseCase;
+import io.github.kobakei.anago.viewmodel.base.FragmentViewModel;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
@@ -22,7 +23,7 @@ import timber.log.Timber;
  * Created by keisuke on 2016/09/18.
  */
 
-public class StarredRepoListViewModel extends ViewModel {
+public class StarredRepoListViewModel extends FragmentViewModel {
 
     private final GetStarredReposUseCase getStarredReposUseCase;
 
@@ -42,8 +43,12 @@ public class StarredRepoListViewModel extends ViewModel {
     }
 
     @Override
+    public void onStart() {
+
+    }
+
+    @Override
     public void onResume() {
-        super.onResume();
         EventBus.getDefault().register(this);
 
         refreshData();
@@ -51,8 +56,12 @@ public class StarredRepoListViewModel extends ViewModel {
 
     @Override
     public void onPause() {
-        super.onPause();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void onStop() {
+
     }
 
     public void onRefresh() {

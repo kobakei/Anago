@@ -15,6 +15,7 @@ import io.github.kobakei.anago.entity.Error;
 import io.github.kobakei.anago.usecase.CheckSessionUseCase;
 import io.github.kobakei.anago.usecase.SignInUseCase;
 import io.github.kobakei.anago.util.NetUtil;
+import io.github.kobakei.anago.viewmodel.base.ActivityViewModel;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
@@ -24,7 +25,7 @@ import timber.log.Timber;
  * Created by keisuke on 2016/09/18.
  */
 
-public class SignInViewModel extends ViewModel {
+public class SignInViewModel extends ActivityViewModel {
 
     // 使用するユースケース
     private final SignInUseCase signInUseCase;
@@ -88,5 +89,25 @@ public class SignInViewModel extends ViewModel {
         Intent intent = new Intent(getContext(), HomeActivity.class);
         getContext().startActivity(intent);
         getActivity().finish();
+    }
+
+    @Override
+    public void onStart() {
+
+    }
+
+    @Override
+    public void onResume() {
+
+    }
+
+    @Override
+    public void onPause() {
+
+    }
+
+    @Override
+    public void onStop() {
+
     }
 }

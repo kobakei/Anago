@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import io.github.kobakei.anago.activity.BaseActivity;
 import io.github.kobakei.anago.entity.User;
 import io.github.kobakei.anago.usecase.GetStargazersUseCase;
+import io.github.kobakei.anago.viewmodel.base.ActivityViewModel;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
@@ -18,7 +19,7 @@ import timber.log.Timber;
  * Created by keisuke on 2016/09/20.
  */
 
-public class StargazerListViewModel extends ViewModel {
+public class StargazerListViewModel extends ActivityViewModel {
 
     private final GetStargazersUseCase getStargazersUseCase;
 
@@ -44,14 +45,23 @@ public class StargazerListViewModel extends ViewModel {
     }
 
     @Override
+    public void onStart() {
+
+    }
+
+    @Override
     public void onResume() {
-        super.onResume();
         load();
     }
 
     @Override
     public void onPause() {
-        super.onPause();
+
+    }
+
+    @Override
+    public void onStop() {
+
     }
 
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {

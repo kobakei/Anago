@@ -2,8 +2,6 @@ package io.github.kobakei.anago.viewmodel;
 
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
-import android.view.View;
-import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -11,9 +9,8 @@ import javax.inject.Inject;
 
 import io.github.kobakei.anago.activity.BaseActivity;
 import io.github.kobakei.anago.entity.User;
-import io.github.kobakei.anago.service.CountIntentService;
 import io.github.kobakei.anago.usecase.GetUserUseCase;
-import rx.Observable;
+import io.github.kobakei.anago.viewmodel.base.ActivityViewModel;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -22,7 +19,7 @@ import rx.schedulers.Schedulers;
  * Created by keisuke on 2016/09/19.
  */
 
-public class UserViewModel extends ViewModel {
+public class UserViewModel extends ActivityViewModel {
 
     private final GetUserUseCase getUserUseCase;
 
@@ -45,9 +42,12 @@ public class UserViewModel extends ViewModel {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
 
+    }
+
+    @Override
+    public void onResume() {
         getUserUseCase.run(paramName)
                 .compose(bindToLifecycle().forSingle())
                 .subscribeOn(Schedulers.io())
@@ -60,6 +60,16 @@ public class UserViewModel extends ViewModel {
                     isConnecting.set(false);
 
                 }, Throwable::printStackTrace);
+    }
+
+    @Override
+    public void onPause() {
+
+    }
+
+    @Override
+    public void onStop() {
+
     }
 
     public static class RefreshUserEvent {

@@ -1,14 +1,11 @@
-package io.github.kobakei.anago.viewmodel;
+package io.github.kobakei.anago.viewmodel.base;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.view.View;
 
 import com.trello.rxlifecycle.LifecycleTransformer;
-import com.trello.rxlifecycle.android.RxLifecycleAndroid;
 
 import io.github.kobakei.anago.activity.BaseActivity;
-import io.github.kobakei.anago.fragment.BaseFragment;
 
 /**
  * ビューモデルのベースクラス
@@ -22,33 +19,12 @@ import io.github.kobakei.anago.fragment.BaseFragment;
  * Created by keisuke on 2016/09/18.
  */
 
-public abstract class ViewModel {
+public abstract class ActivityViewModel {
 
     private final BaseActivity activity;
-    private final BaseFragment fragment;
-    private final View view;
 
-    ViewModel(BaseActivity activity) {
+    public ActivityViewModel(BaseActivity activity) {
         this.activity = activity;
-        this.fragment = null;
-        this.view = null;
-    }
-
-    ViewModel(BaseFragment fragment) {
-        this.activity = null;
-        this.fragment = fragment;
-        this.view = null;
-    }
-
-    ViewModel(View view) {
-        this.activity = null;
-        this.fragment = null;
-        this.view = view;
-    }
-
-    @Deprecated
-    public BaseFragment getFragment() {
-        return fragment;
     }
 
     @Deprecated
@@ -61,12 +37,6 @@ public abstract class ViewModel {
         if (activity != null) {
             return activity;
         }
-        if (fragment != null) {
-            return fragment.getContext();
-        }
-        if (view != null) {
-            return view.getContext();
-        }
         throw new IllegalStateException("No view attached");
     }
 
@@ -75,28 +45,14 @@ public abstract class ViewModel {
         if (activity != null) {
             return activity.bindToLifecycle();
         }
-        if (fragment != null) {
-            return fragment.bindToLifecycle();
-        }
-        if (view != null) {
-            return RxLifecycleAndroid.bindView(view);
-        }
         throw new IllegalStateException("No view attached");
     }
 
-    /**
-     * Activity / FragmentのonResumeで呼ばれます
-     * EventBusのregisterなどはここで呼んでください
-     */
-    public void onResume() {
-        // do nothing
-    }
+    public abstract void onStart();
 
-    /**
-     * Activity / FragmentのonPauseで呼ばれます
-     * EventBusのunregisterなどはここで呼んでください
-     */
-    public void onPause() {
-        // do nothing
-    }
+    public abstract void onResume();
+
+    public abstract void onPause();
+
+    public abstract void onStop();
 }

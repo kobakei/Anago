@@ -10,7 +10,6 @@ import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Inject;
 
-import io.github.kobakei.anago.activity.BaseActivity;
 import io.github.kobakei.anago.activity.StargazerListActivity;
 import io.github.kobakei.anago.activity.UserActivity;
 import io.github.kobakei.anago.entity.Repo;
@@ -19,6 +18,8 @@ import io.github.kobakei.anago.usecase.CheckStarUseCase;
 import io.github.kobakei.anago.usecase.GetRepoUseCase;
 import io.github.kobakei.anago.usecase.StarUseCase;
 import io.github.kobakei.anago.usecase.UnstarUseCase;
+import io.github.kobakei.anago.viewmodel.base.ActivityViewModel;
+import io.github.kobakei.anago.viewmodel.base.FragmentViewModel;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -28,7 +29,7 @@ import rx.schedulers.Schedulers;
  * Created by keisuke on 2016/09/18.
  */
 
-public class RepoInfoViewModel extends ViewModel {
+public class RepoInfoViewModel extends FragmentViewModel {
 
     private final GetRepoUseCase getRepoUseCase;
     private final CheckStarUseCase checkStarUseCase;
@@ -63,10 +64,23 @@ public class RepoInfoViewModel extends ViewModel {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
 
+    }
+
+    @Override
+    public void onResume() {
         refreshRepo();
+    }
+
+    @Override
+    public void onPause() {
+
+    }
+
+    @Override
+    public void onStop() {
+
     }
 
     public void onStarClick(View view) {

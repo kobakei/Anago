@@ -4,7 +4,6 @@ import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.support.design.widget.Snackbar;
 import android.view.View;
-import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -15,6 +14,8 @@ import io.github.kobakei.anago.entity.Repo;
 import io.github.kobakei.anago.fragment.BaseFragment;
 import io.github.kobakei.anago.usecase.StarUseCase;
 import io.github.kobakei.anago.usecase.UnstarUseCase;
+import io.github.kobakei.anago.viewmodel.base.ActivityViewModel;
+import io.github.kobakei.anago.viewmodel.base.FragmentViewModel;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -23,7 +24,7 @@ import rx.schedulers.Schedulers;
  * Created by keisuke on 2016/09/18.
  */
 
-public class RepoListItemViewModel extends ViewModel{
+public class RepoListItemViewModel extends FragmentViewModel {
 
     private final StarUseCase starUseCase;
     private final UnstarUseCase unstarUseCase;
@@ -67,6 +68,26 @@ public class RepoListItemViewModel extends ViewModel{
                         Snackbar.make(view, "Starred!", Snackbar.LENGTH_SHORT).show();
                     });
         }
+    }
+
+    @Override
+    public void onStart() {
+
+    }
+
+    @Override
+    public void onResume() {
+
+    }
+
+    @Override
+    public void onPause() {
+
+    }
+
+    @Override
+    public void onStop() {
+
     }
 
     public static class StarEvent {}
