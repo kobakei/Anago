@@ -6,7 +6,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.github.kobakei.anago.entity.User;
-import io.github.kobakei.anago.net.GitHubService;
+import io.github.kobakei.anago.net.GitHubApiClient;
 import rx.Single;
 
 /**
@@ -16,19 +16,19 @@ import rx.Single;
 @Singleton
 public class UserRepository extends Repository<String, User> {
 
-    private final GitHubService gitHubService;
+    private final GitHubApiClient gitHubApiClient;
 
     @Inject
-    public UserRepository(GitHubService gitHubService) {
+    public UserRepository(GitHubApiClient gitHubApiClient) {
         super();
-        this.gitHubService = gitHubService;
+        this.gitHubApiClient = gitHubApiClient;
     }
 
     public Single<User> get(String name) {
-        return gitHubService.getUser(name);
+        return gitHubApiClient.getUser(name);
     }
 
     public Single<List<User>> getStargazers(String user, String repo, int page, int perPage) {
-        return gitHubService.getStargazers(user, repo, page, perPage);
+        return gitHubApiClient.getStargazers(user, repo, page, perPage);
     }
 }

@@ -14,7 +14,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import io.github.kobakei.anago.entity.OrmaDatabase;
-import io.github.kobakei.anago.net.GitHubService;
+import io.github.kobakei.anago.net.GitHubApiClient;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -57,14 +57,14 @@ public class AppModule {
 
     @Singleton
     @Provides
-    public GitHubService provideGitHubService(OkHttpClient client) {
+    public GitHubApiClient provideGitHubService(OkHttpClient client) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.github.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .client(client)
                 .build();
-        return retrofit.create(GitHubService.class);
+        return retrofit.create(GitHubApiClient.class);
     }
 
     @Singleton

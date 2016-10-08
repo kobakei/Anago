@@ -4,7 +4,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.github.kobakei.anago.dao.AuthTokenDao;
-import io.github.kobakei.anago.net.GitHubService;
+import io.github.kobakei.anago.net.GitHubApiClient;
 import rx.Completable;
 import rx.Single;
 import timber.log.Timber;
@@ -16,13 +16,13 @@ import timber.log.Timber;
 @Singleton
 public class StarRepository extends Repository<String, Boolean> {
 
-    private final GitHubService gitHubService;
+    private final GitHubApiClient gitHubApiClient;
     private final AuthTokenDao authTokenDao;
 
     @Inject
-    public StarRepository(GitHubService gitHubService, AuthTokenDao authTokenDao) {
+    public StarRepository(GitHubApiClient gitHubApiClient, AuthTokenDao authTokenDao) {
         super();
-        this.gitHubService = gitHubService;
+        this.gitHubApiClient = gitHubApiClient;
         this.authTokenDao = authTokenDao;
     }
 
@@ -34,7 +34,7 @@ public class StarRepository extends Repository<String, Boolean> {
         return authTokenDao.get()
                 .flatMap(authToken -> {
                     String header = "token " + authToken.token;
-                    return gitHubService.getStar(header, user, repo)
+                    return gitHubApiClient.getStar(header, user, repo)
                             .toCompletable()
                             .toSingleDefault(true)
                             .onErrorReturn(throwable -> false);
@@ -46,7 +46,7 @@ public class StarRepository extends Repository<String, Boolean> {
         return authTokenDao.get()
                 .flatMapCompletable(authToken -> {
                     String header = "token " + authToken.token;
-                    return gitHubService.putStar(header, user, repo).toCompletable();
+                    return gitHubApiClient.putStar(header, user, repo).toCompletable();
                 })
                 .doOnCompleted(() -> {
                     Timber.v("put complete");
@@ -58,7 +58,7 @@ public class StarRepository extends Repository<String, Boolean> {
         return authTokenDao.get()
                 .flatMapCompletable(authToken -> {
                     String header = "token " + authToken.token;
-                    return gitHubService.deleteStar(header, user, repo).toCompletable();
+                    return gitHubApiClient.deleteStar(header, user, repo).toCompletable();
                 })
                 .doOnCompleted(() -> {
                     Timber.v("delete complete");

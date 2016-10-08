@@ -7,7 +7,7 @@ import javax.inject.Singleton;
 
 import io.github.kobakei.anago.dao.AuthTokenDao;
 import io.github.kobakei.anago.entity.Repo;
-import io.github.kobakei.anago.net.GitHubService;
+import io.github.kobakei.anago.net.GitHubApiClient;
 import rx.Single;
 
 /**
@@ -17,25 +17,25 @@ import rx.Single;
 @Singleton
 public class RepoRepository extends Repository<String, Repo> {
 
-    private final GitHubService gitHubService;
+    private final GitHubApiClient gitHubApiClient;
     private final AuthTokenDao authTokenDao;
 
     @Inject
-    public RepoRepository(GitHubService gitHubService, AuthTokenDao authTokenDao) {
+    public RepoRepository(GitHubApiClient gitHubApiClient, AuthTokenDao authTokenDao) {
         super();
-        this.gitHubService = gitHubService;
+        this.gitHubApiClient = gitHubApiClient;
         this.authTokenDao = authTokenDao;
     }
 
     public Single<List<Repo>> getPublicRepos(int page, int perPage) {
-        return gitHubService.getPublicRepos(page, perPage);
+        return gitHubApiClient.getPublicRepos(page, perPage);
     }
 
     public Single<List<Repo>> getUserRepos(int page, int perPage) {
         return authTokenDao.get()
                 .flatMap(authToken -> {
                     String header = "token " + authToken.token;
-                    return gitHubService.getUserRepos(header, page, perPage);
+                    return gitHubApiClient.getUserRepos(header, page, perPage);
                 })
                 .doOnSuccess(repos1 -> {
                     for (Repo repo : repos1) {
@@ -48,7 +48,7 @@ public class RepoRepository extends Repository<String, Repo> {
         return authTokenDao.get()
                 .flatMap(authToken -> {
                     String header = "token " + authToken.token;
-                    return gitHubService.getStarredRepos(header, page, perPage);
+                    return gitHubApiClient.getStarredRepos(header, page, perPage);
                 })
                 .doOnSuccess(repos1 -> {
                     for (Repo repo : repos1) {
@@ -62,6 +62,6 @@ public class RepoRepository extends Repository<String, Repo> {
         if (getCache().containsKey(fullname)) {
             return Single.just(getCache().get(fullname));
         }
-        return gitHubService.getRepo(user, repo);
+        return gitHubApiClient.getRepo(user, repo);
     }
 }

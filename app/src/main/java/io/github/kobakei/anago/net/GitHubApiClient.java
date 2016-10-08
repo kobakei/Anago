@@ -3,6 +3,7 @@ package io.github.kobakei.anago.net;
 import java.util.List;
 
 import io.github.kobakei.anago.entity.AuthToken;
+import io.github.kobakei.anago.entity.Content;
 import io.github.kobakei.anago.entity.Repo;
 import io.github.kobakei.anago.entity.User;
 import io.github.kobakei.anago.net.body.AuthorizationBody;
@@ -14,7 +15,6 @@ import retrofit2.http.Headers;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-import rx.Completable;
 import rx.Single;
 
 /**
@@ -22,7 +22,7 @@ import rx.Single;
  * Created by keisuke on 2016/09/18.
  */
 
-public interface GitHubService {
+public interface GitHubApiClient {
 
     @PUT("/authorizations/clients/{client_id}/{fingerprint}")
     Single<AuthToken> putAuthorization(@Header("Authorization") String authorization,
@@ -76,4 +76,14 @@ public interface GitHubService {
                                      @Path("repo") String repo,
                                      @Query("page") int page,
                                      @Query("per_page") int perPage);
+
+    @GET("/repos/{user}/{repo}/contents/{path}")
+    Single<Content> getFileContent(@Path("user") String user,
+                                   @Path("repo") String repo,
+                                   @Path("path") String path);
+
+    @GET("/repos/{user}/{repo}/contents/{path}")
+    Single<List<Content>> getDirContent(@Path("user") String user,
+                                        @Path("repo") String repo,
+                                        @Path("path") String path);
 }

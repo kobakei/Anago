@@ -11,7 +11,7 @@ import javax.inject.Singleton;
 import io.github.kobakei.anago.R;
 import io.github.kobakei.anago.dao.AuthTokenDao;
 import io.github.kobakei.anago.entity.AuthToken;
-import io.github.kobakei.anago.net.GitHubService;
+import io.github.kobakei.anago.net.GitHubApiClient;
 import io.github.kobakei.anago.net.body.AuthorizationBody;
 import io.github.kobakei.anago.util.NetUtil;
 import rx.Completable;
@@ -26,15 +26,15 @@ import timber.log.Timber;
 public class AuthTokenRepository extends Repository<String, AuthToken> {
 
     private Context context;
-    private final GitHubService gitHubService;
+    private final GitHubApiClient gitHubApiClient;
     private final AuthTokenDao authTokenDao;
 
     @Inject
-    public AuthTokenRepository(Context context, GitHubService gitHubService,
+    public AuthTokenRepository(Context context, GitHubApiClient gitHubApiClient,
                                AuthTokenDao authTokenDao) {
         super();
         this.context = context;
-        this.gitHubService = gitHubService;
+        this.gitHubApiClient = gitHubApiClient;
         this.authTokenDao = authTokenDao;
     }
 
@@ -46,7 +46,7 @@ public class AuthTokenRepository extends Repository<String, AuthToken> {
         body.client_secret = context.getString(R.string.github_client_secret);
         body.scopes = new ArrayList<>();
         body.scopes.add("public_repo");
-        return this.gitHubService.putAuthorization(header, clientId, fingerprint, body)
+        return this.gitHubApiClient.putAuthorization(header, clientId, fingerprint, body)
                 .doOnSuccess(authToken -> {
                     long id = authTokenDao.upsert(authToken).toBlocking().value();
                     Timber.v("Upserted ID = " + id);
@@ -63,7 +63,7 @@ public class AuthTokenRepository extends Repository<String, AuthToken> {
                     String clientId = context.getString(R.string.github_client_id);
                     String clientSecret = context.getString(R.string.github_client_secret);
                     String header = NetUtil.getBasicHeader(clientId, clientSecret);
-                    return this.gitHubService.revokeAuthorization(header, clientId, authToken.token);
+                    return this.gitHubApiClient.revokeAuthorization(header, clientId, authToken.token);
                 })
                 .flatMap(aVoid -> this.authTokenDao.removeAll())
                 .toCompletable();
