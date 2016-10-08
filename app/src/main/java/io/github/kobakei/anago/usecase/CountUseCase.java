@@ -8,6 +8,8 @@ import rx.Observable;
 import rx.schedulers.Schedulers;
 
 /**
+ * 15秒カウントするユースケース
+ * 時間がかかる処理の例
  * Created by keisuke on 2016/09/24.
  */
 
@@ -19,6 +21,6 @@ public class CountUseCase {
     }
 
     public Observable<Integer> run() {
-        return Observable.range(1, 30).delay(1, TimeUnit.SECONDS, Schedulers.trampoline());
+        return Observable.range(1, 15).delay(1, TimeUnit.SECONDS, Schedulers.trampoline());
     }
 }

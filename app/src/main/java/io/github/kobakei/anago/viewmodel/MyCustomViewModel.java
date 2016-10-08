@@ -6,6 +6,7 @@ import android.widget.Toast;
 import javax.inject.Inject;
 
 import io.github.kobakei.anago.service.CountIntentService;
+import io.github.kobakei.anago.usecase.CountUseCase;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -17,23 +18,18 @@ import timber.log.Timber;
  * Created by keisuke on 2016/10/08.
  */
 
-public class DebugViewModel extends ViewModel {
+public class MyCustomViewModel extends ViewModel {
+
+    private final CountUseCase countUseCase;
 
     @Inject
-    public DebugViewModel(View view) {
+    public MyCustomViewModel(View view, CountUseCase countUseCase) {
         super(view);
+        this.countUseCase = countUseCase;
     }
 
     public void onTestClick(View view) {
-        Observable.just(10)
-                .flatMap(integer -> {
-                    try {
-                        Thread.sleep(10 * 1000L);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    return Observable.just(integer);
-                })
+        countUseCase.run()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(bindToLifecycle())

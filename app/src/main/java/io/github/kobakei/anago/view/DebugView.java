@@ -12,7 +12,7 @@ import io.github.kobakei.anago.AnagoApplication;
 import io.github.kobakei.anago.R;
 import io.github.kobakei.anago.databinding.DebugViewBinding;
 import io.github.kobakei.anago.di.ViewModule;
-import io.github.kobakei.anago.viewmodel.DebugViewModel;
+import io.github.kobakei.anago.viewmodel.MyCustomViewModel;
 
 /**
  * カスタムビューのサンプル
@@ -22,7 +22,7 @@ import io.github.kobakei.anago.viewmodel.DebugViewModel;
 public class DebugView extends FrameLayout {
 
     @Inject
-    DebugViewModel viewModel;
+    MyCustomViewModel viewModel;
 
     public DebugView(Context context) {
         super(context);
