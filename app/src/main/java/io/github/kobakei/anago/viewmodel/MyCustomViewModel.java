@@ -7,7 +7,6 @@ import javax.inject.Inject;
 
 import io.github.kobakei.anago.service.CountIntentService;
 import io.github.kobakei.anago.usecase.CountUseCase;
-import io.github.kobakei.anago.viewmodel.base.ActivityViewModel;
 import io.github.kobakei.anago.viewmodel.base.CustomViewViewModel;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -50,6 +49,6 @@ public class MyCustomViewModel extends CustomViewViewModel {
 
     @Override
     public void onDetached() {
-
+        Toast.makeText(getContext(), "Detached", Toast.LENGTH_SHORT).show();
     }
 }
