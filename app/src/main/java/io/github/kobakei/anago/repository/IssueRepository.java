@@ -13,12 +13,13 @@ import rx.Single;
  * Created by keisuke on 2016/10/09.
  */
 @Singleton
-public class IssueRepository {
+public class IssueRepository extends Repository<String, Issue> {
 
     private final GitHubApiClient gitHubApiClient;
 
     @Inject
     public IssueRepository(GitHubApiClient gitHubApiClient) {
+        super();
         this.gitHubApiClient = gitHubApiClient;
     }
 

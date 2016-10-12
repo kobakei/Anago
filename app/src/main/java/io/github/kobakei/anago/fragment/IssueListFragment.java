@@ -29,9 +29,6 @@ public class IssueListFragment extends BaseFragment {
     private static final String ARG_USER = "user";
     private static final String ARG_REPO = "repo";
 
-    private String user;
-    private String repo;
-
     @Inject
     IssueListViewModel viewModel;
 
@@ -56,8 +53,9 @@ public class IssueListFragment extends BaseFragment {
         bindViewModel(viewModel);
 
         if (getArguments() != null) {
-            user = getArguments().getString(ARG_USER);
-            repo = getArguments().getString(ARG_REPO);
+            String user = getArguments().getString(ARG_USER);
+            String repo = getArguments().getString(ARG_REPO);
+            viewModel.setRepo(user, repo);
         }
     }
 

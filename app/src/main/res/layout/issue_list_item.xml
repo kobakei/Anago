@@ -12,19 +12,23 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="@dimen/margin_medium">
 
         <TextView
             android:id="@+id/textViewNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.issue.number, default=1234}"/>
+            android:text="@{String.valueOf(viewModel.issue.number), default=1234}"
+            tools:text="1234"/>
 
         <TextView
             android:id="@+id/textViewTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.issue.title, default=Title}"/>
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="@{viewModel.issue.title, default=Title}"
+            tools:text="Write unit test"/>
 
     </LinearLayout>
 
