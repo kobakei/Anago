@@ -17,6 +17,7 @@ import javax.inject.Inject;
 import io.github.kobakei.anago.R;
 import io.github.kobakei.anago.databinding.RepoActivityBinding;
 import io.github.kobakei.anago.fragment.IssueListFragment;
+import io.github.kobakei.anago.fragment.PullRequestListFragment;
 import io.github.kobakei.anago.fragment.RepoInfoFragment;
 import io.github.kobakei.anago.viewmodel.RepoInfoViewModel;
 import io.github.kobakei.anago.viewmodel.RepoViewModel;
@@ -59,7 +60,7 @@ public class RepoActivity extends BaseActivity {
                     case 2:
                         return IssueListFragment.newInstance(user, repo);
                     case 3:
-                        return RepoInfoFragment.newInstance(user, repo);
+                        return PullRequestListFragment.newInstance(user, repo);
                     default:
                         return null;
                 }

@@ -5,6 +5,7 @@ import java.util.List;
 import io.github.kobakei.anago.entity.AuthToken;
 import io.github.kobakei.anago.entity.Content;
 import io.github.kobakei.anago.entity.Issue;
+import io.github.kobakei.anago.entity.PullRequest;
 import io.github.kobakei.anago.entity.Repo;
 import io.github.kobakei.anago.entity.User;
 import io.github.kobakei.anago.net.body.AuthorizationBody;
@@ -91,4 +92,8 @@ public interface GitHubApiClient {
     @GET("/repos/{user}/{repo}/issues")
     Single<List<Issue>> getIssues(@Path("user") String user,
                                   @Path("repo") String repo);
+
+    @GET("/repos/{user}/{repo}/pulls")
+    Single<List<PullRequest>> getPullRequests(@Path("user") String user,
+                                              @Path("repo") String repo);
 }

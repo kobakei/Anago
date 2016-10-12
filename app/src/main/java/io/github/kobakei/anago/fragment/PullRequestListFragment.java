@@ -10,27 +10,27 @@ import android.view.ViewGroup;
 import javax.inject.Inject;
 
 import io.github.kobakei.anago.R;
-import io.github.kobakei.anago.adapter.IssueAdapter;
-import io.github.kobakei.anago.databinding.IssueListFragmentBinding;
-import io.github.kobakei.anago.viewmodel.IssueListViewModel;
+import io.github.kobakei.anago.adapter.PullRequestAdapter;
+import io.github.kobakei.anago.databinding.PullRequestListFragmentBinding;
+import io.github.kobakei.anago.viewmodel.PullRequestListViewModel;
 
 /**
- * イシュー画面
+ * プルリク画面
  */
-public class IssueListFragment extends BaseFragment {
+public class PullRequestListFragment extends BaseFragment {
 
     private static final String ARG_USER = "user";
     private static final String ARG_REPO = "repo";
 
     @Inject
-    IssueListViewModel viewModel;
+    PullRequestListViewModel viewModel;
 
-    public IssueListFragment() {
+    public PullRequestListFragment() {
         // Required empty public constructor
     }
 
-    public static IssueListFragment newInstance(String param1, String param2) {
-        IssueListFragment fragment = new IssueListFragment();
+    public static PullRequestListFragment newInstance(String param1, String param2) {
+        PullRequestListFragment fragment = new PullRequestListFragment();
         Bundle args = new Bundle();
         args.putString(ARG_USER, param1);
         args.putString(ARG_REPO, param2);
@@ -56,9 +56,9 @@ public class IssueListFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        IssueListFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.issue_list_fragment, container, false);
+        PullRequestListFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.pull_request_list_fragment, container, false);
 
-        binding.listView.setAdapter(new IssueAdapter(getContext(), getInjector(), viewModel.issues));
+        binding.listView.setAdapter(new PullRequestAdapter(getContext(), getInjector(), viewModel.pullRequests));
 
         return binding.getRoot();
     }
