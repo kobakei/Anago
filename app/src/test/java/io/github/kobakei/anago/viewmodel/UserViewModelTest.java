@@ -2,6 +2,7 @@ package io.github.kobakei.anago.viewmodel;
 
 import android.os.Build;
 
+import org.greenrobot.eventbus.EventBus;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,6 +36,7 @@ import static org.mockito.Mockito.when;
 public class UserViewModelTest {
 
     UserViewModel userViewModel;
+    EventBus eventBus;
 
     @Before
     public void setUp() {
@@ -48,7 +50,11 @@ public class UserViewModelTest {
         when(getUserUseCase.run("user")).thenReturn(Single.just(user));
         when(getUserUseCase.run("wrong")).thenReturn(Single.error(new Throwable("error")));
 
-        userViewModel = new UserViewModel(activity, getUserUseCase);
+        // イベントバスのモック
+        eventBus = mock(EventBus.class);
+
+        // ビューモデルの作成
+        userViewModel = new UserViewModel(activity, getUserUseCase, eventBus);
 
         // subscribeOnのスレッドをioからimmediateに変更
         RxJavaHooks.setOnIOScheduler(scheduler -> Schedulers.immediate());
@@ -60,6 +66,7 @@ public class UserViewModelTest {
         userViewModel.onResume();
         Assert.assertEquals("user", userViewModel.user.get().login);
         Assert.assertFalse(userViewModel.isConnecting.get());
+        verify(eventBus).post(any(UserViewModel.RefreshUserEvent.class));
     }
 
     @Test

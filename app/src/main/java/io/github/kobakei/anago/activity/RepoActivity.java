@@ -1,6 +1,5 @@
 package io.github.kobakei.anago.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -32,6 +31,9 @@ public class RepoActivity extends BaseActivity {
 
     @Inject
     RepoViewModel viewModel;
+
+    @Inject
+    EventBus eventBus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,13 +96,13 @@ public class RepoActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        EventBus.getDefault().register(this);
+        eventBus.register(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        EventBus.getDefault().unregister(this);
+        eventBus.unregister(this);
     }
 
     @Override

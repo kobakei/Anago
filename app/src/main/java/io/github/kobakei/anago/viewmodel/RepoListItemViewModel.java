@@ -28,6 +28,7 @@ public class RepoListItemViewModel extends FragmentViewModel {
 
     private final StarUseCase starUseCase;
     private final UnstarUseCase unstarUseCase;
+    private final EventBus eventBus;
 
     public ObservableField<Repo> repo;
     public ObservableBoolean starred;
@@ -35,10 +36,12 @@ public class RepoListItemViewModel extends FragmentViewModel {
     @Inject
     public RepoListItemViewModel(BaseFragment fragment,
                                  StarUseCase starUseCase,
-                                 UnstarUseCase unstarUseCase) {
+                                 UnstarUseCase unstarUseCase,
+                                 EventBus eventBus) {
         super(fragment);
         this.starUseCase = starUseCase;
         this.unstarUseCase = unstarUseCase;
+        this.eventBus = eventBus;
 
         this.repo = new ObservableField<>();
         this.starred = new ObservableBoolean(false);
@@ -55,7 +58,7 @@ public class RepoListItemViewModel extends FragmentViewModel {
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(() -> {
-                        EventBus.getDefault().post(new StarEvent());
+                        eventBus.post(new StarEvent());
                         Snackbar.make(view, "Unstarred!", Snackbar.LENGTH_SHORT).show();
                     });
         } else {
@@ -64,7 +67,7 @@ public class RepoListItemViewModel extends FragmentViewModel {
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(() -> {
-                        EventBus.getDefault().post(new StarEvent());
+                        eventBus.post(new StarEvent());
                         Snackbar.make(view, "Starred!", Snackbar.LENGTH_SHORT).show();
                     });
         }

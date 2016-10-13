@@ -9,7 +9,7 @@ import dagger.Component;
  * Created by keisuke on 2016/09/18.
  */
 @Singleton
-@Component(modules = {AppModule.class})
+@Component(modules = {AppModule.class, EventBusModule.class})
 public interface AppComponent {
     /**
      * このインジェクタをベースに、Activity用のインジェクタを生成する

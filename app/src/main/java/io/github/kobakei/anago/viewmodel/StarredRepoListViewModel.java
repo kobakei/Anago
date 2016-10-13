@@ -26,16 +26,19 @@ import timber.log.Timber;
 public class StarredRepoListViewModel extends FragmentViewModel {
 
     private final GetStarredReposUseCase getStarredReposUseCase;
+    private final EventBus eventBus;
 
     public ObservableArrayList<Pair<Repo, Boolean>> repos;
     public ObservableBoolean isConnecting;
     public ObservableBoolean isRefreshing;
 
     @Inject
-    public StarredRepoListViewModel(BaseFragment fragment, GetStarredReposUseCase getStarredReposUseCase) {
+    public StarredRepoListViewModel(BaseFragment fragment, GetStarredReposUseCase getStarredReposUseCase,
+                                    EventBus eventBus) {
         super(fragment);
 
         this.getStarredReposUseCase = getStarredReposUseCase;
+        this.eventBus = eventBus;
 
         repos = new ObservableArrayList<>();
         isConnecting = new ObservableBoolean(true);
@@ -49,14 +52,14 @@ public class StarredRepoListViewModel extends FragmentViewModel {
 
     @Override
     public void onResume() {
-        EventBus.getDefault().register(this);
+        eventBus.register(this);
 
         refreshData();
     }
 
     @Override
     public void onPause() {
-        EventBus.getDefault().unregister(this);
+        eventBus.unregister(this);
     }
 
     @Override

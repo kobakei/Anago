@@ -35,6 +35,7 @@ public class RepoInfoViewModel extends FragmentViewModel {
     private final CheckStarUseCase checkStarUseCase;
     private final StarUseCase starUseCase;
     private final UnstarUseCase unstarUseCase;
+    private final EventBus eventBus;
 
     public ObservableField<Repo> repo;
     public ObservableBoolean isConnecting;
@@ -46,12 +47,13 @@ public class RepoInfoViewModel extends FragmentViewModel {
     @Inject
     public RepoInfoViewModel(BaseFragment fragment, GetRepoUseCase getRepoUseCase,
                              CheckStarUseCase checkStarUseCase, StarUseCase starUseCase,
-                             UnstarUseCase unstarUseCase) {
+                             UnstarUseCase unstarUseCase, EventBus eventBus) {
         super(fragment);
         this.getRepoUseCase = getRepoUseCase;
         this.checkStarUseCase = checkStarUseCase;
         this.starUseCase = starUseCase;
         this.unstarUseCase = unstarUseCase;
+        this.eventBus = eventBus;
 
         this.repo = new ObservableField<>();
         this.isConnecting = new ObservableBoolean(true);
@@ -135,7 +137,7 @@ public class RepoInfoViewModel extends FragmentViewModel {
                     this.repo.set(pair.first);
                     this.starred.set(pair.second);
 
-                    EventBus.getDefault().post(new RefreshRepoEvent(pair.first));
+                    eventBus.post(new RefreshRepoEvent(pair.first));
 
                 }, Throwable::printStackTrace);
     }

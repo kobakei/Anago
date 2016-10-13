@@ -25,6 +25,9 @@ public class UserActivity extends BaseActivity {
     @Inject
     UserViewModel viewModel;
 
+    @Inject
+    EventBus eventBus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,13 +47,13 @@ public class UserActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        EventBus.getDefault().register(this);
+        eventBus.register(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        EventBus.getDefault().unregister(this);
+        eventBus.unregister(this);
     }
 
     public static void startActivity(Context context, String name) {

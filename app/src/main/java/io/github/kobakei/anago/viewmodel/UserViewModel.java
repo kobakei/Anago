@@ -23,6 +23,7 @@ import timber.log.Timber;
 public class UserViewModel extends ActivityViewModel {
 
     private final GetUserUseCase getUserUseCase;
+    private final EventBus eventBus;
 
     public ObservableField<User> user;
     public ObservableBoolean isConnecting;
@@ -30,9 +31,10 @@ public class UserViewModel extends ActivityViewModel {
     private String paramName;
 
     @Inject
-    public UserViewModel(BaseActivity activity, GetUserUseCase getUserUseCase) {
+    public UserViewModel(BaseActivity activity, GetUserUseCase getUserUseCase, EventBus eventBus) {
         super(activity);
         this.getUserUseCase = getUserUseCase;
+        this.eventBus = eventBus;
 
         this.user = new ObservableField<>();
         this.isConnecting = new ObservableBoolean(true);
@@ -55,7 +57,7 @@ public class UserViewModel extends ActivityViewModel {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(user1 -> {
                     user.set(user1);
-                    EventBus.getDefault().post(new RefreshUserEvent(user.get()));
+                    eventBus.post(new RefreshUserEvent(user.get()));
                     isConnecting.set(false);
                 }, throwable -> {
                     Timber.e(throwable);

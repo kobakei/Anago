@@ -5,9 +5,12 @@ import android.app.Application;
 import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
 
+import org.greenrobot.eventbus.EventBus;
+
 import io.github.kobakei.anago.di.AppComponent;
 import io.github.kobakei.anago.di.AppModule;
 import io.github.kobakei.anago.di.DaggerAppComponent;
+import io.github.kobakei.anago.di.EventBusModule;
 import timber.log.Timber;
 
 /**
@@ -34,8 +37,17 @@ public class AnagoApplication extends Application {
             Timber.plant(new Timber.DebugTree());
         }
 
-        injector = DaggerAppComponent.builder()
+        injector = buildAppComponent();
+    }
+
+    /**
+     * 単体テストでこのメソッドをオーバーライドしてください
+     * @return
+     */
+    protected AppComponent buildAppComponent() {
+        return DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
+                .eventBusModule(new EventBusModule(EventBus.getDefault()))
                 .build();
     }
 
