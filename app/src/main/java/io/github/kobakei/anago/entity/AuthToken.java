@@ -24,7 +24,7 @@ public class AuthToken {
     public final String fingerprint;
 
     @Setter
-    AuthToken(long id, String token, String hashed_token, List<String> scopes, String fingerprint) {
+    public AuthToken(long id, String token, String hashed_token, List<String> scopes, String fingerprint) {
         this.id = id;
         this.token = token;
         this.hashed_token = hashed_token;
