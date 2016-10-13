@@ -13,6 +13,7 @@ import io.github.kobakei.anago.usecase.GetUserUseCase;
 import io.github.kobakei.anago.viewmodel.base.ActivityViewModel;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import timber.log.Timber;
 
 /**
  * ユーザー情報画面のビューモデル
@@ -54,12 +55,12 @@ public class UserViewModel extends ActivityViewModel {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(user1 -> {
                     user.set(user1);
-
                     EventBus.getDefault().post(new RefreshUserEvent(user.get()));
-
                     isConnecting.set(false);
-
-                }, Throwable::printStackTrace);
+                }, throwable -> {
+                    Timber.e(throwable);
+                    isConnecting.set(false);
+                });
     }
 
     @Override
