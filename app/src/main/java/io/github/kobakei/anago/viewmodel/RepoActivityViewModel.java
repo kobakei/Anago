@@ -1,5 +1,8 @@
 package io.github.kobakei.anago.viewmodel;
 
+import android.databinding.adapters.AbsListViewBindingAdapter;
+import android.widget.Toast;
+
 import javax.inject.Inject;
 
 import io.github.kobakei.anago.activity.BaseActivity;
@@ -35,5 +38,9 @@ public class RepoActivityViewModel extends ActivityViewModel {
     @Override
     public void onStop() {
 
+    }
+
+    public void onPageSelected(int position) {
+        Toast.makeText(getContext(), "Position " + position, Toast.LENGTH_SHORT).show();
     }
 }
