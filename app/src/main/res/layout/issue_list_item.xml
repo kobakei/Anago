@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -19,7 +20,7 @@
             android:id="@+id/textViewNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{String.valueOf(viewModel.issue.number), default=1234}"
+            android:text="@{String.valueOf(viewModel.issue.number)}"
             tools:text="1234"/>
 
         <TextView
@@ -27,8 +28,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
-            android:text="@{viewModel.issue.title, default=Title}"
-            tools:text="Write unit test"/>
+            android:text="@{viewModel.issue.title}"
+            tools:text="Write unit test"
+            app:stroke='@{viewModel.issue.state.equals("closed")}'/>
 
     </LinearLayout>
 

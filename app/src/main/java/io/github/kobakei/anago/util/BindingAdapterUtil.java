@@ -3,13 +3,16 @@ package io.github.kobakei.anago.util;
 import android.databinding.BindingAdapter;
 import android.databinding.adapters.AbsListViewBindingAdapter;
 import android.databinding.adapters.TextViewBindingAdapter;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.TextPaint;
 import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
@@ -64,6 +67,15 @@ public class BindingAdapterUtil {
 
             }
         });
+    }
+
+    @BindingAdapter(value = "stroke")
+    public static void setStroke(TextView textView, boolean enabled) {
+        if (enabled) {
+            TextPaint paint = textView.getPaint();
+            paint.setFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            paint.setAntiAlias(true);
+        }
     }
 
     public interface OnScroll {
