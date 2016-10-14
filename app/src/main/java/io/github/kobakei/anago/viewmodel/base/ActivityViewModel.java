@@ -27,9 +27,12 @@ public abstract class ActivityViewModel {
         this.activity = activity;
     }
 
-    @Deprecated
+    @NonNull
     public BaseActivity getActivity() {
-        return activity;
+        if (activity != null) {
+            return activity;
+        }
+        throw new IllegalStateException("No view attached");
     }
 
     @NonNull

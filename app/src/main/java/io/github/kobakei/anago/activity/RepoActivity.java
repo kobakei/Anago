@@ -6,7 +6,8 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import org.greenrobot.eventbus.EventBus;
@@ -19,8 +20,8 @@ import io.github.kobakei.anago.databinding.RepoActivityBinding;
 import io.github.kobakei.anago.fragment.IssueListFragment;
 import io.github.kobakei.anago.fragment.PullRequestListFragment;
 import io.github.kobakei.anago.fragment.RepoInfoFragment;
-import io.github.kobakei.anago.viewmodel.RepoInfoFragmentViewModel;
 import io.github.kobakei.anago.viewmodel.RepoActivityViewModel;
+import io.github.kobakei.anago.viewmodel.RepoInfoFragmentViewModel;
 
 /**
  * リポジトリ詳細画面
@@ -36,6 +37,8 @@ public class RepoActivity extends BaseActivity {
     @Inject
     EventBus eventBus;
 
+    private RepoActivityBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +46,7 @@ public class RepoActivity extends BaseActivity {
         getInjector().inject(this);
         bindViewModel(viewModel);
 
-        RepoActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.repo_activity);
+        binding = DataBindingUtil.setContentView(this, R.layout.repo_activity);
         binding.setViewModel(viewModel);
 
         // 変数
@@ -107,10 +110,22 @@ public class RepoActivity extends BaseActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (binding.viewPager.getCurrentItem() == 2) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.repo_issues, menu);
+        }
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
+                return true;
+            case R.id.menu_all:
+                viewModel.onShowAllClick();
                 return true;
         }
         return false;

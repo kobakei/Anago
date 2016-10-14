@@ -1,6 +1,5 @@
 package io.github.kobakei.anago.viewmodel;
 
-import android.databinding.adapters.AbsListViewBindingAdapter;
 import android.widget.Toast;
 
 import javax.inject.Inject;
@@ -41,6 +40,10 @@ public class RepoActivityViewModel extends ActivityViewModel {
     }
 
     public void onPageSelected(int position) {
-        Toast.makeText(getContext(), "Position " + position, Toast.LENGTH_SHORT).show();
+        getActivity().invalidateOptionsMenu();
+    }
+
+    public void onShowAllClick() {
+        Toast.makeText(getContext(), "Not implemented", Toast.LENGTH_SHORT).show();
     }
 }
