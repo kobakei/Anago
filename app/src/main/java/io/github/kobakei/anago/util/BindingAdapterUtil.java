@@ -75,6 +75,14 @@ public class BindingAdapterUtil {
             TextPaint paint = textView.getPaint();
             paint.setFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             paint.setAntiAlias(true);
+        } else {
+            TextPaint paint = textView.getPaint();
+            int flags = textView.getPaintFlags();
+            if ((flags & Paint.STRIKE_THRU_TEXT_FLAG) == Paint.STRIKE_THRU_TEXT_FLAG) {
+                flags -= Paint.STRIKE_THRU_TEXT_FLAG;
+            }
+            paint.setFlags(flags);
+            paint.setAntiAlias(true);
         }
     }
 
