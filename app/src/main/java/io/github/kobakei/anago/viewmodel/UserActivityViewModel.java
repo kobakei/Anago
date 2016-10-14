@@ -20,7 +20,7 @@ import timber.log.Timber;
  * Created by keisuke on 2016/09/19.
  */
 
-public class UserViewModel extends ActivityViewModel {
+public class UserActivityViewModel extends ActivityViewModel {
 
     private final GetUserUseCase getUserUseCase;
     private final EventBus eventBus;
@@ -31,7 +31,7 @@ public class UserViewModel extends ActivityViewModel {
     private String paramName;
 
     @Inject
-    public UserViewModel(BaseActivity activity, GetUserUseCase getUserUseCase, EventBus eventBus) {
+    public UserActivityViewModel(BaseActivity activity, GetUserUseCase getUserUseCase, EventBus eventBus) {
         super(activity);
         this.getUserUseCase = getUserUseCase;
         this.eventBus = eventBus;

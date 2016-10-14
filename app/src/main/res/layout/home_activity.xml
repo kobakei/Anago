@@ -9,7 +9,7 @@
         <import type="android.view.View"/>
         <variable
             name="viewModel"
-            type="io.github.kobakei.anago.viewmodel.HomeViewModel"/>
+            type="io.github.kobakei.anago.viewmodel.HomeActivityViewModel"/>
     </data>
 
     <RelativeLayout

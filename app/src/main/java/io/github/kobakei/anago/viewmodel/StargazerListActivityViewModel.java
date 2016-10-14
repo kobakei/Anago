@@ -19,7 +19,7 @@ import timber.log.Timber;
  * Created by keisuke on 2016/09/20.
  */
 
-public class StargazerListViewModel extends ActivityViewModel {
+public class StargazerListActivityViewModel extends ActivityViewModel {
 
     private final GetStargazersUseCase getStargazersUseCase;
 
@@ -32,7 +32,7 @@ public class StargazerListViewModel extends ActivityViewModel {
     private boolean loadingMore = false;
 
     @Inject
-    public StargazerListViewModel(BaseActivity activity, GetStargazersUseCase getStargazersUseCase) {
+    public StargazerListActivityViewModel(BaseActivity activity, GetStargazersUseCase getStargazersUseCase) {
         super(activity);
         this.getStargazersUseCase = getStargazersUseCase;
 

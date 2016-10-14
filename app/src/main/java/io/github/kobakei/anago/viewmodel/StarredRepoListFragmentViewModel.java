@@ -23,7 +23,7 @@ import timber.log.Timber;
  * Created by keisuke on 2016/09/18.
  */
 
-public class StarredRepoListViewModel extends FragmentViewModel {
+public class StarredRepoListFragmentViewModel extends FragmentViewModel {
 
     private final GetStarredReposUseCase getStarredReposUseCase;
     private final EventBus eventBus;
@@ -33,8 +33,8 @@ public class StarredRepoListViewModel extends FragmentViewModel {
     public ObservableBoolean isRefreshing;
 
     @Inject
-    public StarredRepoListViewModel(BaseFragment fragment, GetStarredReposUseCase getStarredReposUseCase,
-                                    EventBus eventBus) {
+    public StarredRepoListFragmentViewModel(BaseFragment fragment, GetStarredReposUseCase getStarredReposUseCase,
+                                            EventBus eventBus) {
         super(fragment);
 
         this.getStarredReposUseCase = getStarredReposUseCase;

@@ -8,7 +8,7 @@
     <data>
         <variable
             name="viewModel"
-            type="io.github.kobakei.anago.viewmodel.SignInViewModel"/>
+            type="io.github.kobakei.anago.viewmodel.SignInActivityViewModel"/>
     </data>
 
     <LinearLayout

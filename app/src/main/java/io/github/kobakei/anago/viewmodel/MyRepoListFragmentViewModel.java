@@ -24,7 +24,7 @@ import timber.log.Timber;
  * Created by keisuke on 2016/09/18.
  */
 
-public class MyRepoListViewModel extends FragmentViewModel {
+public class MyRepoListFragmentViewModel extends FragmentViewModel {
 
     private final GetUserReposUseCase getUserReposUseCase;
     private final EventBus eventBus;
@@ -34,7 +34,7 @@ public class MyRepoListViewModel extends FragmentViewModel {
     public ObservableBoolean isRefreshing;
 
     @Inject
-    public MyRepoListViewModel(BaseFragment fragment, GetUserReposUseCase getUserReposUseCase, EventBus eventBus) {
+    public MyRepoListFragmentViewModel(BaseFragment fragment, GetUserReposUseCase getUserReposUseCase, EventBus eventBus) {
         super(fragment);
 
         this.getUserReposUseCase = getUserReposUseCase;

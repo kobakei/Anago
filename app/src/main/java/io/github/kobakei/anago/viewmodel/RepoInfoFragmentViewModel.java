@@ -29,7 +29,7 @@ import rx.schedulers.Schedulers;
  * Created by keisuke on 2016/09/18.
  */
 
-public class RepoInfoViewModel extends FragmentViewModel {
+public class RepoInfoFragmentViewModel extends FragmentViewModel {
 
     private final GetRepoUseCase getRepoUseCase;
     private final CheckStarUseCase checkStarUseCase;
@@ -45,9 +45,9 @@ public class RepoInfoViewModel extends FragmentViewModel {
     private String paramRepo;
 
     @Inject
-    public RepoInfoViewModel(BaseFragment fragment, GetRepoUseCase getRepoUseCase,
-                             CheckStarUseCase checkStarUseCase, StarUseCase starUseCase,
-                             UnstarUseCase unstarUseCase, EventBus eventBus) {
+    public RepoInfoFragmentViewModel(BaseFragment fragment, GetRepoUseCase getRepoUseCase,
+                                     CheckStarUseCase checkStarUseCase, StarUseCase starUseCase,
+                                     UnstarUseCase unstarUseCase, EventBus eventBus) {
         super(fragment);
         this.getRepoUseCase = getRepoUseCase;
         this.checkStarUseCase = checkStarUseCase;

@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import io.github.kobakei.anago.R;
 import io.github.kobakei.anago.adapter.RepoAdapter;
 import io.github.kobakei.anago.databinding.MyRepoListFragmentBinding;
-import io.github.kobakei.anago.viewmodel.MyRepoListViewModel;
+import io.github.kobakei.anago.viewmodel.MyRepoListFragmentViewModel;
 
 /**
  * リポジトリ一覧画面
@@ -20,7 +20,7 @@ import io.github.kobakei.anago.viewmodel.MyRepoListViewModel;
 public class MyRepoListFragment extends BaseFragment {
 
     @Inject
-    MyRepoListViewModel viewModel;
+    MyRepoListFragmentViewModel viewModel;
 
     public MyRepoListFragment() {
         // Required empty public constructor

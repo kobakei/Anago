@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="io.github.kobakei.anago.viewmodel.IssueListViewModel"/>
+            type="io.github.kobakei.anago.viewmodel.IssueListFragmentViewModel"/>
     </data>
 
     <FrameLayout

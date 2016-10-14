@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="io.github.kobakei.anago.viewmodel.PullRequestListViewModel"/>
+            type="io.github.kobakei.anago.viewmodel.PullRequestListFragmentViewModel"/>
     </data>
 
     <FrameLayout

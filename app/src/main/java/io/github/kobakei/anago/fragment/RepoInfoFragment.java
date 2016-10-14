@@ -11,7 +11,7 @@ import javax.inject.Inject;
 
 import io.github.kobakei.anago.R;
 import io.github.kobakei.anago.databinding.RepoInfoFragmentBinding;
-import io.github.kobakei.anago.viewmodel.RepoInfoViewModel;
+import io.github.kobakei.anago.viewmodel.RepoInfoFragmentViewModel;
 
 /**
  * リポジトリ詳細
@@ -21,7 +21,7 @@ import io.github.kobakei.anago.viewmodel.RepoInfoViewModel;
 public class RepoInfoFragment extends BaseFragment {
 
     @Inject
-    RepoInfoViewModel viewModel;
+    RepoInfoFragmentViewModel viewModel;
 
     private String user;
     private String repo;

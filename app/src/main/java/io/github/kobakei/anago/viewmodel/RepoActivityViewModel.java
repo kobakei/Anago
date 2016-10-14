@@ -10,10 +10,10 @@ import io.github.kobakei.anago.viewmodel.base.ActivityViewModel;
  * Created by keisuke on 2016/10/07.
  */
 
-public class RepoViewModel extends ActivityViewModel {
+public class RepoActivityViewModel extends ActivityViewModel {
 
     @Inject
-    public RepoViewModel(BaseActivity activity) {
+    public RepoActivityViewModel(BaseActivity activity) {
         super(activity);
     }
 

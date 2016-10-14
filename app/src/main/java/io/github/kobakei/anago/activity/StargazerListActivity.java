@@ -1,18 +1,15 @@
 package io.github.kobakei.anago.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
 
 import javax.inject.Inject;
@@ -21,8 +18,7 @@ import io.github.kobakei.anago.R;
 import io.github.kobakei.anago.databinding.StargazerListActivityBinding;
 import io.github.kobakei.anago.databinding.StargazerListItemBinding;
 import io.github.kobakei.anago.entity.User;
-import io.github.kobakei.anago.viewmodel.StargazerListViewModel;
-import timber.log.Timber;
+import io.github.kobakei.anago.viewmodel.StargazerListActivityViewModel;
 
 /**
  * スターした人一覧画面
@@ -33,7 +29,7 @@ public class StargazerListActivity extends BaseActivity {
     private static final String KEY_REPO = "repo";
 
     @Inject
-    StargazerListViewModel viewModel;
+    StargazerListActivityViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

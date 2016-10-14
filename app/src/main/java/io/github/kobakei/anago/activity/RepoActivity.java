@@ -18,8 +18,8 @@ import io.github.kobakei.anago.databinding.RepoActivityBinding;
 import io.github.kobakei.anago.fragment.IssueListFragment;
 import io.github.kobakei.anago.fragment.PullRequestListFragment;
 import io.github.kobakei.anago.fragment.RepoInfoFragment;
-import io.github.kobakei.anago.viewmodel.RepoInfoViewModel;
-import io.github.kobakei.anago.viewmodel.RepoViewModel;
+import io.github.kobakei.anago.viewmodel.RepoInfoFragmentViewModel;
+import io.github.kobakei.anago.viewmodel.RepoActivityViewModel;
 
 /**
  * リポジトリ詳細画面
@@ -30,7 +30,7 @@ public class RepoActivity extends BaseActivity {
     private static final String KEY_REPO = "repo";
 
     @Inject
-    RepoViewModel viewModel;
+    RepoActivityViewModel viewModel;
 
     @Inject
     EventBus eventBus;
@@ -116,7 +116,7 @@ public class RepoActivity extends BaseActivity {
     }
 
     @Subscribe
-    public void onRepoRefreshed(RepoInfoViewModel.RefreshRepoEvent event) {
+    public void onRepoRefreshed(RepoInfoFragmentViewModel.RefreshRepoEvent event) {
         getSupportActionBar().setTitle(event.repo.name);
     }
 

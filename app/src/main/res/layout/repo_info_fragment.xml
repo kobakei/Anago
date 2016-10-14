@@ -8,7 +8,7 @@
         <import type="android.view.View"/>
         <variable
             name="viewModel"
-            type="io.github.kobakei.anago.viewmodel.RepoInfoViewModel"/>
+            type="io.github.kobakei.anago.viewmodel.RepoInfoFragmentViewModel"/>
     </data>
 
     <FrameLayout

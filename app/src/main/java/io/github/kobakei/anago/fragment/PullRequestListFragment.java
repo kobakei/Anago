@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import io.github.kobakei.anago.R;
 import io.github.kobakei.anago.adapter.PullRequestAdapter;
 import io.github.kobakei.anago.databinding.PullRequestListFragmentBinding;
-import io.github.kobakei.anago.viewmodel.PullRequestListViewModel;
+import io.github.kobakei.anago.viewmodel.PullRequestListFragmentViewModel;
 
 /**
  * プルリク画面
@@ -23,7 +23,7 @@ public class PullRequestListFragment extends BaseFragment {
     private static final String ARG_REPO = "repo";
 
     @Inject
-    PullRequestListViewModel viewModel;
+    PullRequestListFragmentViewModel viewModel;
 
     public PullRequestListFragment() {
         // Required empty public constructor

@@ -1,6 +1,5 @@
 package io.github.kobakei.anago.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -10,7 +9,7 @@ import javax.inject.Inject;
 
 import io.github.kobakei.anago.R;
 import io.github.kobakei.anago.databinding.SignInActivityBinding;
-import io.github.kobakei.anago.viewmodel.SignInViewModel;
+import io.github.kobakei.anago.viewmodel.SignInActivityViewModel;
 
 /**
  * サインイン画面
@@ -18,7 +17,7 @@ import io.github.kobakei.anago.viewmodel.SignInViewModel;
 public class SignInActivity extends BaseActivity {
 
     @Inject
-    SignInViewModel viewModel;
+    SignInActivityViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

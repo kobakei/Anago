@@ -8,7 +8,7 @@
     <data>
         <variable
             name="viewModel"
-            type="io.github.kobakei.anago.viewmodel.StargazerListViewModel"/>
+            type="io.github.kobakei.anago.viewmodel.StargazerListActivityViewModel"/>
     </data>
 
     <RelativeLayout

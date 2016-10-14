@@ -13,7 +13,7 @@ import javax.inject.Inject;
 
 import io.github.kobakei.anago.R;
 import io.github.kobakei.anago.databinding.UserActivityBinding;
-import io.github.kobakei.anago.viewmodel.UserViewModel;
+import io.github.kobakei.anago.viewmodel.UserActivityViewModel;
 
 /**
  * ユーザー情報画面
@@ -23,7 +23,7 @@ public class UserActivity extends BaseActivity {
     private static final String KEY_NAME = "name";
 
     @Inject
-    UserViewModel viewModel;
+    UserActivityViewModel viewModel;
 
     @Inject
     EventBus eventBus;
@@ -73,7 +73,7 @@ public class UserActivity extends BaseActivity {
     }
 
     @Subscribe
-    public void onUserRefreshed(UserViewModel.RefreshUserEvent event) {
+    public void onUserRefreshed(UserActivityViewModel.RefreshUserEvent event) {
         getSupportActionBar().setTitle(event.user.login);
     }
 }

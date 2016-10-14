@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import io.github.kobakei.anago.R;
 import io.github.kobakei.anago.adapter.IssueAdapter;
 import io.github.kobakei.anago.databinding.IssueListFragmentBinding;
-import io.github.kobakei.anago.viewmodel.IssueListViewModel;
+import io.github.kobakei.anago.viewmodel.IssueListFragmentViewModel;
 
 /**
  * イシュー画面
@@ -23,7 +23,7 @@ public class IssueListFragment extends BaseFragment {
     private static final String ARG_REPO = "repo";
 
     @Inject
-    IssueListViewModel viewModel;
+    IssueListFragmentViewModel viewModel;
 
     public IssueListFragment() {
         // Required empty public constructor

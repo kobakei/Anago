@@ -14,12 +14,12 @@ import rx.schedulers.Schedulers;
  * Created by keisuke on 2016/09/19.
  */
 
-public class HomeViewModel extends ActivityViewModel {
+public class HomeActivityViewModel extends ActivityViewModel {
 
     private final SignOutUseCase signOutUseCase;
 
     @Inject
-    public HomeViewModel(BaseActivity activity, SignOutUseCase signOutUseCase) {
+    public HomeActivityViewModel(BaseActivity activity, SignOutUseCase signOutUseCase) {
         super(activity);
         this.signOutUseCase = signOutUseCase;
     }

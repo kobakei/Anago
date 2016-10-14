@@ -16,7 +16,7 @@ import io.github.kobakei.anago.R;
 import io.github.kobakei.anago.databinding.HomeActivityBinding;
 import io.github.kobakei.anago.fragment.MyRepoListFragment;
 import io.github.kobakei.anago.fragment.StarredRepoListFragment;
-import io.github.kobakei.anago.viewmodel.HomeViewModel;
+import io.github.kobakei.anago.viewmodel.HomeActivityViewModel;
 
 /**
  * リポジトリ一覧画面
@@ -24,7 +24,7 @@ import io.github.kobakei.anago.viewmodel.HomeViewModel;
 public class HomeActivity extends BaseActivity {
 
     @Inject
-    HomeViewModel viewModel;
+    HomeActivityViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

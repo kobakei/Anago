@@ -25,7 +25,7 @@ import timber.log.Timber;
  * Created by keisuke on 2016/09/18.
  */
 
-public class SignInViewModel extends ActivityViewModel {
+public class SignInActivityViewModel extends ActivityViewModel {
 
     // 使用するユースケース
     private final SignInUseCase signInUseCase;
@@ -37,8 +37,8 @@ public class SignInViewModel extends ActivityViewModel {
     public ObservableBoolean buttonEnabled;
 
     @Inject
-    public SignInViewModel(BaseActivity activity, SignInUseCase signInUseCase,
-                           CheckSessionUseCase checkSessionUseCase) {
+    public SignInActivityViewModel(BaseActivity activity, SignInUseCase signInUseCase,
+                                   CheckSessionUseCase checkSessionUseCase) {
         super(activity);
 
         this.signInUseCase = signInUseCase;

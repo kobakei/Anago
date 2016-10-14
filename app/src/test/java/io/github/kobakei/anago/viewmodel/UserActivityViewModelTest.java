@@ -33,9 +33,9 @@ import static org.mockito.Mockito.when;
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP,
         application = TestAnagoApplication.class)
-public class UserViewModelTest {
+public class UserActivityViewModelTest {
 
-    UserViewModel userViewModel;
+    UserActivityViewModel userViewModel;
     EventBus eventBus;
 
     @Before
@@ -54,7 +54,7 @@ public class UserViewModelTest {
         eventBus = mock(EventBus.class);
 
         // ビューモデルの作成
-        userViewModel = new UserViewModel(activity, getUserUseCase, eventBus);
+        userViewModel = new UserActivityViewModel(activity, getUserUseCase, eventBus);
 
         // subscribeOnのスレッドをioからimmediateに変更
         RxJavaHooks.setOnIOScheduler(scheduler -> Schedulers.immediate());
@@ -66,7 +66,7 @@ public class UserViewModelTest {
         userViewModel.onResume();
         Assert.assertEquals("user", userViewModel.user.get().login);
         Assert.assertFalse(userViewModel.isConnecting.get());
-        verify(eventBus).post(any(UserViewModel.RefreshUserEvent.class));
+        verify(eventBus).post(any(UserActivityViewModel.RefreshUserEvent.class));
     }
 
     @Test
