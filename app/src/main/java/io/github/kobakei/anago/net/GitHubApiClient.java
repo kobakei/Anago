@@ -91,7 +91,8 @@ public interface GitHubApiClient {
 
     @GET("/repos/{user}/{repo}/issues")
     Single<List<Issue>> getIssues(@Path("user") String user,
-                                  @Path("repo") String repo);
+                                  @Path("repo") String repo,
+                                  @Query("state") String state);
 
     @GET("/repos/{user}/{repo}/pulls")
     Single<List<PullRequest>> getPullRequests(@Path("user") String user,

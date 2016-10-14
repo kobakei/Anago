@@ -21,7 +21,7 @@ public class GetIssuesUseCase {
         this.issueRepository = issueRepository;
     }
 
-    public Single<List<Issue>> run(String user, String repo) {
-        return issueRepository.getAllByRepo(user, repo);
+    public Single<List<Issue>> run(String user, String repo, String state) {
+        return issueRepository.getAllByRepo(user, repo, state);
     }
 }

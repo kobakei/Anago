@@ -125,7 +125,7 @@ public class RepoActivity extends BaseActivity {
                 finish();
                 return true;
             case R.id.menu_all:
-                viewModel.onShowAllClick();
+                eventBus.post(new ShowAllIssuesEvent());
                 return true;
         }
         return false;
@@ -148,4 +148,6 @@ public class RepoActivity extends BaseActivity {
         intent.putExtra(KEY_REPO, repo);
         context.startActivity(intent);
     }
+
+    public static class ShowAllIssuesEvent {}
 }

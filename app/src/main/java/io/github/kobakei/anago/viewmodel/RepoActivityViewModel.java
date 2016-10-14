@@ -42,8 +42,4 @@ public class RepoActivityViewModel extends ActivityViewModel {
     public void onPageSelected(int position) {
         getActivity().invalidateOptionsMenu();
     }
-
-    public void onShowAllClick() {
-        Toast.makeText(getContext(), "Not implemented", Toast.LENGTH_SHORT).show();
-    }
 }

@@ -23,7 +23,7 @@ public class IssueRepository extends Repository<String, Issue> {
         this.gitHubApiClient = gitHubApiClient;
     }
 
-    public Single<List<Issue>> getAllByRepo(String user, String repo) {
-        return gitHubApiClient.getIssues(user, repo);
+    public Single<List<Issue>> getAllByRepo(String user, String repo, String state) {
+        return gitHubApiClient.getIssues(user, repo, state);
     }
 }
