@@ -1,12 +1,15 @@
 package io.github.kobakei.anago.util;
 
 import android.databinding.BindingAdapter;
+import android.databinding.BindingMethod;
+import android.databinding.BindingMethods;
 import android.databinding.adapters.AbsListViewBindingAdapter;
 import android.databinding.adapters.TextViewBindingAdapter;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextPaint;
 import android.text.TextWatcher;
@@ -19,7 +22,11 @@ import com.bumptech.glide.Glide;
 /**
  * Created by keisuke on 2016/09/18.
  */
-
+@BindingMethods({
+        // support lib Toolbar
+        @BindingMethod(type = Toolbar.class, attribute = "onMenuItemClick", method = "setOnMenuItemClickListener"),
+        @BindingMethod(type = Toolbar.class, attribute = "onNavigationClick", method = "setNavigationOnClickListener"),
+})
 public class BindingAdapterUtil {
     @BindingAdapter(value = {"imageUrl", "errorDrawable"}, requireAll = false)
     public static void loadImage(ImageView view, String url, Drawable error) {

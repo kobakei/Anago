@@ -48,8 +48,6 @@ public class StargazerListActivity extends BaseActivity {
         // Set up recycler view
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(new StargazerAdapter(viewModel.users));
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

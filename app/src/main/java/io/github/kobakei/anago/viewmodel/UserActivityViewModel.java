@@ -2,6 +2,7 @@ package io.github.kobakei.anago.viewmodel;
 
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
+import android.view.View;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -73,6 +74,10 @@ public class UserActivityViewModel extends ActivityViewModel {
     @Override
     public void onStop() {
 
+    }
+
+    public void onNavigationClick(View view) {
+        getActivity().finish();
     }
 
     public static class RefreshUserEvent {

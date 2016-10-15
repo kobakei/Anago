@@ -3,6 +3,7 @@ package io.github.kobakei.anago.viewmodel;
 import android.databinding.ObservableArrayList;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import javax.inject.Inject;
 
@@ -62,6 +63,10 @@ public class StargazerListActivityViewModel extends ActivityViewModel {
     @Override
     public void onStop() {
 
+    }
+
+    public void onNavigationClick(View view) {
+        getActivity().finish();
     }
 
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {

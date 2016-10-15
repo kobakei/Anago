@@ -16,18 +16,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            app:title="@{viewModel.repo}"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:popupTheme="@style/Theme.AppCompat.Light"
+            app:onMenuItemClick="@{viewModel}"
+            app:onNavigationClick="@{viewModel::onNavigationClick}"/>
+
         <android.support.design.widget.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"/>
+            android:layout_below="@id/toolbar"/>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/tabLayout"
-            app:onPageSelected="@{viewModel::onPageSelected}"/>
+            android:layout_below="@id/tabLayout"/>
 
     </RelativeLayout>
 

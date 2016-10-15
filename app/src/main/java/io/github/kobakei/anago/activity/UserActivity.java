@@ -38,8 +38,6 @@ public class UserActivity extends BaseActivity {
         UserActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.user_activity);
         binding.setViewModel(viewModel);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         String name = getIntent().getStringExtra(KEY_NAME);
         viewModel.setParams(name);
     }

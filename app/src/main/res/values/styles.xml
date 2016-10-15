@@ -1,12 +1,24 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <!--
+    このアプリケーションのテーマ
+    Data bindingと相性が良いので、ActionBarを使わずにToolbarを使う。
+    -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Color -->
         <item name="colorPrimary">@color/blue_grey_600</item>
         <item name="colorPrimaryDark">@color/blue_grey_800</item>
         <item name="colorAccent">@color/orange_600</item>
         <item name="colorButtonNormal">@color/orange_600</item>
+
+        <!-- Widget default style -->
+        <item name="toolbarStyle">@style/Anago.Toolbar</item>
+    </style>
+
+    <style name="Anago.Toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">@color/blue_grey_600</item>
+        <item name="titleTextAppearance">@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse</item>
+        <item name="subtitleTextAppearance">@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle.Inverse</item>
     </style>
 
 </resources>

@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -52,6 +53,8 @@ public class RepoActivity extends BaseActivity {
         // 変数
         String user = getIntent().getStringExtra(KEY_USER);
         String repo = getIntent().getStringExtra(KEY_REPO);
+        viewModel.user.set(user);
+        viewModel.repo.set(repo);
 
         // タブ＋ページャー
         binding.tabLayout.setupWithViewPager(binding.viewPager);
@@ -94,7 +97,26 @@ public class RepoActivity extends BaseActivity {
             }
         });
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // メニューのインフレートのためのリスナーなので、ビューで受け取る
+        binding.viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                binding.toolbar.getMenu().clear();
+                if (position == 2) {
+                    binding.toolbar.inflateMenu(R.menu.repo_issues);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     @Override
@@ -107,28 +129,6 @@ public class RepoActivity extends BaseActivity {
     protected void onPause() {
         super.onPause();
         eventBus.unregister(this);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (binding.viewPager.getCurrentItem() == 2) {
-            MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.repo_issues, menu);
-        }
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-            case R.id.menu_all:
-                eventBus.post(new ShowAllIssuesEvent());
-                return true;
-        }
-        return false;
     }
 
     @Subscribe
@@ -148,6 +148,4 @@ public class RepoActivity extends BaseActivity {
         intent.putExtra(KEY_REPO, repo);
         context.startActivity(intent);
     }
-
-    public static class ShowAllIssuesEvent {}
 }

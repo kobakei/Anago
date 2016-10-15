@@ -19,18 +19,25 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin">
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                app:title="@{viewModel.user.login}"
+                app:navigationIcon="?attr/homeAsUpIndicator"
+                app:popupTheme="@style/Theme.AppCompat.Light"
+                app:onNavigationClick="@{viewModel::onNavigationClick}"/>
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="@dimen/avatar_large"
                 android:layout_height="@dimen/avatar_large"
                 android:layout_centerHorizontal="true"
-                android:layout_alignParentTop="true"
+                android:layout_below="@id/toolbar"
+                android:layout_marginTop="@dimen/margin_medium"
                 app:imageUrl="@{viewModel.user.avatar_url}"
                 app:errorDrawable="@{@android:drawable/ic_delete}"/>
 

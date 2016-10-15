@@ -67,7 +67,7 @@ public class IssueListFragmentViewModel extends FragmentViewModel {
     }
 
     @Subscribe
-    public void onShowAllIssuesEvent(RepoActivity.ShowAllIssuesEvent event) {
+    public void onShowAllIssuesEvent(RepoActivityViewModel.ShowAllIssuesEvent event) {
         refresh("all");
     }
 
