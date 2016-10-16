@@ -11,6 +11,9 @@
         <item name="colorAccent">@color/orange_600</item>
         <item name="colorButtonNormal">@color/orange_600</item>
 
+        <!-- Toolbarのnavigation & overflow icon の色 -->
+        <item name="colorControlNormal">@color/white</item>
+
         <!-- Widget default style -->
         <item name="toolbarStyle">@style/Anago.Toolbar</item>
     </style>
