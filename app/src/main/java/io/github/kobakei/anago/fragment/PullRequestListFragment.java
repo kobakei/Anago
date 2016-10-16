@@ -57,6 +57,7 @@ public class PullRequestListFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         PullRequestListFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.pull_request_list_fragment, container, false);
+        binding.setViewModel(viewModel);
 
         binding.listView.setAdapter(new PullRequestAdapter(getContext(), getInjector(), viewModel.pullRequests));
 

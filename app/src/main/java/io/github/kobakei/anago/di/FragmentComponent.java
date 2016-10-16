@@ -1,11 +1,13 @@
 package io.github.kobakei.anago.di;
 
 import dagger.Subcomponent;
+import io.github.kobakei.anago.fragment.ContentListFragment;
 import io.github.kobakei.anago.fragment.IssueListFragment;
 import io.github.kobakei.anago.fragment.MyRepoListFragment;
 import io.github.kobakei.anago.fragment.PullRequestListFragment;
 import io.github.kobakei.anago.fragment.RepoInfoFragment;
 import io.github.kobakei.anago.fragment.StarredRepoListFragment;
+import io.github.kobakei.anago.viewmodel.ContentListItemViewModel;
 import io.github.kobakei.anago.viewmodel.IssueListItemViewModel;
 import io.github.kobakei.anago.viewmodel.PullRequestListItemViewModel;
 import io.github.kobakei.anago.viewmodel.RepoListItemViewModel;
@@ -20,8 +22,10 @@ public interface FragmentComponent {
     void inject(RepoInfoFragment fragment);
     void inject(IssueListFragment fragment);
     void inject(PullRequestListFragment fragment);
+    void inject(ContentListFragment fragment);
 
     RepoListItemViewModel repoListItemViewModel();
     IssueListItemViewModel issueListItemViewModel();
     PullRequestListItemViewModel pullRequestListItemViewModel();
+    ContentListItemViewModel contentListItemViewModel();
 }

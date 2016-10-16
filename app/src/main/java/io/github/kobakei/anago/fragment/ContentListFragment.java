@@ -6,31 +6,35 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import javax.inject.Inject;
 
 import io.github.kobakei.anago.R;
+import io.github.kobakei.anago.adapter.ContentAdapter;
 import io.github.kobakei.anago.adapter.IssueAdapter;
+import io.github.kobakei.anago.databinding.ContentListFragmentBinding;
 import io.github.kobakei.anago.databinding.IssueListFragmentBinding;
+import io.github.kobakei.anago.viewmodel.ContentListFragmentViewModel;
 import io.github.kobakei.anago.viewmodel.IssueListFragmentViewModel;
 
 /**
- * イシュー画面
+ * コード画面
  */
-public class IssueListFragment extends BaseFragment {
+public class ContentListFragment extends BaseFragment {
 
     private static final String ARG_USER = "user";
     private static final String ARG_REPO = "repo";
 
     @Inject
-    IssueListFragmentViewModel viewModel;
+    ContentListFragmentViewModel viewModel;
 
-    public IssueListFragment() {
+    public ContentListFragment() {
         // Required empty public constructor
     }
 
-    public static IssueListFragment newInstance(String param1, String param2) {
-        IssueListFragment fragment = new IssueListFragment();
+    public static ContentListFragment newInstance(String param1, String param2) {
+        ContentListFragment fragment = new ContentListFragment();
         Bundle args = new Bundle();
         args.putString(ARG_USER, param1);
         args.putString(ARG_REPO, param2);
@@ -56,10 +60,10 @@ public class IssueListFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        IssueListFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.issue_list_fragment, container, false);
+        ContentListFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.content_list_fragment, container, false);
         binding.setViewModel(viewModel);
 
-        binding.listView.setAdapter(new IssueAdapter(getContext(), getInjector(), viewModel.issues));
+        binding.listView.setAdapter(new ContentAdapter(getContext(), getInjector(), viewModel.contents));
 
         return binding.getRoot();
     }
